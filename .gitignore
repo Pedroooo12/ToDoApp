@@ -1,0 +1,33 @@
+# Directorios
+/target/
+/bin/
+/build/
+
+# Archivos de configuración específicos de tu IDE
+*.iml
+*.ipr
+*.iws
+/.idea/
+
+# Logs
+logs/
+*.log
+
+# Archivos de propiedades
+/backend/application.properties
+/backend/application.yml
+
+# Archivos de compilación
+/backend/*.class
+
+# Archivos generados
+/backend/*.jar
+/backend/*.war
+/backend/*.ear
+
+# Carpeta de dependencias
+/backend/lib/
+
+# Carpeta de configuración de Maven
+/backend/.mvn/
+
