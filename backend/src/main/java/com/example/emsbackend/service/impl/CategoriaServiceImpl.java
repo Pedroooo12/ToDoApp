@@ -2,9 +2,7 @@ package com.example.emsbackend.service.impl;
 
 
 import com.example.emsbackend.entity.Categoria;
-import com.example.emsbackend.entity.Ejercicios;
 import com.example.emsbackend.exception.ResourceNotFoundException;
-import com.example.emsbackend.repository.EjerciciosRepository;
 import com.example.emsbackend.repository.CategoriaRepository;
 import com.example.emsbackend.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,6 @@ import java.util.List;
 public class CategoriaServiceImpl implements CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
-    @Autowired
-    private EjerciciosRepository ejerciciosRepository;
     @Override
     public Categoria createCategoria(Categoria categoria) {
         Categoria categoriaSaved = categoriaRepository.save(categoria);

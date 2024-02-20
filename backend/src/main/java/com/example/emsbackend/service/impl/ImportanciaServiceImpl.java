@@ -3,7 +3,6 @@ package com.example.emsbackend.service.impl;
 
 import com.example.emsbackend.entity.Importancia;
 import com.example.emsbackend.exception.ResourceNotFoundException;
-import com.example.emsbackend.repository.EjerciciosRepository;
 import com.example.emsbackend.repository.ImportanciaRepository;
 import com.example.emsbackend.service.ImportanciaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,7 @@ import java.util.List;
 public class ImportanciaServiceImpl implements ImportanciaService {
     @Autowired
     private ImportanciaRepository importanciaRepository;
-    @Autowired
-    private EjerciciosRepository ejerciciosRepository;
+
     @Override
     public Importancia createImportancia(Importancia importancia) {
         Importancia importanciaSaved = importanciaRepository.save(importancia);
