@@ -1,0 +1,40 @@
+<div class="flex min-h-full h-screen bg-oscuro flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-amarillo animate-fade-down animate-once animate-duration-[1000ms]">Iniciar Sesión</h2>
+    </div>
+  
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm animate-fade-down animate-once animate-duration-[1000ms] animate-delay-1000">
+      <form class="space-y-6" [formGroup]="miFormulario" (ngSubmit)="enviar()" action="#" method="POST">
+        <div>
+          <label for="email" class="block text-sm font-medium leading-6 text-blanco">Correo electronico</label>
+          <div class="mt-2">
+            <input type="email" formControlName="email" name="email" id="email" autocomplete="given-name" class="block w-full bg-oscuro rounded-md border-0 px-3.5 py-2 text-blanco shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blanco sm:text-sm sm:leading-6">
+            <div *ngIf="formularioEnviado && validacion('email')" class="bg-red-500 my-4 border rounded text-white p-2">
+                Es necesario introducir un email para el usuario
+            </div>
+        </div>
+        </div>
+  
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="password" class="block text-sm font-medium leading-6 text-blanco">Contraseña</label>
+          </div>
+          <div class="mt-2">
+            <input type="password" formControlName="password" name="password" id="password" autocomplete="given-name" class="block w-full bg-oscuro rounded-md border-0 px-3.5 py-2 text-blanco shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blanco sm:text-sm sm:leading-6">
+            <div *ngIf="formularioEnviado && validacion('password')" class="bg-red-500 my-4 border rounded text-white p-2">
+                Es necesario introducir una contraseña para el usuario
+            </div>
+        </div>
+        </div>
+  
+        <div>
+          <button type="submit" class="flex w-full justify-center rounded-md bg-amarillo px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Iniciar Sesión</button>
+        </div>
+      </form>
+  
+      <p class="mt-10 text-center text-sm text-blanco">
+        ¿Quieres crear otra cuenta?
+        <a routerLink="/register" class="font-semibold leading-6 text-amarillo hover:text-indigo-500">Registrarse</a>
+      </p>
+    </div>
+</div>
