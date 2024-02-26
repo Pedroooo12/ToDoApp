@@ -45,7 +45,7 @@ export class LoginComponent {
 
     //Si es correcto el formulario
     this.service.logearse(this.miFormulario.value).subscribe(user => {
-      console.log("entrar")
+      console.log(user)
       localStorage.setItem('token', user.id!.toString());
       this.route.navigate(['auth/inicio']);
       //redirigir al inicio

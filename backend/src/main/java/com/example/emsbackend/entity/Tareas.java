@@ -32,4 +32,8 @@ public class Tareas {
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
 
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
 }

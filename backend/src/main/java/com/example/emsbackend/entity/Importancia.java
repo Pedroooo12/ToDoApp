@@ -18,4 +18,8 @@ public class Importancia {
     private Long id;
     @Column(name="importancia", nullable = false, unique = true)
     private String importancia;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 }

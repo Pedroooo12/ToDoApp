@@ -7,13 +7,23 @@ import { InicioComponent } from './page/inicio/inicio.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PageComponent } from './page/page.component';
+import { CardTareaComponent } from './page/tareas/card-tarea/card-tarea.component';
+import { ListadoTareaComponent } from './page/tareas/listado-tarea/listado-tarea.component';
+import { CrearTareaComponent } from './page/tareas/crear-tarea/crear-tarea.component';
+import { VerUsuarioComponent } from './page/user/ver-usuario/ver-usuario.component';
+import { NuevaPasswordComponent } from './page/user/nueva-password/nueva-password.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     InicioComponent,
-    PageComponent
+    PageComponent,
+    CardTareaComponent,
+    ListadoTareaComponent,
+    CrearTareaComponent,
+    VerUsuarioComponent,
+    NuevaPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +34,8 @@ import { PageComponent } from './page/page.component';
   exports: [
     HeaderComponent,
     InicioComponent,
-    PageComponent
+    PageComponent,
+    ListadoTareaComponent
   ]
 })
 export class AuthModule { }

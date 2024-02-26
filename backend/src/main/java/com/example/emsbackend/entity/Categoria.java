@@ -23,6 +23,6 @@ public class Categoria {
     private String categoria;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name="user_id")
     private User user;
 }

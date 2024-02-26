@@ -15,15 +15,15 @@ export class HeaderComponent {
   public menu: Menu[] = [
     {
       title: 'Inicio',
-      route: 'inicio'
+      route: 'auth/inicio'
     },
     {
-      title: 'Listado Rutina',
-      route: 'auth/listado-rutina'
+      title: 'Crear Tarea',
+      route: 'auth/crear-tarea'
     },
     {
-      title: 'Crear Rutina',
-      route: 'auth/crear-rutina'
+      title: 'Listado Tareas',
+      route: 'auth/listado-tareas'
     }
   ];
 
@@ -32,17 +32,24 @@ export class HeaderComponent {
   }
 
   logOut(){
-    this.service.logOut().subscribe(resp => {
-      localStorage.clear();
-      this.route.navigate(['/register']);
-    }, (error) => {
-
-    });
+    console.log("logout")
+    localStorage.clear();
+    this.route.navigate(['/register']);
    
+  }
+
+  clickhaz(){
+    console.log("click");
   }
 
   devolverUsuario(){
     this.user = this.service.currentUser;
   }
   
+  mostrar(){
+    const ul = document.getElementById("ul_crear");
+    console.log("hola");
+    ul?.classList.toggle("invisible");
+  }
+
 }

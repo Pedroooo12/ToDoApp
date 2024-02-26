@@ -21,7 +21,7 @@ import { ComponentsModule } from './components/components.module';
     ComponentsModule
   ],
   providers: [
-    AuthService
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

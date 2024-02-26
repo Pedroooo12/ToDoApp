@@ -1,0 +1,39 @@
+<section class="bg-gradient-to-br from-amarillo via-claro to-azul">
+    <div class="flex items-center h-screen w-full justify-center">
+
+        <div class="max-w-lg">
+            <div class="bg-white bg-opacity-15 shadow-xl rounded-lg p-3">
+                <div class="p-2">
+                    <div class="text-center text-gray-400 text-base font-semibold"> <!-- Modificado aquí -->
+                        <h1 class="text-2xl font-bold text-azul">Detalles del Usuario:</h1> <!-- Modificado aquí -->
+                    </div>
+                    <table class="text-base my-3"> <!-- Modificado aquí -->
+                        <tbody>
+                            <tr>
+                                <td class="px-2 py-2 text-gray-500 font-semibold">Nombre</td>
+                                <td class="px-2 py-2 text-lg">{{user!.name}}</td> <!-- Modificado aquí -->
+                            </tr>
+                            <tr>
+                                <td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
+                                <td class="px-2 py-2 text-lg">{{user!.email}}</td> <!-- Modificado aquí -->
+                            </tr>
+                            <tr>
+                                <td class="px-2 py-2 text-gray-500 font-semibold">Contraseña</td>
+                                <td class="px-2 py-3">
+                                    <a routerLink="/auth/cambiar-contraseña" class="bg-green-600 text-white px-4 py-3 rounded text-md">Crear nueva contraseña</a> <!-- Modificado aquí -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+        
+                    <div class="text-center my-3">
+                        <a class="bg-red-600 block mt-5 w-fit mx-auto text-white p-3 rounded text-md cursor-pointer" (click)="eliminarUser()">Eliminar perfil</a> <!-- Modificado aquí -->
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+

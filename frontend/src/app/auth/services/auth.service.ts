@@ -23,8 +23,16 @@ export class AuthService {
        );
     }
 
-    logOut(): Observable<void>{
-        return this.http.post<void>( `${this.ApiURL}/logout`, {} );
+    logOut(): Observable<Object>{
+        return this.http.post<Object>( `${this.ApiURL}/logout` , "");
+    }
+
+    cambiarPassword(id: Number, user: User): Observable<User>{
+        return this.http.post<User>(`${this.ApiURL}/change/${id}`, user);
+    }
+
+    eliminarUsuario(id: Number): Observable<User>{
+        return this.http.delete<User>(`${this.ApiURL}/user/${id}`);
     }
 
     get currentUser(): User | undefined{
