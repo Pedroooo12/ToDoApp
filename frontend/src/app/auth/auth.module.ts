@@ -12,6 +12,9 @@ import { ListadoTareaComponent } from './page/tareas/listado-tarea/listado-tarea
 import { CrearTareaComponent } from './page/tareas/crear-tarea/crear-tarea.component';
 import { VerUsuarioComponent } from './page/user/ver-usuario/ver-usuario.component';
 import { NuevaPasswordComponent } from './page/user/nueva-password/nueva-password.component';
+import { CrearCategoriaComponent } from './page/categoria/crear-categoria/crear-categoria.component';
+import { ListadoCategoriaComponent } from './page/categoria/listado-categoria/listado-categoria.component';
+import { ActualizarCategoriaComponent } from './page/categoria/actualizar-categoria/actualizar-categoria.component';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import { NuevaPasswordComponent } from './page/user/nueva-password/nueva-passwor
     ListadoTareaComponent,
     CrearTareaComponent,
     VerUsuarioComponent,
-    NuevaPasswordComponent
+    NuevaPasswordComponent,
+    CrearCategoriaComponent,
+    ListadoCategoriaComponent,
+    ActualizarCategoriaComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,8 @@ import { ListadoTareaComponent } from './page/tareas/listado-tarea/listado-tarea
 import { CrearTareaComponent } from './page/tareas/crear-tarea/crear-tarea.component';
 import { VerUsuarioComponent } from './page/user/ver-usuario/ver-usuario.component';
 import { NuevaPasswordComponent } from './page/user/nueva-password/nueva-password.component';
+import { CrearCategoriaComponent } from './page/categoria/crear-categoria/crear-categoria.component';
+import { ActualizarCategoriaComponent } from './page/categoria/actualizar-categoria/actualizar-categoria.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,15 @@ const routes: Routes = [
       {
         path: 'cambiar-contraseña',
         component: NuevaPasswordComponent
+      },
+      {
+        path: 'crear-categoria',
+        component: CrearCategoriaComponent
+      },
+      {
+        path: 'actualizar-categoria/:id',
+        component: ActualizarCategoriaComponent
+
       },
       {
         path: '**',

@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { Categoria } from '../interfaces/categoria';
 
 @Injectable({providedIn: 'root'})
-export class ServiceNameService {
+export class CategoriaService {
     constructor(private http: HttpClient) { }
 
-    private apiUrl = "http:9000/api/categoria";
+    private apiUrl = "http://localhost:9000/api/categoria";
     
-    buscarCategorias(): Observable<Categoria[]> {
-        return this.http.get<Categoria[]>(this.apiUrl);
+    buscarCategoriasPorUser(id: Number): Observable<Categoria[]> {
+        return this.http.get<Categoria[]>(`${this.apiUrl}/user/${id}`);
       }
     
     
@@ -18,15 +18,15 @@ export class ServiceNameService {
         return this.http.post<Categoria>(this.apiUrl, Categoria);
     }
     
-    obtenerCategoriaPorID(id: number): Observable<Categoria>{
+    obtenerCategoriaPorID(id: Number): Observable<Categoria>{
         return this.http.get<Categoria>(`${this.apiUrl}/${id}`);
     }
     
-    actualizarCategoria(id:number, Categoria: Categoria): Observable<Categoria>{
+    actualizarCategoria(id:Number, Categoria: Categoria): Observable<Categoria>{
         return this.http.put<Categoria>(`${this.apiUrl}/${id}`, Categoria);
     }
     
-    eliminarCategoria(id:number): Observable<Categoria>{
+    eliminarCategoria(id:Number): Observable<Categoria>{
         return this.http.delete<Categoria>(`${this.apiUrl}/${id}`);
     }
 }
