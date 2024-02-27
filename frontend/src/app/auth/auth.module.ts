@@ -15,6 +15,9 @@ import { NuevaPasswordComponent } from './page/user/nueva-password/nueva-passwor
 import { CrearCategoriaComponent } from './page/categoria/crear-categoria/crear-categoria.component';
 import { ListadoCategoriaComponent } from './page/categoria/listado-categoria/listado-categoria.component';
 import { ActualizarCategoriaComponent } from './page/categoria/actualizar-categoria/actualizar-categoria.component';
+import { CrearImportanciaComponent } from './page/importancia/crear-importancia/crear-importancia.component';
+import { ListadoImportanciaComponent } from './page/importancia/listado-importancia/listado-importancia.component';
+import { ActualizarImportanciaComponent } from './page/importancia/actualizar-importancia/actualizar-importancia.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { ActualizarCategoriaComponent } from './page/categoria/actualizar-catego
     NuevaPasswordComponent,
     CrearCategoriaComponent,
     ListadoCategoriaComponent,
-    ActualizarCategoriaComponent
+    ActualizarCategoriaComponent,
+    CrearImportanciaComponent,
+    ListadoImportanciaComponent,
+    ActualizarImportanciaComponent
   ],
   imports: [
     CommonModule,

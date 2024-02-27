@@ -8,6 +8,8 @@ import { VerUsuarioComponent } from './page/user/ver-usuario/ver-usuario.compone
 import { NuevaPasswordComponent } from './page/user/nueva-password/nueva-password.component';
 import { CrearCategoriaComponent } from './page/categoria/crear-categoria/crear-categoria.component';
 import { ActualizarCategoriaComponent } from './page/categoria/actualizar-categoria/actualizar-categoria.component';
+import { ActualizarImportanciaComponent } from './page/importancia/actualizar-importancia/actualizar-importancia.component';
+import { CrearImportanciaComponent } from './page/importancia/crear-importancia/crear-importancia.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,15 @@ const routes: Routes = [
       {
         path: 'actualizar-categoria/:id',
         component: ActualizarCategoriaComponent
+
+      },
+      {
+        path: 'crear-importancia',
+        component: CrearImportanciaComponent
+      },
+      {
+        path: 'actualizar-importancia/:id',
+        component: ActualizarImportanciaComponent
 
       },
       {

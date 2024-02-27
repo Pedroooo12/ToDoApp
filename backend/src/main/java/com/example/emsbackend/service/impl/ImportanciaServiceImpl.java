@@ -22,8 +22,8 @@ public class ImportanciaServiceImpl implements ImportanciaService {
     }
 
     @Override
-    public List<Importancia> getAllImportancias(){
-        List<Importancia> lista = importanciaRepository.findAll();
+    public List<Importancia> getAllImportancias(Long userId){
+        List<Importancia> lista = importanciaRepository.findByUserId(userId);
         return lista;
     }
 

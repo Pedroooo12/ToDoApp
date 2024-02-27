@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { Importancia } from '../interfaces/importancia';
 
 @Injectable({providedIn: 'root'})
-export class ServiceNameService {
+export class ImportanciaService {
     constructor(private http: HttpClient) { }
 
-    private apiUrl = "localhost:9000/api/importancia";
+    private apiUrl = "http://localhost:9000/api/importancia";
     
-    buscarImportancia(): Observable<Importancia[]> {
-        return this.http.get<Importancia[]>(this.apiUrl);
+    buscarImportanciasPorUser(id:Number): Observable<Importancia[]> {
+        return this.http.get<Importancia[]>(`${this.apiUrl}/user/${id}`);
       }
     
     
@@ -18,15 +18,15 @@ export class ServiceNameService {
         return this.http.post<Importancia>(this.apiUrl, Importancia);
     }
     
-    obtenerImportanciaPorID(id: number): Observable<Importancia>{
+    obtenerImportanciaPorID(id: Number): Observable<Importancia>{
         return this.http.get<Importancia>(`${this.apiUrl}/${id}`);
     }
     
-    actualizarImportancia(id:number, Importancia: Importancia): Observable<Importancia>{
+    actualizarImportancia(id:Number, Importancia: Importancia): Observable<Importancia>{
         return this.http.put<Importancia>(`${this.apiUrl}/${id}`, Importancia);
     }
     
-    eliminarImportancia(id:number): Observable<Importancia>{
+    eliminarImportancia(id:Number): Observable<Importancia>{
         return this.http.delete<Importancia>(`${this.apiUrl}/${id}`);
     }
 }

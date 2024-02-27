@@ -37,10 +37,13 @@ public class ImportanciaController {
     }
 
     //para leer todas las importancias
-    @GetMapping("/all")
-    public ResponseEntity<List<Importancia>> getAllImportancias(){
-        List<Importancia> lista_importancia = importanciaService.getAllImportancias();
-        return ResponseEntity.ok(lista_importancia);
+
+
+    //Leemos la lista de todos los rutinas por id
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Importancia>> getAllCategoriasByUserId(@PathVariable Long userId) {
+        List<Importancia> importancias = importanciaService.getAllImportancias(userId);
+        return ResponseEntity.ok(importancias);
     }
 
     //Para modificar los datos de un empleado

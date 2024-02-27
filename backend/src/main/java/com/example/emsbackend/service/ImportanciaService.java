@@ -10,7 +10,7 @@ public interface ImportanciaService {
     Importancia createImportancia(Importancia importancia);
     Importancia getImportanciaById(Long importanciaId);
 
-    List<Importancia> getAllImportancias();
+    List<Importancia> getAllImportancias(Long userId);
     Importancia updateImportancia(Long importanciaId, Importancia updatedImportancia);
 
     void deleteImportancia(Long importanciaId);
