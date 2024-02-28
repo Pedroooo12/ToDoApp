@@ -1,0 +1,17 @@
+.altura{
+    max-height: 700px;
+}
+
+::-webkit-scrollbar{
+    width: 6px;
+}
+
+::-webkit-scrollbar-track{
+    display: none;
+
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: black;
+    border-radius: 999px;
+}

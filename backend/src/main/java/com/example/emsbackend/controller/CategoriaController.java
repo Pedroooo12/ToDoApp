@@ -42,6 +42,8 @@ public class CategoriaController {
         return ResponseEntity.ok(rutinas);
     }
 
+    //Leemos la lista de todos los rutinas por id
+
     //Para modificar los datos de un empleado
     @PutMapping("{id}")
     public ResponseEntity<Categoria> updateCategoria(@PathVariable("id") Long categoriaId, @RequestBody Categoria updatedCategoria){

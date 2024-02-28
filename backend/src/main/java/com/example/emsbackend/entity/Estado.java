@@ -11,15 +11,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="importancia")
-public class Importancia {
+@Table(name="estado")
+public class Estado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="importancia", nullable = false)
-    private String importancia;
+    @Column(name="estado", nullable = false)
+    private String estado;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+
 }

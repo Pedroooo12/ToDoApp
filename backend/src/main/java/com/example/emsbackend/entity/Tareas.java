@@ -24,16 +24,20 @@ public class Tareas {
     @Column(name="terminada", nullable = false)
     private Boolean terminada;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="importancia_id")
     private Importancia importancia;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
 
-    @OneToOne
-    @JoinColumn(name="user_id")
+    @ManyToOne
+    @JoinColumn(name="estado_id")
+    private Estado estado;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", unique = false)
     private User user;
 
 }

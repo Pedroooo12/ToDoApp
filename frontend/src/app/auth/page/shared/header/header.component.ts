@@ -1,9 +1,10 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Menu } from 'src/app/auth/interfaces/menu';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/interfaces/user';
-import { Menu } from '../../interfaces/menu';
+
 
 @Component({
   selector: 'app-header',

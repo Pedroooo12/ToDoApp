@@ -1,10 +1,7 @@
 package com.example.emsbackend.service.impl;
 
 
-import com.example.emsbackend.entity.Categoria;
-import com.example.emsbackend.entity.Importancia;
-import com.example.emsbackend.entity.Tareas;
-import com.example.emsbackend.entity.User;
+import com.example.emsbackend.entity.*;
 import com.example.emsbackend.exception.ResourceNotFoundException;
 import com.example.emsbackend.repository.CategoriaRepository;
 import com.example.emsbackend.repository.ImportanciaRepository;
@@ -102,5 +99,9 @@ public class TareasServiceImpl implements TareasService {
         return tareasRepository.findByUser(user);
     }
 
-
+    @Override
+    public List<Tareas> findByEstado(Estado estado) {
+        List<Tareas> tareas = tareasRepository.findByEstado(estado);
+        return tareas;
+    }
 }

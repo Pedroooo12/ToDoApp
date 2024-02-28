@@ -13,4 +13,5 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
     @Query("SELECT r FROM Categoria r WHERE r.user.id = :userId")
     List<Categoria> findByUserId(@Param("userId") Long userId);
 
+
 }

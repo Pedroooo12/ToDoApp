@@ -1,6 +1,7 @@
 package com.example.emsbackend.controller;
 
 import com.example.emsbackend.entity.Categoria;
+import com.example.emsbackend.entity.Estado;
 import com.example.emsbackend.entity.Importancia;
 import com.example.emsbackend.entity.Tareas;
 import com.example.emsbackend.service.CategoriaService;
@@ -82,6 +83,12 @@ public class TareaController {
     public ResponseEntity<Tareas> updateTarea(@PathVariable("id") Long tareaId, @RequestBody Tareas updatedTarea){
         Tareas tarea = tareasService.updateTarea(tareaId, updatedTarea);
         return ResponseEntity.ok(tarea);
+    }
+
+    @PostMapping("/estado/")
+    public ResponseEntity<List<Tareas>> getAllCategoriesByEstado(@RequestBody() Estado estado) {
+        List<Tareas> tareas = tareasService.findByEstado(estado);
+        return ResponseEntity.ok(tareas);
     }
 
     //Para eliminar un empleado

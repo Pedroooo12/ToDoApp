@@ -1,0 +1,49 @@
+<section class="flex min-h-full h-screen bg-oscuro flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-br from-azul via-claro to-amarillo">
+    <div class="h-auto w-1/2 mx-auto bg-claro bg-opacity-10 shadow-2xl rounded-md">  
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-violeta animate-fade-down animate-once animate-duration-[1000ms]">Crear tarea</h2>
+        </div>
+        <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm animate-fade-down animate-once animate-duration-[1000ms] animate-delay-1000">
+            <form class="space-y-6" [formGroup]="miFormulario" (ngSubmit)="enviar()" action="#" method="POST">
+            <div>
+                <label for="nombre" class="block text-sm font-medium leading-6 text-violeta">Nombre</label>
+                <div class="mt-2">
+                    <input type="text" formControlName="nombre" name="nombre" id="nombre" autocomplete="off" class="block w-full bg-transparent rounded-md border-2 border-transparent px-3.5 py-2 text-violeta shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:text-violeta focus:bg-transparent  sm:text-sm sm:leading-6">
+                    <div *ngIf="formularioEnviado && validacion('nombre')" class="bg-red-500 my-4 border w-fit rounded text-white p-2">
+                        Es necesario introducir un nombre
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label for="descripcion" class="block text-sm font-medium leading-6 text-violeta">Descripción</label>
+                <div class="mt-2">
+                    <textarea id="message" formControlName="descripcion" rows="4" class="block p-2.5 w-full text-sm text-violeta bg-transparent  rounded-lg border border-gray-300 placeholder:text-violeta_claro" placeholder="Una breve descripción de la tarea..."></textarea>
+                    <div *ngIf="formularioEnviado && validacion('descripcion')" class="bg-red-500 my-4 border w-fit rounded text-white p-2">
+                        Es necesario introducir una descripcion
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label for="categoria" class="block text-sm font-medium leading-6 text-violeta">Categoría</label>
+                <select id="categoria" formControlName="categoria" class="bg-transparent mt-2 border border-gray-300 text-violeta text-sm rounded-lg  block w-full p-2.5 ">
+                        <option *ngFor="let categoria of listadoCategorias; let i = index" value="{{i}}">{{categoria.categoria}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="importancia" class="block text-sm font-medium leading-6 text-violeta">Importancia</label>
+                <select id="importancia" formControlName="importancia" class="bg-transparent mt-2 border border-gray-300 text-violeta text-sm rounded-lg  block w-full p-2.5 ">
+                        <option *ngFor="let importancia of listadoImportancias; let i = index" value="{{i}}">{{importancia.importancia}}</option>
+                </select>
+            </div>
+        
+        
+            <div>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-violeta px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Crear tarea</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</section>

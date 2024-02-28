@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InicioComponent } from './page/inicio/inicio.component';
+import { InicioComponent } from './page/components/inicio/inicio.component';
 import { PageComponent } from './page/page.component';
-import { ListadoTareaComponent } from './page/tareas/listado-tarea/listado-tarea.component';
-import { CrearTareaComponent } from './page/tareas/crear-tarea/crear-tarea.component';
-import { VerUsuarioComponent } from './page/user/ver-usuario/ver-usuario.component';
-import { NuevaPasswordComponent } from './page/user/nueva-password/nueva-password.component';
-import { CrearCategoriaComponent } from './page/categoria/crear-categoria/crear-categoria.component';
-import { ActualizarCategoriaComponent } from './page/categoria/actualizar-categoria/actualizar-categoria.component';
-import { ActualizarImportanciaComponent } from './page/importancia/actualizar-importancia/actualizar-importancia.component';
-import { CrearImportanciaComponent } from './page/importancia/crear-importancia/crear-importancia.component';
+import { ListadoTareaComponent } from './page/components/tareas/listado-tarea/listado-tarea.component';
+import { VerUsuarioComponent } from './page/components/user/ver-usuario/ver-usuario.component';
+import { NuevaPasswordComponent } from './page/components/user/nueva-password/nueva-password.component';
+import { CrearCategoriaComponent } from './page/components/categoria/crear-categoria/crear-categoria.component';
+import { ActualizarCategoriaComponent } from './page/components/categoria/actualizar-categoria/actualizar-categoria.component';
+import { CrearImportanciaComponent } from './page/components/importancia/crear-importancia/crear-importancia.component';
+import { ActualizarImportanciaComponent } from './page/components/importancia/actualizar-importancia/actualizar-importancia.component';
+import { CrearTareaComponent } from './page/components/tareas/crear-tarea/crear-tarea.component';
+
 
 const routes: Routes = [
   {

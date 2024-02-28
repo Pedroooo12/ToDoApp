@@ -1,3 +1,4 @@
+import { Estado } from './../interfaces/estado';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,6 +12,10 @@ export class TareaService {
     
     buscarTodasTareas(): Observable<Tarea[]> {
         return this.http.get<Tarea[]>(this.apiUrl + "/all");
+    }
+
+    buscarTareasPorEstado(Estado: Estado): Observable<Tarea[]>{
+        return this.http.post<Tarea[]>(`${this.apiUrl}/estado/`, Estado);
     }
     
     

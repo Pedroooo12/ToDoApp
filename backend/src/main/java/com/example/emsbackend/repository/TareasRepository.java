@@ -1,10 +1,8 @@
 package com.example.emsbackend.repository;
 
-import com.example.emsbackend.entity.Categoria;
-import com.example.emsbackend.entity.Importancia;
-import com.example.emsbackend.entity.Tareas;
-import com.example.emsbackend.entity.User;
+import com.example.emsbackend.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +17,7 @@ public interface TareasRepository extends JpaRepository<Tareas, Long>{
     long countByCategoria(Categoria categoria);
 
     long countByImportancia(Importancia importancia);
+
+
+    List<Tareas> findByEstado(Estado estado);
 }

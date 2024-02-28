@@ -8,7 +8,7 @@
             <div>
                 <label for="categoria" class="block text-sm font-medium leading-6 text-violeta">Nueva Categoria</label>
                 <div class="mt-2">
-                <input type="text" formControlName="categoria" name="categoria" id="categoria" autocomplete="given-name" class="block w-full bg-transparent rounded-md border-2 border-transparent px-3.5 py-2 text-violeta shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:text-violeta focus:bg-transparent  sm:text-sm sm:leading-6">
+                <input type="text" formControlName="categoria" name="categoria" id="categoria" autocomplete="off" class="block w-full bg-transparent rounded-md border-2 border-transparent px-3.5 py-2 text-violeta shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:text-violeta focus:bg-transparent  sm:text-sm sm:leading-6">
                 <div *ngIf="formularioEnviado && validacion('categoria')" class="bg-red-500 my-4 border w-fit rounded text-white p-2">
                     Es necesario introducir una categoria
                 </div>
