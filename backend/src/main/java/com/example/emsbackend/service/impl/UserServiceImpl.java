@@ -125,8 +125,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("No hay una tarea con el id: " + userId));
 
-        //Eliminamos las importancias
-        List<Importancia> importanciasAsociadas = importanciaRepository.findByUserId(userId);
+
         List<Categoria> categoriasAsociadas = categoriaRepository.findByUserId(userId);
 
         //Eliminamos las categorias
@@ -150,16 +149,6 @@ public class UserServiceImpl implements UserService {
 
             // Eliminar la tarea
             categoriaRepository.deleteById(categoria.getId());
-        }
-
-        // Eliminar cada importancia asociada al usuario
-        for (Importancia importancia : importanciasAsociadas) {
-            // Puedes realizar otras acciones relacionadas con la eliminación de tareas si es necesario
-            // Por ejemplo, eliminar categorías asociadas a cada tarea
-            // ...
-
-            // Eliminar la tarea
-            importanciaRepository.deleteById(importancia.getId());
         }
 
         userRepository.deleteById(user.getId());

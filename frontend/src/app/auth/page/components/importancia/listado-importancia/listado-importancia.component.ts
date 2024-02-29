@@ -21,7 +21,7 @@ export class ListadoImportanciaComponent {
   }
 
   buscarCategorias(){
-    this._importanciaService.buscarImportanciasPorUser(this.user_id).subscribe(resp => {
+    this._importanciaService.buscarImportancias().subscribe(resp => {
       this.listadoImportancias = resp;
       this.cdRef.detectChanges();
     }, (error) => {

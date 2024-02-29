@@ -72,20 +72,6 @@ public class TareasServiceImpl implements TareasService {
 
         // Eliminamos la tarea
         tareasRepository.deleteById(tareaId);
-
-        // Verificamos si hay otras tareas asociadas a la misma categoría
-        long tareasConMismaCategoria = tareasRepository.countByCategoria(categoria);
-        if (tareasConMismaCategoria == 0) {
-            // Si no hay otras tareas asociadas, eliminamos la categoría
-            categoriaRepository.deleteById(categoria.getId());
-        }
-
-        // Verificamos si hay otras tareas asociadas a la misma importancia
-        long tareasConMismaImportancia = tareasRepository.countByImportancia(importancia);
-        if (tareasConMismaImportancia == 0) {
-            // Si no hay otras tareas asociadas, eliminamos la importancia
-            importanciaRepository.deleteById(importancia.getId());
-        }
     }
 
     @Override

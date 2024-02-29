@@ -19,6 +19,7 @@ import { ListadoTareaComponent } from './page/components/tareas/listado-tarea/li
 import { NuevaPasswordComponent } from './page/components/user/nueva-password/nueva-password.component';
 import { VerUsuarioComponent } from './page/components/user/ver-usuario/ver-usuario.component';
 import { CdkDrag, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
+import { ActualizarTareaComponent } from './page/components/tareas/actualizar-tarea/actualizar-tarea.component';
 
 
 
@@ -38,6 +39,7 @@ import { CdkDrag, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
     CrearImportanciaComponent,
     ListadoImportanciaComponent,
     ActualizarImportanciaComponent,
+    ActualizarTareaComponent,
   ],
   imports: [
     CommonModule,

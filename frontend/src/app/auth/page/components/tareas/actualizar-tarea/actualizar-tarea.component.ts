@@ -1,7 +1,6 @@
-import { Estado } from './../../../../interfaces/estado';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/auth/interfaces/categoria';
 import { Importancia } from 'src/app/auth/interfaces/importancia';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
@@ -12,11 +11,11 @@ import { TareaService } from 'src/app/auth/services/tarea.service';
 import { User } from 'src/app/interfaces/user';
 
 @Component({
-  selector: 'app-crear-tarea',
-  templateUrl: './crear-tarea.component.html',
-  styleUrls: ['./crear-tarea.component.css']
+  selector: 'app-actualizar-tarea',
+  templateUrl: './actualizar-tarea.component.html',
+  styleUrls: ['./actualizar-tarea.component.css']
 })
-export class CrearTareaComponent {
+export class ActualizarTareaComponent implements OnInit{
   public listadoImportancias: Importancia[] = [];
 
   public listadoCategorias: Categoria[] = [];
@@ -40,7 +39,9 @@ export class CrearTareaComponent {
     user: this.user
   }
 
-  private tarea: Tarea = {
+  private tarea_id!: Number;
+
+  public tarea: Tarea = {
     nombre: '',
     descripcion: '',
     terminada: false,
@@ -53,7 +54,7 @@ export class CrearTareaComponent {
   }
 
   //injectamos en el constructor 
-  constructor(private fb: FormBuilder, private route: Router, private _authService: AuthService, private _importanciaService: ImportanciaService, private _categoriaService: CategoriaService, private _tareaService: TareaService) { 
+  constructor(private fb: FormBuilder, private route: Router, private router: ActivatedRoute, private _authService: AuthService, private _importanciaService: ImportanciaService, private _categoriaService: CategoriaService, private _tareaService: TareaService) { 
 
     if(typeof this._authService.currentUser == "object"){
       this.user = this._authService.currentUser;
@@ -67,19 +68,18 @@ export class CrearTareaComponent {
     this._importanciaService.buscarImportancias().subscribe(resp => {
       this.listadoImportancias = resp;
       
-    console.log(this.listadoImportancias);
     }, (error) => {
       console.log(error)
     });
 
     this._categoriaService.buscarCategoriasPorUser(this.user.id!).subscribe(resp => {
       this.listadoCategorias = resp;
-      console.log(this.listadoCategorias);
     }, (error) => {
       console.log(error)
     });
 
     this.miFormulario = this.fb.group({
+      id: [this.tarea.id],
       nombre: [this.tarea.nombre, [Validators.required]],
       descripcion: [this.tarea.descripcion, [Validators.required]],
       terminada: [this.tarea.terminada],
@@ -88,6 +88,22 @@ export class CrearTareaComponent {
       estado: [this.tarea.estado],
       user:[this.importancia.user]
     })
+  }
+
+  ngOnInit() {
+    // Obtener el ID del parámetro de la ruta
+    this.router.paramMap.subscribe(params => {
+      this.tarea_id = Number(params.get("id")); // Convierte el parámetro a número
+
+      this._tareaService.obtenerTareaPorID(this.tarea_id).subscribe(resp => {
+        this.tarea = resp;
+        console.log(this.tarea);
+        this.miFormulario.setValue(this.tarea);
+      }, (error) => {
+        console.log(error);
+      });
+    });
+    
   }
 
 
@@ -104,16 +120,24 @@ export class CrearTareaComponent {
       return;
 
     }
-    //Si es correcto el formulario
-    console.log(this.miFormulario.get("importancia")!.value);
-    let importancia_id = Number(this.miFormulario.get("importancia")!.value);
-    let categoria_id = Number(this.miFormulario.get("categoria")!.value);
 
-    this.miFormulario.patchValue({
-      categoria: this.listadoCategorias[categoria_id],
-      importancia: this.listadoImportancias[importancia_id]
-    });
-    this._tareaService.crearTarea(this.miFormulario.value).subscribe(resp => {
+    if(typeof this.miFormulario.get("categoria")!.value == "object"){
+      let importancia = this.miFormulario.get("importancia")!.value;
+      let categoria = this.miFormulario.get("categoria")!.value;
+      this.miFormulario.patchValue({
+        categoria: categoria,
+        importancia: importancia
+      });
+    }else{
+      let importancia = Number(this.miFormulario.get("importancia")!.value);
+      let categoria = Number(this.miFormulario.get("categoria")!.value);
+      this.miFormulario.patchValue({
+        categoria: this.listadoCategorias[categoria],
+        importancia: this.listadoImportancias[importancia]
+      });
+    }
+
+    this._tareaService.actualizarTarea(this.tarea_id,this.miFormulario.value).subscribe(resp => {
       this.route.navigate(["auth/listado-tareas"]);
     }, (error) => {
       console.log(error);

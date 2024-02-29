@@ -11,7 +11,7 @@
                 [cdkDropListConnectedTo]="[doneList, doingList]"
                 (cdkDropListDropped)="drop($event)">
                     <div class="" *ngFor="let tarea of tareasToDo" cdkDrag [cdkDragData]="tarea">
-                        <app-card-tarea [card]="tarea"></app-card-tarea>
+                        <app-card-tarea (eventoRecargaTareas)="recogerArrays()" [card]="tarea"></app-card-tarea>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 [cdkDropListConnectedTo]="[todoList, doneList]"
                 (cdkDropListDropped)="drop($event)">
                     <div class="" *ngFor="let tarea of tareasDoing" cdkDrag [cdkDragData]="tarea">
-                        <app-card-tarea [card]="tarea"></app-card-tarea>
+                        <app-card-tarea (eventoRecargaTareas)="recogerArrays()" [card]="tarea"></app-card-tarea>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                   [cdkDropListConnectedTo]="[todoList, doingList]"
                   (cdkDropListDropped)="drop($event)">
                   <div class="" *ngFor="let tarea of tareasDone" cdkDrag [cdkDragData]="tarea">
-                    <app-card-tarea [card]="tarea"></app-card-tarea>
+                    <app-card-tarea (eventoRecargaTareas)="recogerArrays()" [card]="tarea"></app-card-tarea>
                   </div>
                 </div>
             </div>

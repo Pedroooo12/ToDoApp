@@ -9,8 +9,8 @@ export class ImportanciaService {
 
     private apiUrl = "http://localhost:9000/api/importancia";
     
-    buscarImportanciasPorUser(id:Number): Observable<Importancia[]> {
-        return this.http.get<Importancia[]>(`${this.apiUrl}/user/${id}`);
+    buscarImportancias(): Observable<Importancia[]> {
+        return this.http.get<Importancia[]>(`${this.apiUrl}`);
       }
     
     

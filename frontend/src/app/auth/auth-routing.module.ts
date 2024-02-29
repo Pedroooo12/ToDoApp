@@ -10,6 +10,7 @@ import { ActualizarCategoriaComponent } from './page/components/categoria/actual
 import { CrearImportanciaComponent } from './page/components/importancia/crear-importancia/crear-importancia.component';
 import { ActualizarImportanciaComponent } from './page/components/importancia/actualizar-importancia/actualizar-importancia.component';
 import { CrearTareaComponent } from './page/components/tareas/crear-tarea/crear-tarea.component';
+import { ActualizarTareaComponent } from './page/components/tareas/actualizar-tarea/actualizar-tarea.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: 'crear-tarea',
         component: CrearTareaComponent
+      },
+      {
+        path: 'actualizar-tarea/:id',
+        component: ActualizarTareaComponent
       },
       {
         path: 'listado-tareas',

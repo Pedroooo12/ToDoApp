@@ -40,9 +40,9 @@ public class ImportanciaController {
 
 
     //Leemos la lista de todos los rutinas por id
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Importancia>> getAllCategoriasByUserId(@PathVariable Long userId) {
-        List<Importancia> importancias = importanciaService.getAllImportancias(userId);
+    @GetMapping("")
+    public ResponseEntity<List<Importancia>> getAllCategoriasByUserId() {
+        List<Importancia> importancias = importanciaService.getAllImportancias();
         return ResponseEntity.ok(importancias);
     }
 

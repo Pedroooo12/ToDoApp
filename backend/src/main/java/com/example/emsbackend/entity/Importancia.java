@@ -19,7 +19,4 @@ public class Importancia {
     @Column(name="importancia", nullable = false)
     private String importancia;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
 }

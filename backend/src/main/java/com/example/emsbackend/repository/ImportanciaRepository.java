@@ -11,7 +11,4 @@ import java.util.List;
 
 @Repository
 public interface ImportanciaRepository extends JpaRepository<Importancia, Long>{
-
-    @Query("SELECT r FROM Importancia r WHERE r.user.id = :userId")
-    List<Importancia> findByUserId(@Param("userId") Long userId);
 }

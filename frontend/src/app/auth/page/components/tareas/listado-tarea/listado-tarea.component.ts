@@ -37,10 +37,31 @@ export class ListadoTareaComponent {
     });
   }
 
+  async recogerArrays(){
+    this._tareaService.buscarTareasPorEstado({id: 1}).subscribe(resp => {
+      this.tareasToDo = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._tareaService.buscarTareasPorEstado({id: 2}).subscribe(resp => {
+      this.tareasDoing = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._tareaService.buscarTareasPorEstado({id: 3}).subscribe(resp => {
+      this.tareasDone = resp;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
   drop(event: CdkDragDrop<Tarea[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      this.recogerArrays();
       let id_estado;
       console.log(event.item.data.id);
       console.log(event.container.element.nativeElement.id);

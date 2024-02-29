@@ -61,7 +61,7 @@ export class CrearImportanciaComponent {
     //Si es correcto el formulario
     this._importanciaService.crearImportancia(this.miFormulario.value).subscribe(resp => {
 
-      this._importanciaService.buscarImportanciasPorUser(this.user_id).subscribe(resp => {
+      this._importanciaService.buscarImportancias().subscribe(resp => {
         this.listadoImportancias= resp;
         this.miFormulario.get('importancia')!.setValue(null);
       }, (error) => {

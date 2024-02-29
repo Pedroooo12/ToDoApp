@@ -27,15 +27,15 @@ export class TareaService {
         return this.http.post<Tarea>(this.apiUrl, Tarea);
     }
     
-    obtenerTareaPorID(id: number): Observable<Tarea>{
+    obtenerTareaPorID(id: Number): Observable<Tarea>{
         return this.http.get<Tarea>(`${this.apiUrl}/${id}`);
     }
     
-    actualizarTarea(id:number, Tarea: Tarea): Observable<Tarea>{
+    actualizarTarea(id:Number, Tarea: Tarea): Observable<Tarea>{
         return this.http.put<Tarea>(`${this.apiUrl}/${id}`, Tarea);
     }
     
-    eliminarTarea(id:number): Observable<Tarea>{
+    eliminarTarea(id:Number): Observable<Tarea>{
         return this.http.delete<Tarea>(`${this.apiUrl}/${id}`);
     }
 }
