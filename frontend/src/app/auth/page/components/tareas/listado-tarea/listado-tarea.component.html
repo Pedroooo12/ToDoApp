@@ -1,31 +1,48 @@
 <section class="p-40 h-svh bg-gradient-to-br block from-amarillo via-claro to-azul">
     <div class="mx-auto container">
-        <h1 class="text-center text-3xl font-bold">Listado tareas</h1>
+        <h1 class="text-center text-3xl font-bold mb-10">Listado tareas</h1>
         <div class="flex gap-36 justify-center">
             <div>
-                <h2 class="text-2xl font-semibold mb-5 text-azul">To do</h2>
-                <div class="h-full  overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10">
-                    <div class="" *ngFor="let tarea of tareasToDo">
+                <h2 class="text-2xl text-center font-semibold mb-5 text-azul">To do</h2>
+                <div id="todo" class="h-96 w-fit min-w-56 overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10"
+                cdkDropList
+                #todoList="cdkDropList"
+                [cdkDropListData]="tareasToDo"
+                [cdkDropListConnectedTo]="[doneList, doingList]"
+                (cdkDropListDropped)="drop($event)">
+                    <div class="" *ngFor="let tarea of tareasToDo" cdkDrag [cdkDragData]="tarea">
                         <app-card-tarea [card]="tarea"></app-card-tarea>
                     </div>
                 </div>
             </div>
 
             <div>
-                <h2 class="text-2xl font-semibold mb-5 text-azul">Doing</h2>
-                <div class="h-full altura overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10">
-                    <div class="" *ngFor="let tarea of tareasDoing">
+                <h2 class="text-2xl text-center font-semibold mb-5 text-azul">Doing</h2>
+                <div id="doing" class="h-96 w-fit min-w-56 altura overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10"
+                cdkDropList
+                #doingList="cdkDropList"
+                [cdkDropListData]="tareasDoing"
+                [cdkDropListConnectedTo]="[todoList, doneList]"
+                (cdkDropListDropped)="drop($event)">
+                    <div class="" *ngFor="let tarea of tareasDoing" cdkDrag [cdkDragData]="tarea">
                         <app-card-tarea [card]="tarea"></app-card-tarea>
                     </div>
                 </div>
             </div>
 
             <div>
-                <h2 class="text-2xl font-semibold mb-5 text-azul">Done</h2>
-                <div class="h-full altura overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10">
-                    <div class="" *ngFor="let tarea of tareasDone">
-                        <app-card-tarea [card]="tarea"></app-card-tarea>
-                    </div>
+                <h2 class="text-2xl text-center font-semibold mb-5 text-azul">Done</h2>
+                <div
+                  id="done"
+                  class="h-96 altura w-fit min-w-56 overflow-y-auto bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10"
+                  cdkDropList
+                  #doneList="cdkDropList"
+                  [cdkDropListData]="tareasDone"
+                  [cdkDropListConnectedTo]="[todoList, doingList]"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="" *ngFor="let tarea of tareasDone" cdkDrag [cdkDragData]="tarea">
+                    <app-card-tarea [card]="tarea"></app-card-tarea>
+                  </div>
                 </div>
             </div>
         </div>

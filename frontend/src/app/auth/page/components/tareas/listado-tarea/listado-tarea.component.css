@@ -1,9 +1,10 @@
 .altura{
-    max-height: 700px;
+    max-height: 500px;
 }
 
 ::-webkit-scrollbar{
     width: 6px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track{
@@ -14,4 +15,5 @@
 ::-webkit-scrollbar-thumb{
     background-color: black;
     border-radius: 999px;
+    height: 10px;
 }

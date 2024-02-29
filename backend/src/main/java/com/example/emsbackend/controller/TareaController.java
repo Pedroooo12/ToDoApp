@@ -85,6 +85,12 @@ public class TareaController {
         return ResponseEntity.ok(tarea);
     }
 
+    @PutMapping("/cambiarEstado/{id}")
+    public ResponseEntity<Tareas> updateTarea(@PathVariable("id") Long tareaId, @RequestBody Long estadoId){
+        Tareas tarea = tareasService.updateTareaEstado(tareaId, estadoId);
+        return ResponseEntity.ok(tarea);
+    }
+
     @PostMapping("/estado/")
     public ResponseEntity<List<Tareas>> getAllCategoriesByEstado(@RequestBody() Estado estado) {
         List<Tareas> tareas = tareasService.findByEstado(estado);

@@ -10,6 +10,8 @@ public interface TareasService {
     List<Tareas> getAllTareas();
     Tareas updateTarea(Long tareaId, Tareas updatedTarea);
 
+    Tareas updateTareaEstado(Long tareaId, Long estadoId);
+
     void deleteTarea(Long tareaId);
 
     /*void deleteEjercicioByRutina(Rutina rutina);*/

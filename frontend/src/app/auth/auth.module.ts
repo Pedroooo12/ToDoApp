@@ -18,6 +18,7 @@ import { CrearTareaComponent } from './page/components/tareas/crear-tarea/crear-
 import { ListadoTareaComponent } from './page/components/tareas/listado-tarea/listado-tarea.component';
 import { NuevaPasswordComponent } from './page/components/user/nueva-password/nueva-password.component';
 import { VerUsuarioComponent } from './page/components/user/ver-usuario/ver-usuario.component';
+import { CdkDrag, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -43,6 +44,9 @@ import { VerUsuarioComponent } from './page/components/user/ver-usuario/ver-usua
     AuthRoutingModule,
     RouterModule,
     ReactiveFormsModule,
+    DragDropModule,
+    CdkDropList,
+    CdkDrag
   ],
   exports: [
     HeaderComponent,

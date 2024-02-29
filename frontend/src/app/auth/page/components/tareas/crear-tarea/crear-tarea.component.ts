@@ -1,3 +1,4 @@
+import { Estado } from './../../../../interfaces/estado';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -31,6 +32,7 @@ export class CrearTareaComponent {
   private categoria: Categoria = {
     categoria: "",
     user: this.user
+    
   }
 
   private importancia: Importancia = {
@@ -44,6 +46,9 @@ export class CrearTareaComponent {
     terminada: false,
     categoria: this.categoria,
     importancia: this.importancia,
+    estado: {
+      id: 1
+    },
     user: this.user
   }
 
@@ -80,6 +85,7 @@ export class CrearTareaComponent {
       terminada: [this.tarea.terminada],
       importancia: [null, [Validators.required]],
       categoria: [null, [Validators.required]],
+      estado: [this.tarea.estado],
       user:[this.importancia.user]
     })
   }

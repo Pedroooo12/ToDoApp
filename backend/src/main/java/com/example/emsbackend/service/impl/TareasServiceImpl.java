@@ -4,6 +4,7 @@ package com.example.emsbackend.service.impl;
 import com.example.emsbackend.entity.*;
 import com.example.emsbackend.exception.ResourceNotFoundException;
 import com.example.emsbackend.repository.CategoriaRepository;
+import com.example.emsbackend.repository.EstadoRepository;
 import com.example.emsbackend.repository.ImportanciaRepository;
 import com.example.emsbackend.repository.TareasRepository;
 import com.example.emsbackend.service.TareasService;
@@ -19,6 +20,9 @@ public class TareasServiceImpl implements TareasService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private EstadoRepository estadoRepository;
 
     @Autowired
     ImportanciaRepository importanciaRepository;
@@ -103,5 +107,21 @@ public class TareasServiceImpl implements TareasService {
     public List<Tareas> findByEstado(Estado estado) {
         List<Tareas> tareas = tareasRepository.findByEstado(estado);
         return tareas;
+    }
+
+    @Override
+    public Tareas updateTareaEstado(Long tareaId, Long estadoId){
+        Tareas tarea = tareasRepository.findById(tareaId).orElseThrow(
+                () -> new ResourceNotFoundException("No hay una tarea con el id: " + tareaId)
+        );
+
+        Estado estado = estadoRepository.findById(estadoId).orElseThrow(
+                () -> new ResourceNotFoundException("No hay un estado con el id: " + estadoId)
+        );
+
+        tarea.setEstado(estado);
+        Tareas updatedEjercicioObj =  tareasRepository.save(tarea);
+
+        return tarea;
     }
 }
