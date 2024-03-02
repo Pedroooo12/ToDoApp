@@ -91,6 +91,18 @@ public class TareaController {
         return ResponseEntity.ok(tarea);
     }
 
+    @PutMapping("/terminarTarea/")
+    public ResponseEntity<Tareas> updateTarea( @RequestBody Tareas tareaRecibida){
+        Tareas tarea = tareasService.terminarTarea(tareaRecibida);
+        return ResponseEntity.ok(tarea);
+    }
+
+    @PutMapping("/terminarTareas/")
+    public ResponseEntity<List<Tareas>> updateTarea( @RequestBody List<Tareas> tareasRecibida){
+        List<Tareas> tareas = tareasService.terminarTareas(tareasRecibida);
+        return ResponseEntity.ok(tareas);
+    }
+
     @PostMapping("/estado/")
     public ResponseEntity<List<Tareas>> getAllCategoriesByEstado(@RequestBody() Estado estado) {
         List<Tareas> tareas = tareasService.findByEstado(estado);

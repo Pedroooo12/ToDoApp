@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
-import { AuthService } from 'src/app/auth/services/auth.service';
 import { TareaService } from 'src/app/auth/services/tarea.service';
 
 @Component({
@@ -18,6 +17,15 @@ export class CardTareaComponent {
 
   eliminarTarea(id: Number){
     this._tareaService.eliminarTarea(id).subscribe(resp => {
+      this.eventoRecargaTareas.emit();
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+
+  terminarTarea(tarea: Tarea){
+    this._tareaService.terminarTarea(tarea).subscribe(resp => {
       this.eventoRecargaTareas.emit();
     }, (error) => {
       console.log(error);

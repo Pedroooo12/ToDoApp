@@ -18,6 +18,5 @@ public interface TareasRepository extends JpaRepository<Tareas, Long>{
 
     long countByImportancia(Importancia importancia);
 
-
     List<Tareas> findByEstado(Estado estado);
 }

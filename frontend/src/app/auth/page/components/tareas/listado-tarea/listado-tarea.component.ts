@@ -98,4 +98,12 @@ export class ListadoTareaComponent {
       );
     }
   }
+
+  terminarTodasTareas(){
+    this._tareaService.terminarTareas(this.tareasDone).subscribe(resp => {
+      this.recogerArrays();
+    }, (error) => { 
+      console.log(error);
+    });
+  }
 }

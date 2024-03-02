@@ -11,6 +11,7 @@ import com.example.emsbackend.service.TareasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -109,5 +110,54 @@ public class TareasServiceImpl implements TareasService {
         Tareas updatedEjercicioObj =  tareasRepository.save(tarea);
 
         return tarea;
+    }
+
+    @Override
+    public Tareas terminarTarea(Tareas tareas){
+        Tareas tarea = tareasRepository.findById(tareas.getId()).orElseThrow(
+                () -> new ResourceNotFoundException("No hay una tarea con el id: " + tareas.getId())
+        );
+
+        long id_estado = 4;
+        Estado estado = estadoRepository.findById(id_estado).orElseThrow(
+                () -> new ResourceNotFoundException("No hay un estado con el id: " + id_estado)
+        );
+        //cambiamos el estado a finalizado
+        tarea.setEstado(estado);
+        //ponemos finalizado en 1
+        tarea.setTerminada(true);
+
+        //actualizamos
+        Tareas updatedEjercicioObj =  tareasRepository.save(tarea);
+        return tarea;
+    }
+
+    @Override
+    public List<Tareas> terminarTareas(List<Tareas> tareas){
+        long id_estado = 4;
+        Estado estado = estadoRepository.findById(id_estado).orElseThrow(
+                () -> new ResourceNotFoundException("No hay un estado con el id: " + id_estado)
+        );
+
+        List<Tareas> tareasTerminadas = new ArrayList<>();
+
+        for (Tareas tarea : tareas) {
+            Tareas tareaExistente = tareasRepository.findById(tarea.getId()).orElseThrow(
+                    () -> new ResourceNotFoundException("No hay una tarea con el id: " + tarea.getId())
+            );
+
+            // Cambiamos el estado a finalizado
+            tareaExistente.setEstado(estado);
+
+            // Ponemos terminada en true
+            tareaExistente.setTerminada(true);
+
+            // Actualizamos y agregamos a la lista de tareas terminadas
+            Tareas updatedTarea = tareasRepository.save(tareaExistente);
+            tareasTerminadas.add(updatedTarea);
+        }
+
+
+        return tareasTerminadas;
     }
 }

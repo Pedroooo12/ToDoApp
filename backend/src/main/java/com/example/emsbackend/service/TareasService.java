@@ -23,5 +23,8 @@ public interface TareasService {
 
     List<Tareas> findByUser(User user);
 
+    Tareas terminarTarea(Tareas tarea);
+
+    List<Tareas> terminarTareas(List<Tareas> tareas);
 
 }
