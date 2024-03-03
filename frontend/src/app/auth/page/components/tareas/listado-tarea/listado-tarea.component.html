@@ -1,6 +1,7 @@
 <section class="p-40 h-svh bg-gradient-to-br block from-amarillo via-claro to-azul">
     <div class="mx-auto container">
         <h1 class="text-center text-3xl font-bold mb-10">Listado tareas</h1>
+        <app-filtrado-tarea (eventoRecargaTareas)="recogerArrays($event)"></app-filtrado-tarea>
         <div class="flex gap-36 justify-center">
             <div>
                 <h2 class="text-2xl text-center font-semibold mb-5 text-azul">To do</h2>

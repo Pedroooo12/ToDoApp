@@ -8,6 +8,8 @@ export interface Tarea {
     nombre: String,
     descripcion: String,
     terminada: boolean,
+    created?: Date,
+    updated?: Date,
     categoria: Categoria,
     importancia: Importancia,
     estado: Estado,

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,6 +34,14 @@ public class Tareas {
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
 
+    @Column(name = "created")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
+
+    @Column(name = "updated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updated;
+
     @ManyToOne
     @JoinColumn(name="estado_id")
     private Estado estado;
@@ -39,5 +49,6 @@ public class Tareas {
     @ManyToOne
     @JoinColumn(name="user_id", unique = false)
     private User user;
+
 
 }

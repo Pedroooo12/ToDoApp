@@ -16,8 +16,8 @@ public interface TareasService {
 
     /*void deleteEjercicioByRutina(Rutina rutina);*/
 
-    List<Tareas> findByImportancia(Importancia importancia);
-    List<Tareas> findByCategoria(Categoria categoria);
+    List<Tareas> findByImportancia(Importancia importancia, Estado estado);
+    List<Tareas> findByCategoria(Categoria categoria, Estado estado);
 
     List<Tareas> findByEstado(Estado estado);
 

@@ -4,6 +4,7 @@ import com.example.emsbackend.entity.Categoria;
 import com.example.emsbackend.entity.Estado;
 import com.example.emsbackend.entity.Importancia;
 import com.example.emsbackend.entity.Tareas;
+import com.example.emsbackend.request.FiltradoRequest;
 import com.example.emsbackend.service.CategoriaService;
 import com.example.emsbackend.service.ImportanciaService;
 import com.example.emsbackend.service.TareasService;
@@ -51,19 +52,27 @@ public class TareaController {
 
     }
 
-    @GetMapping("/categoria/{id}")
-    public ResponseEntity<List<Tareas>> getTareaByCategoria(@PathVariable("id") Long categoriaId){
+    /*@PostMapping("/categoria/filtrado")
+    public ResponseEntity<List<Tareas>> getTareaByCategoria(@RequestParam()  Long categoriaId,@RequestParam() Estado estado){
         Categoria categoria = categoriaService.getCategoriaById(categoriaId);
-        List<Tareas> tareas = tareasService.findByCategoria(categoria);
+        List<Tareas> tareas = tareasService.findByCategoria(categoria, estado);
 
         return ResponseEntity.ok(tareas);
 
+    }*/
+    @PostMapping("/categoria/filtrado")
+    public ResponseEntity<List<Tareas>> getTareaByCategoria(@RequestBody FiltradoRequest filtroTareasRequest) {
+        Categoria categoria = categoriaService.getCategoriaById(filtroTareasRequest.getCategoriaId());
+        List<Tareas> tareas = tareasService.findByCategoria(categoria, filtroTareasRequest.getEstado());
+
+        return ResponseEntity.ok(tareas);
     }
 
-    @GetMapping("/importancia/{id}")
-    public ResponseEntity<List<Tareas>> getTareaByImportancia(@PathVariable("id") Long importanciaId){
+
+    @PostMapping("/importancia/filtrado")
+    public ResponseEntity<List<Tareas>> getTareaByImportancia(@RequestBody() Long importanciaId,@RequestBody()  Estado estado){
         Importancia importancia = importanciaService.getImportanciaById(importanciaId);
-        List<Tareas> tareas = tareasService.findByImportancia(importancia);
+        List<Tareas> tareas = tareasService.findByImportancia(importancia, estado);
         return ResponseEntity.ok(tareas);
 
     }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,7 +31,9 @@ public class TareasServiceImpl implements TareasService {
 
     @Override
     public Tareas createTarea(Tareas tarea){
-
+        if (tarea.getCreated() == null) {
+            tarea.setCreated(new Date());
+        }
         Tareas ejercicioSaved = tareasRepository.save(tarea);
         return ejercicioSaved;
     }
@@ -58,6 +61,8 @@ public class TareasServiceImpl implements TareasService {
         tarea.setTerminada(updatedTarea.getTerminada());
         tarea.setCategoria(updatedTarea.getCategoria());
         tarea.setImportancia(updatedTarea.getImportancia());
+        tarea.setUpdated(new Date());
+
         Tareas updatedEjercicioObj =  tareasRepository.save(tarea);
 
         return tarea;
@@ -76,13 +81,15 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public List<Tareas> findByCategoria(Categoria categoria){
-        return tareasRepository.findByCategoria(categoria);
+    public List<Tareas> findByCategoria(Categoria categoria, Estado estado){
+        boolean terminada = false;
+        return tareasRepository.findByCategoriaAndTerminadaAndEstado(categoria, terminada, estado);
     }
 
     @Override
-    public List<Tareas> findByImportancia(Importancia importancia){
-        return tareasRepository.findByImportancia(importancia);
+    public List<Tareas> findByImportancia(Importancia importancia, Estado estado){
+        boolean terminada = false;
+        return tareasRepository.findByImportanciaAndTerminadaAndEstado(importancia,terminada, estado);
     }
 
     @Override

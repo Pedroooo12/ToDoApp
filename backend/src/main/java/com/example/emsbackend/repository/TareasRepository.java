@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface TareasRepository extends JpaRepository<Tareas, Long>{
-    List<Tareas> findByCategoria(Categoria categoria);
-    List<Tareas> findByImportancia(Importancia importancia);
+    List<Tareas> findByCategoriaAndTerminadaAndEstado(Categoria categoria, boolean terminada, Estado estado);
+    List<Tareas> findByImportanciaAndTerminadaAndEstado(Importancia importancia, boolean terminada, Estado estado);
 
     List<Tareas> findByUser(User user);
 

@@ -9,9 +9,6 @@ import { HeaderComponent } from './page/shared/header/header.component';
 import { ActualizarCategoriaComponent } from './page/components/categoria/actualizar-categoria/actualizar-categoria.component';
 import { CrearCategoriaComponent } from './page/components/categoria/crear-categoria/crear-categoria.component';
 import { ListadoCategoriaComponent } from './page/components/categoria/listado-categoria/listado-categoria.component';
-import { ActualizarImportanciaComponent } from './page/components/importancia/actualizar-importancia/actualizar-importancia.component';
-import { CrearImportanciaComponent } from './page/components/importancia/crear-importancia/crear-importancia.component';
-import { ListadoImportanciaComponent } from './page/components/importancia/listado-importancia/listado-importancia.component';
 import { InicioComponent } from './page/components/inicio/inicio.component';
 import { CardTareaComponent } from './page/components/tareas/card-tarea/card-tarea.component';
 import { CrearTareaComponent } from './page/components/tareas/crear-tarea/crear-tarea.component';
@@ -20,6 +17,7 @@ import { NuevaPasswordComponent } from './page/components/user/nueva-password/nu
 import { VerUsuarioComponent } from './page/components/user/ver-usuario/ver-usuario.component';
 import { CdkDrag, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
 import { ActualizarTareaComponent } from './page/components/tareas/actualizar-tarea/actualizar-tarea.component';
+import { FiltradoTareaComponent } from './page/components/tareas/filtrado-tarea/filtrado-tarea.component';
 
 
 
@@ -36,10 +34,8 @@ import { ActualizarTareaComponent } from './page/components/tareas/actualizar-ta
     CrearCategoriaComponent,
     ListadoCategoriaComponent,
     ActualizarCategoriaComponent,
-    CrearImportanciaComponent,
-    ListadoImportanciaComponent,
-    ActualizarImportanciaComponent,
     ActualizarTareaComponent,
+    FiltradoTareaComponent,
   ],
   imports: [
     CommonModule,
