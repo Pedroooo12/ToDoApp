@@ -1,4 +1,4 @@
-<div class="flex gap-10">
+<div class="flex gap-10 my-10">
     <div class="w-60">
         <label for="categorias" class="block text-sm font-medium leading-6 text-gray-900">Filtrar por categoria</label>
         <select id="categorias" name="categorias" (change)="cambioCategorias($event)" class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
@@ -10,9 +10,9 @@
 
     <div class="w-60">
         <label for="importancias" class="block text-sm font-medium leading-6 text-gray-900">Filtrar por importancia</label>
-        <select id="importancias" name="importancias"  class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-            <option selected>Todos</option>
-            <option *ngFor="let importancia of listadoImportancias">{{importancia.importancia}}</option>
+        <select id="importancias" name="importancias" (change)="cambioImportancias($event)" class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option selected value="0">Todos</option>
+            <option *ngFor="let importancia of listadoImportancias" [value]="importancia.id!">{{importancia.importancia}}</option>
         </select>
     </div>
 </div>

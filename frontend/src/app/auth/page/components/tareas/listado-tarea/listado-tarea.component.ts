@@ -36,46 +36,91 @@ export class ListadoTareaComponent {
     }, (error) => {
       console.log(error);
     });
+    //this.recogerArrays();
   }
 
-  async recogerArrays(id?: Number){
-    if(id == null){
-      this._tareaService.buscarTareasPorEstado({id: 1}).subscribe(resp => {
-        this.tareasToDo = resp;
-      }, (error) => {
-        console.log(error);
-      });
-  
-      this._tareaService.buscarTareasPorEstado({id: 2}).subscribe(resp => {
-        this.tareasDoing = resp;
-      }, (error) => {
-        console.log(error);
-      });
-  
-      this._tareaService.buscarTareasPorEstado({id: 3}).subscribe(resp => {
-        this.tareasDone = resp;
-      }, (error) => {
-        console.log(error);
-      });
+  async recogerArrays(eventData?: { id_categoria: Number, id_importancia: Number }){
+   
+
+
+    //Si no se ha tocado nada
+    if(!eventData){
+      console.log("entra");
+      this.recorrerArrayNormal();
+      //si idcategoria existe y no es 0 y importancia es 0
     }else{
-      this._filtradoService.filtrarPorCategoria(id,{id: 1}).subscribe(resp => {
-        this.tareasToDo = resp;
-      }, (error) => {
-        console.log(error);
-      });
-  
-      this._filtradoService.filtrarPorCategoria(id,{id: 2}).subscribe(resp => {
-        this.tareasDoing = resp;
-      }, (error) => {
-        console.log(error);
-      });
-  
-      this._filtradoService.filtrarPorCategoria(id,{id: 3}).subscribe(resp => {
-        this.tareasDone = resp;
-      }, (error) => {
-        console.log(error);
-      });
+      console.log(eventData);
+
+      if(eventData && eventData.id_categoria == 1 && eventData.id_importancia == 0){
+        console.log("entra a categoria");
+        this.recorrerArrayPorCategoria(eventData.id_categoria);
+        
+        //filtrar por importancia
+      }else if(eventData && eventData.id_importancia != 0 && eventData.id_categoria == 0){
+        this.recorrerArrayPorImportancia(eventData.id_importancia);
+      }
     }
+
+  }
+
+  recorrerArrayNormal(){
+    this._tareaService.buscarTareasPorEstado({id: 1}).subscribe(resp => {
+      this.tareasToDo = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._tareaService.buscarTareasPorEstado({id: 2}).subscribe(resp => {
+      this.tareasDoing = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._tareaService.buscarTareasPorEstado({id: 3}).subscribe(resp => {
+      this.tareasDone = resp;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  recorrerArrayPorCategoria(categoriaId: Number){
+    this._filtradoService.filtrarPorCategoria(categoriaId,{id: 1}).subscribe(resp => {
+      this.tareasToDo = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._filtradoService.filtrarPorCategoria(categoriaId,{id: 2}).subscribe(resp => {
+      this.tareasDoing = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._filtradoService.filtrarPorCategoria(categoriaId,{id: 3}).subscribe(resp => {
+      this.tareasDone = resp;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  recorrerArrayPorImportancia(importanciaId: Number){
+    this._filtradoService.filtrarPorImportancia(importanciaId,{id: 1}).subscribe(resp => {
+      this.tareasToDo = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._filtradoService.filtrarPorImportancia(importanciaId,{id: 2}).subscribe(resp => {
+      this.tareasDoing = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._filtradoService.filtrarPorImportancia(importanciaId,{id: 3}).subscribe(resp => {
+      this.tareasDone = resp;
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   drop(event: CdkDragDrop<Tarea[]>) {

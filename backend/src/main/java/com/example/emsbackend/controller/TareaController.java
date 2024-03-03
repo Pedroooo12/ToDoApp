@@ -4,7 +4,8 @@ import com.example.emsbackend.entity.Categoria;
 import com.example.emsbackend.entity.Estado;
 import com.example.emsbackend.entity.Importancia;
 import com.example.emsbackend.entity.Tareas;
-import com.example.emsbackend.request.FiltradoRequest;
+import com.example.emsbackend.request.FiltradoCategoriaRequest;
+import com.example.emsbackend.request.FiltradoImportanciaRequest;
 import com.example.emsbackend.service.CategoriaService;
 import com.example.emsbackend.service.ImportanciaService;
 import com.example.emsbackend.service.TareasService;
@@ -52,16 +53,8 @@ public class TareaController {
 
     }
 
-    /*@PostMapping("/categoria/filtrado")
-    public ResponseEntity<List<Tareas>> getTareaByCategoria(@RequestParam()  Long categoriaId,@RequestParam() Estado estado){
-        Categoria categoria = categoriaService.getCategoriaById(categoriaId);
-        List<Tareas> tareas = tareasService.findByCategoria(categoria, estado);
-
-        return ResponseEntity.ok(tareas);
-
-    }*/
     @PostMapping("/categoria/filtrado")
-    public ResponseEntity<List<Tareas>> getTareaByCategoria(@RequestBody FiltradoRequest filtroTareasRequest) {
+    public ResponseEntity<List<Tareas>> getTareaByCategoria(@RequestBody FiltradoCategoriaRequest filtroTareasRequest) {
         Categoria categoria = categoriaService.getCategoriaById(filtroTareasRequest.getCategoriaId());
         List<Tareas> tareas = tareasService.findByCategoria(categoria, filtroTareasRequest.getEstado());
 
@@ -70,11 +63,11 @@ public class TareaController {
 
 
     @PostMapping("/importancia/filtrado")
-    public ResponseEntity<List<Tareas>> getTareaByImportancia(@RequestBody() Long importanciaId,@RequestBody()  Estado estado){
-        Importancia importancia = importanciaService.getImportanciaById(importanciaId);
-        List<Tareas> tareas = tareasService.findByImportancia(importancia, estado);
-        return ResponseEntity.ok(tareas);
+    public ResponseEntity<List<Tareas>> getTareaByImportancia(@RequestBody FiltradoImportanciaRequest filtroTareasRequest) {
+        Importancia importancia = importanciaService.getImportanciaById(filtroTareasRequest.getImportanciaId());
+        List<Tareas> tareas = tareasService.findByImportancia(importancia, filtroTareasRequest.getEstado());
 
+        return ResponseEntity.ok(tareas);
     }
 
 

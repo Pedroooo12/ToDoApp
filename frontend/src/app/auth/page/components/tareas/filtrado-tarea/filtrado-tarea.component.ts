@@ -36,6 +36,19 @@ export class FiltradoTareaComponent {
 
   cambioCategorias(event: any){
     console.log(event.target.value);
-    this.eventoRecargaTareas.emit(event.target.value);
+
+    //cogemos el valor de la importancia
+    const select = document.getElementById("importancias") as HTMLSelectElement;
+
+
+    this.eventoRecargaTareas.emit({id_categoria: Number(event.target.value), id_importancia: Number(select.selectedIndex)});
+  }
+
+  cambioImportancias(event: any){
+
+    //cogemos el valor de la importancia
+    const select = document.getElementById("categorias") as HTMLSelectElement;
+    console.log(select.selectedIndex);
+    this.eventoRecargaTareas.emit({id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)});
   }
 }

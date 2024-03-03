@@ -4,7 +4,7 @@ import com.example.emsbackend.entity.Estado;
 import lombok.Data;
 
 @Data
-public class FiltradoRequest {
-    private Long categoriaId;
+public class FiltradoImportanciaRequest {
+    private Long importanciaId;
     private Estado estado;
 }

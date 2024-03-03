@@ -20,8 +20,13 @@ export class FiltradoService {
     );
   }
 
-  filtrarPorImportancia(id:Number){
-    return this.http.get<Array<Tarea>>(`${this.ApiURL}/importancia/${id}`);
+  filtrarPorImportancia(id: Number, estado: Estado): Observable<Array<Tarea>>{
+    return this.http.post<Array<Tarea>>(`${this.ApiURL}/importancia/filtrado`,
+      {
+        "importanciaId": id,
+        "estado": estado
+      }
+    );
   }
 
 
