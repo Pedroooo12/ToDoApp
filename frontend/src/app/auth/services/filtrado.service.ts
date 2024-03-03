@@ -29,6 +29,16 @@ export class FiltradoService {
     );
   }
 
+  filtrarPorImportanciaYCategoria(id_categoria: Number, id_importancia: Number, estado: Estado): Observable<Array<Tarea>>{
+    return this.http.post<Array<Tarea>>(`${this.ApiURL}/filtrado/all`,
+      {
+        "categoriaId": id_categoria,
+        "importanciaId": id_importancia,
+        "estado": estado
+      }
+    );
+  }
+
 
 
 }

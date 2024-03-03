@@ -19,6 +19,8 @@ public interface TareasService {
     List<Tareas> findByImportancia(Importancia importancia, Estado estado);
     List<Tareas> findByCategoria(Categoria categoria, Estado estado);
 
+    List<Tareas> findByCategoriaAndImportancia(Categoria categoria,Importancia importancia, Estado estado);
+
     List<Tareas> findByEstado(Estado estado);
 
     List<Tareas> findByUser(User user);

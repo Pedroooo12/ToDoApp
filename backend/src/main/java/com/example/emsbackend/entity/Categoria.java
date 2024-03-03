@@ -22,6 +22,9 @@ public class Categoria {
     @Column(name="categoria", nullable = false)
     private String categoria;
 
+    @Column(name = "color", nullable = false)
+    private String color;
+
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;

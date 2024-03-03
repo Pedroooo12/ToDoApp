@@ -31,6 +31,7 @@ export class CrearTareaComponent {
 
   private categoria: Categoria = {
     categoria: "",
+    color: "",
     user: this.user
     
   }

@@ -25,6 +25,7 @@ export class ActualizarCategoriaComponent implements OnInit {
 
   private categoria: Categoria = {
     categoria: "",
+    color: "",
     user: this.user
   }
 
@@ -33,6 +34,7 @@ export class ActualizarCategoriaComponent implements OnInit {
 
     this.miFormulario = this.fb.group({
       categoria: [this.categoria.categoria, [Validators.required]],
+      color: [this.categoria.color, [Validators.required]],
       user:[this.categoria.user]
     })
     

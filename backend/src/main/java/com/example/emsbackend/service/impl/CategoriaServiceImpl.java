@@ -34,11 +34,12 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public Categoria updateRutina(Long categoriaId, Categoria updatedCategoria) {
+    public Categoria updateCategoria(Long categoriaId, Categoria updatedCategoria) {
         Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(
                 () -> new ResourceNotFoundException("No hay un empleado con el id: " + categoriaId)
         );
         categoria.setCategoria(updatedCategoria.getCategoria());
+        categoria.setColor(updatedCategoria.getColor());
         Categoria updatedCategoriaObj =  categoriaRepository.save(categoria);
 
         return categoria;

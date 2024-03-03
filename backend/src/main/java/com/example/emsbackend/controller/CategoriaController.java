@@ -47,7 +47,7 @@ public class CategoriaController {
     //Para modificar los datos de un empleado
     @PutMapping("{id}")
     public ResponseEntity<Categoria> updateCategoria(@PathVariable("id") Long categoriaId, @RequestBody Categoria updatedCategoria){
-        Categoria categoria = categoriaService.updateRutina(categoriaId, updatedCategoria);
+        Categoria categoria = categoriaService.updateCategoria(categoriaId, updatedCategoria);
         return ResponseEntity.ok(categoria);
     }
 

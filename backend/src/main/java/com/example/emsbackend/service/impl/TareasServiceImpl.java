@@ -93,6 +93,12 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
+    public List<Tareas> findByCategoriaAndImportancia(Categoria categoria, Importancia importancia, Estado estado){
+        boolean terminada = false;
+        return tareasRepository.findByCategoriaAndImportanciaAndTerminadaAndEstado(categoria, importancia,terminada, estado);
+    }
+
+    @Override
     public List<Tareas> findByUser(User user){
         return tareasRepository.findByUser(user);
     }

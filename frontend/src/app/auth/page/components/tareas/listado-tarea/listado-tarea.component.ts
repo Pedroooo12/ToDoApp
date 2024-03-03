@@ -44,7 +44,7 @@ export class ListadoTareaComponent {
 
 
     //Si no se ha tocado nada
-    if(!eventData){
+    if(!eventData || eventData.id_categoria == 0 && eventData.id_importancia == 0){
       console.log("entra");
       this.recorrerArrayNormal();
       //si idcategoria existe y no es 0 y importancia es 0
@@ -58,6 +58,8 @@ export class ListadoTareaComponent {
         //filtrar por importancia
       }else if(eventData && eventData.id_importancia != 0 && eventData.id_categoria == 0){
         this.recorrerArrayPorImportancia(eventData.id_importancia);
+      }else{
+        this.recorrerArrayPorCategoriaYImportancia(eventData.id_categoria, eventData.id_importancia);
       }
     }
 
@@ -117,6 +119,26 @@ export class ListadoTareaComponent {
     });
 
     this._filtradoService.filtrarPorImportancia(importanciaId,{id: 3}).subscribe(resp => {
+      this.tareasDone = resp;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  recorrerArrayPorCategoriaYImportancia(importanciaId: Number, categoriaId: Number){
+    this._filtradoService.filtrarPorImportanciaYCategoria(categoriaId,importanciaId,{id: 1}).subscribe(resp => {
+      this.tareasToDo = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._filtradoService.filtrarPorImportanciaYCategoria(categoriaId,importanciaId,{id: 2}).subscribe(resp => {
+      this.tareasDoing = resp;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this._filtradoService.filtrarPorImportanciaYCategoria(categoriaId,importanciaId,{id: 3}).subscribe(resp => {
       this.tareasDone = resp;
     }, (error) => {
       console.log(error);

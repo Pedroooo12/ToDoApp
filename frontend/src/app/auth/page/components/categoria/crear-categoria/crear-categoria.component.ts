@@ -24,6 +24,7 @@ export class CrearCategoriaComponent {
 
   private categoria: Categoria = {
     categoria: "",
+    color: "",
     user: this.user
   }
 
@@ -40,6 +41,7 @@ export class CrearCategoriaComponent {
 
     this.miFormulario = this.fb.group({
       categoria: [this.categoria.categoria, [Validators.required]],
+      color: [this.categoria.color, [Validators.required]],
       user:[this.categoria.user]
     })
   }
@@ -64,6 +66,7 @@ export class CrearCategoriaComponent {
       this._categoriaService.buscarCategoriasPorUser(this.user_id).subscribe(resp => {
         this.listadoCategorias= resp;
         this.miFormulario.get('categoria')!.setValue(null);
+        this.miFormulario.get('color')!.setValue(null);
       }, (error) => {
         console.log(error);
       });

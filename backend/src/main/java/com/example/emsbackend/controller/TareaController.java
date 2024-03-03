@@ -4,6 +4,7 @@ import com.example.emsbackend.entity.Categoria;
 import com.example.emsbackend.entity.Estado;
 import com.example.emsbackend.entity.Importancia;
 import com.example.emsbackend.entity.Tareas;
+import com.example.emsbackend.request.FiltradoAllRequest;
 import com.example.emsbackend.request.FiltradoCategoriaRequest;
 import com.example.emsbackend.request.FiltradoImportanciaRequest;
 import com.example.emsbackend.service.CategoriaService;
@@ -66,6 +67,15 @@ public class TareaController {
     public ResponseEntity<List<Tareas>> getTareaByImportancia(@RequestBody FiltradoImportanciaRequest filtroTareasRequest) {
         Importancia importancia = importanciaService.getImportanciaById(filtroTareasRequest.getImportanciaId());
         List<Tareas> tareas = tareasService.findByImportancia(importancia, filtroTareasRequest.getEstado());
+
+        return ResponseEntity.ok(tareas);
+    }
+
+    @PostMapping("/filtrado/all")
+    public ResponseEntity<List<Tareas>> getTareaByAllFiltros(@RequestBody FiltradoAllRequest filtroTareasRequest) {
+        Categoria categoria = categoriaService.getCategoriaById(filtroTareasRequest.getCategoriaId());
+        Importancia importancia = importanciaService.getImportanciaById(filtroTareasRequest.getImportanciaId());
+        List<Tareas> tareas = tareasService.findByCategoriaAndImportancia(categoria, importancia, filtroTareasRequest.getEstado());
 
         return ResponseEntity.ok(tareas);
     }

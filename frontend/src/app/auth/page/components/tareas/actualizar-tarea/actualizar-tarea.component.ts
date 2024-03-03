@@ -30,6 +30,7 @@ export class ActualizarTareaComponent implements OnInit{
 
   private categoria: Categoria = {
     categoria: "",
+    color: "",
     user: this.user
     
   }

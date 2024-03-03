@@ -10,7 +10,7 @@ public interface CategoriaService {
     Categoria createCategoria(Categoria categoria);
     Categoria getCategoriaById(Long categoriaId);
     List<Categoria> getAllCategorias(Long user_id);
-    Categoria updateRutina(Long categoriaId, Categoria updatedCategoria);
+    Categoria updateCategoria(Long categoriaId, Categoria updatedCategoria);
 
     void deleteCategoria(Long categoriaId);
 
