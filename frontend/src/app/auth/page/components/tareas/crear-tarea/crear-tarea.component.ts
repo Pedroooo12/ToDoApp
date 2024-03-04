@@ -67,15 +67,13 @@ export class CrearTareaComponent {
     //cogemos todas las categorias e importancias
     this._importanciaService.buscarImportancias().subscribe(resp => {
       this.listadoImportancias = resp;
-      
-    console.log(this.listadoImportancias);
+
     }, (error) => {
       console.log(error)
     });
 
     this._categoriaService.buscarCategoriasPorUser(this.user.id!).subscribe(resp => {
       this.listadoCategorias = resp;
-      console.log(this.listadoCategorias);
     }, (error) => {
       console.log(error)
     });

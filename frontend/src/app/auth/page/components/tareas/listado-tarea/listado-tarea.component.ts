@@ -10,9 +10,14 @@ import { FiltradoService } from 'src/app/auth/services/filtrado.service';
   styleUrls: ['./listado-tarea.component.css']
 })
 export class ListadoTareaComponent {
+  //arrays tareas
   tareasToDo: Tarea[] = [];
   tareasDoing: Tarea[] = [];
   tareasDone: Tarea[] = [];
+
+  //acciones
+  eliminar = false;
+  terminar = false;
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
@@ -190,5 +195,44 @@ export class ListadoTareaComponent {
     }, (error) => { 
       console.log(error);
     });
+  }
+
+  async alertasTareas(accion: String){
+    console.log(accion);
+    if (accion == "eliminar") {
+  
+      // Supongamos que el evento asíncrono es una promesa
+      await new Promise<void>(resolve => {
+        // Lógica asíncrona que eventualmente resolverá la promesa
+        // Esto podría ser un evento, una solicitud HTTP, etc.
+        resolve();
+      });
+  
+      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
+      this.eliminar = true;
+      setTimeout(() => {
+        this.eliminar = false;
+      }, 2000);
+    }
+
+
+    if (accion == "terminar") {
+
+  
+      // Supongamos que el evento asíncrono es una promesa
+      await new Promise<void>(resolve => {
+        // Lógica asíncrona que eventualmente resolverá la promesa
+        // Esto podría ser un evento, una solicitud HTTP, etc.
+
+        resolve();
+
+      });
+  
+      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
+      this.terminar = true;
+      setTimeout(() => {
+        this.terminar = false;
+      }, 2000);
+    }
   }
 }

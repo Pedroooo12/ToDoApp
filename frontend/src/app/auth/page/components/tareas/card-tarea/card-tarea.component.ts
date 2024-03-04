@@ -12,11 +12,15 @@ export class CardTareaComponent {
 
   @Output() eventoRecargaTareas = new EventEmitter<any>();
 
+  @Output() alertasTareas = new EventEmitter<any>();
+
+
   constructor(private _tareaService: TareaService){
   }
 
   eliminarTarea(id: Number){
     this._tareaService.eliminarTarea(id).subscribe(resp => {
+      this.alertasTareas.emit("eliminar");
       this.eventoRecargaTareas.emit();
     }, (error) => {
       console.log(error);
@@ -25,7 +29,9 @@ export class CardTareaComponent {
 
 
   terminarTarea(tarea: Tarea){
+    
     this._tareaService.terminarTarea(tarea).subscribe(resp => {
+      this.alertasTareas.emit("terminar");
       this.eventoRecargaTareas.emit();
     }, (error) => {
       console.log(error);

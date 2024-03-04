@@ -1,11 +1,19 @@
 <section class="p-20 h-svh bg-gradient-to-br block from-amarillo via-claro to-azul">
     <div class="mx-auto container">
+        <div *ngIf="terminar" class="p-4 mb-4 text-sm w-fit ms-auto text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">¡Tarea terminada!</span> La tarea ha sido terminada con éxito.
+        </div>
+
+        <div *ngIf="eliminar" class="p-4 mb-4 w-fit ms-auto text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span class="font-medium">¡Tarea eliminada!</span> La tarea ha sido eliminada con éxito.
+        </div>
+
         <h1 class="text-center text-3xl font-bold mb-10">Listado tareas</h1>
         <app-filtrado-tarea (eventoRecargaTareas)="recogerArrays($event)"></app-filtrado-tarea>
         <div class="flex gap-36 justify-center">
             <div>
                 <h2 class="text-2xl text-center font-semibold mb-5 text-azul">To do</h2>
-                <div id="todo" class="h-96 w-fit min-w-56 overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10"
+                <div id="todo" class="h-96 w-fit min-w-56 overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
                 cdkDropList
                 #todoList="cdkDropList"
                 [cdkDropListData]="tareasToDo"
@@ -19,7 +27,7 @@
 
             <div>
                 <h2 class="text-2xl text-center font-semibold mb-5 text-azul">Doing</h2>
-                <div id="doing" class="h-96 w-fit min-w-56 altura overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10"
+                <div id="doing" class="h-96 w-fit min-w-56 altura overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
                 cdkDropList
                 #doingList="cdkDropList"
                 [cdkDropListData]="tareasDoing"
@@ -36,14 +44,14 @@
                 <a *ngIf="tareasDone.length > 0" (click)="terminarTodasTareas()" class="p-3 block bg-green-500 my-5 rounded-lg text-white cursor-pointer">Terminar todas las tareas realizadas</a>
                 <div
                   id="done"
-                  class="h-96 altura w-fit min-w-56 overflow-y-auto bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-10"
+                  class="h-96 altura w-fit min-w-56 overflow-y-auto bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
                   cdkDropList
                   #doneList="cdkDropList"
                   [cdkDropListData]="tareasDone"
                   [cdkDropListConnectedTo]="[todoList, doingList]"
                   (cdkDropListDropped)="drop($event)">
                   <div class="" *ngFor="let tarea of tareasDone" cdkDrag [cdkDragData]="tarea">
-                    <app-card-tarea (eventoRecargaTareas)="recogerArrays()" [card]="tarea"></app-card-tarea>
+                    <app-card-tarea (eventoRecargaTareas)="recogerArrays()" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
                   </div>
                 </div>
             </div>
