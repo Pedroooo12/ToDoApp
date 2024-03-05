@@ -173,4 +173,15 @@ public class TareasServiceImpl implements TareasService {
 
         return tareasTerminadas;
     }
+
+    //METODOS ESTADISTICAS
+    @Override
+    public long contarTareas(){
+        return this.tareasRepository.count();
+    }
+
+    @Override
+    public long contarTareasPorEstado(Estado estado){
+        return this.tareasRepository.countByEstado(estado);
+    }
 }

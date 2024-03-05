@@ -36,6 +36,7 @@ public class SpringSecurity implements WebMvcConfigurer {
                         authorize.requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/auth/checkAuth/{id}").permitAll()
                                 .requestMatchers("api/tareas/**").permitAll()
+                                .requestMatchers("/api/estadisticas/**").permitAll()
                                 .requestMatchers("api/categoria/**").permitAll()
                                 .requestMatchers("api/importancia/**").permitAll()
 

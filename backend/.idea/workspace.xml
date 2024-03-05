@@ -52,10 +52,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.emsbackend.controller" />
       <recent name="com.example.emsbackend.request" />
       <recent name="com.example.emsbackend.repository" />
       <recent name="com.example.emsbackend.entity" />
-      <recent name="com.example.emsbackend.controller" />
       <recent name="com.example.emsbackend.service.impl" />
     </key>
   </component>

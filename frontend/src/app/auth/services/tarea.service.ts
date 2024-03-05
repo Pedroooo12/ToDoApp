@@ -43,7 +43,7 @@ export class TareaService {
         return this.http.put<Array<Tarea>>(`${this.apiUrl}/terminarTareas/`, tareas);
     }
     
-    eliminarTarea(id:Number): Observable<Tarea>{
-        return this.http.delete<Tarea>(`${this.apiUrl}/${id}`);
+    eliminarTarea(id:Number): Observable<void>{
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 }

@@ -50,7 +50,7 @@ export class ListadoTareaComponent {
 
     //Si no se ha tocado nada
     if(!eventData || eventData.id_categoria == 0 && eventData.id_importancia == 0){
-      console.log("entra");
+  
       this.recorrerArrayNormal();
       //si idcategoria existe y no es 0 y importancia es 0
     }else{
@@ -198,9 +198,26 @@ export class ListadoTareaComponent {
   }
 
   async alertasTareas(accion: String){
+    console.log("hola")
     console.log(accion);
-    if (accion == "eliminar") {
+
+    if (accion == "terminar") {
   
+      // Supongamos que el evento asíncrono es una promesa
+      await new Promise<void>(resolve => {
+        // Lógica asíncrona que eventualmente resolverá la promesa
+        // Esto podría ser un evento, una solicitud HTTP, etc.
+        resolve();
+      });
+  
+      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
+      this.terminar = true;
+      setTimeout(() => {
+        this.terminar = false;
+      }, 2000);
+    }
+    if (accion == "eliminar") {
+      console.log("entra");
       // Supongamos que el evento asíncrono es una promesa
       await new Promise<void>(resolve => {
         // Lógica asíncrona que eventualmente resolverá la promesa
@@ -212,26 +229,6 @@ export class ListadoTareaComponent {
       this.eliminar = true;
       setTimeout(() => {
         this.eliminar = false;
-      }, 2000);
-    }
-
-
-    if (accion == "terminar") {
-
-  
-      // Supongamos que el evento asíncrono es una promesa
-      await new Promise<void>(resolve => {
-        // Lógica asíncrona que eventualmente resolverá la promesa
-        // Esto podría ser un evento, una solicitud HTTP, etc.
-
-        resolve();
-
-      });
-  
-      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
-      this.terminar = true;
-      setTimeout(() => {
-        this.terminar = false;
       }, 2000);
     }
   }

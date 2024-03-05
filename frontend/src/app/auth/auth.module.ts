@@ -18,6 +18,8 @@ import { VerUsuarioComponent } from './page/components/user/ver-usuario/ver-usua
 import { CdkDrag, CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
 import { ActualizarTareaComponent } from './page/components/tareas/actualizar-tarea/actualizar-tarea.component';
 import { FiltradoTareaComponent } from './page/components/tareas/filtrado-tarea/filtrado-tarea.component';
+import { ListadoEstadisticasComponent } from './page/estadisticas/listado-estadisticas/listado-estadisticas.component';
+import { PorEstadoComponent } from './page/estadisticas/por-estado/por-estado.component';
 
 
 
@@ -36,6 +38,8 @@ import { FiltradoTareaComponent } from './page/components/tareas/filtrado-tarea/
     ActualizarCategoriaComponent,
     ActualizarTareaComponent,
     FiltradoTareaComponent,
+    ListadoEstadisticasComponent,
+    PorEstadoComponent,
   ],
   imports: [
     CommonModule,

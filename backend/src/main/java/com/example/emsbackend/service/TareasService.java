@@ -29,4 +29,9 @@ public interface TareasService {
 
     List<Tareas> terminarTareas(List<Tareas> tareas);
 
+    //Metodos estadisticas
+
+    long contarTareas();
+
+    long contarTareasPorEstado(Estado estado);
 }
