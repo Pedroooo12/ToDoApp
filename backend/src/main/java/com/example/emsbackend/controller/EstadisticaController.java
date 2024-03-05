@@ -2,9 +2,11 @@ package com.example.emsbackend.controller;
 
 import com.example.emsbackend.entity.Categoria;
 import com.example.emsbackend.entity.Estado;
+import com.example.emsbackend.entity.User;
 import com.example.emsbackend.repository.EstadoRepository;
 import com.example.emsbackend.service.CategoriaService;
 import com.example.emsbackend.service.TareasService;
+import com.example.emsbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,50 +21,58 @@ public class EstadisticaController {
     private TareasService tareasService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private EstadoRepository estadoRepository;
 
-    @GetMapping("/tareasTotales")
-    public ResponseEntity<Long> getTareasTotales() {
-        long tareasTotales = tareasService.contarTareas();
+    @GetMapping("/tareasTotales/{id}")
+    public ResponseEntity<Long> getTareasTotales(@PathVariable Long id) {
+        User user = userService.findById(id);
+        long tareasTotales = tareasService.contarTareasPorUsuario(user);
         return ResponseEntity.ok(tareasTotales);
     }
 
-    @GetMapping("/tareasToDo")
-    public ResponseEntity<Long> getTareasParaHacer() {
-        Long id = 1L;
-        Estado estado = estadoRepository.findById(id).orElseThrow(null);
+    @GetMapping("/tareasToDo/{id}")
+    public ResponseEntity<Long> getTareasParaHacer(@PathVariable Long id) {
+        User user = userService.findById(id);
+        Long id_estado = 1L;
+        Estado estado = estadoRepository.findById(id_estado).orElseThrow(null);
 
-        long tareasToDo = tareasService.contarTareasPorEstado(estado);
+        long tareasToDo = tareasService.contarTareasPorEstadoYUsuario(estado,user);
 
         return ResponseEntity.ok(tareasToDo);
     }
 
-    @GetMapping("/tareasDoing")
-    public ResponseEntity<Long> getTareasHaciendo() {
-        Long id = 2L;
-        Estado estado = estadoRepository.findById(id).orElseThrow(null);
+    @GetMapping("/tareasDoing/{id}")
+    public ResponseEntity<Long> getTareasHaciendo(@PathVariable Long id) {
+        User user = userService.findById(id);
+        Long id_estado = 2L;
+        Estado estado = estadoRepository.findById(id_estado).orElseThrow(null);
 
-        long tareasDoing = tareasService.contarTareasPorEstado(estado);
+        long tareasDoing = tareasService.contarTareasPorEstadoYUsuario(estado,user);
 
         return ResponseEntity.ok(tareasDoing);
     }
 
-    @GetMapping("/tareasDone")
-    public ResponseEntity<Long> getTareasHechas() {
-        Long id = 3L;
-        Estado estado = estadoRepository.findById(id).orElseThrow(null);
+    @GetMapping("/tareasDone/{id}")
+    public ResponseEntity<Long> getTareasHechas(@PathVariable Long id) {
+        User user = userService.findById(id);
+        Long id_estado = 3L;
+        Estado estado = estadoRepository.findById(id_estado).orElseThrow(null);
 
-        long tareasDone = tareasService.contarTareasPorEstado(estado);
+        long tareasDone = tareasService.contarTareasPorEstadoYUsuario(estado,user);
 
         return ResponseEntity.ok(tareasDone);
     }
 
-    @GetMapping("/tareasFinalizadas")
-    public ResponseEntity<Long> getTareasFinalizadas() {
-        Long id = 4L;
-        Estado estado = estadoRepository.findById(id).orElseThrow(null);
+    @GetMapping("/tareasFinalizadas/{id}")
+    public ResponseEntity<Long> getTareasFinalizadas(@PathVariable Long id) {
+        User user = userService.findById(id);
+        Long id_estado = 4L;
+        Estado estado = estadoRepository.findById(id_estado).orElseThrow(null);
 
-        long tareasFinalizadas = tareasService.contarTareasPorEstado(estado);
+        long tareasFinalizadas = tareasService.contarTareasPorEstadoYUsuario(estado,user);
 
         return ResponseEntity.ok(tareasFinalizadas);
     }

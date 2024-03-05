@@ -80,23 +80,6 @@ public class TareasServiceImpl implements TareasService {
         tareasRepository.deleteById(tareaId);
     }
 
-    @Override
-    public List<Tareas> findByCategoria(Categoria categoria, Estado estado){
-        boolean terminada = false;
-        return tareasRepository.findByCategoriaAndTerminadaAndEstado(categoria, terminada, estado);
-    }
-
-    @Override
-    public List<Tareas> findByImportancia(Importancia importancia, Estado estado){
-        boolean terminada = false;
-        return tareasRepository.findByImportanciaAndTerminadaAndEstado(importancia,terminada, estado);
-    }
-
-    @Override
-    public List<Tareas> findByCategoriaAndImportancia(Categoria categoria, Importancia importancia, Estado estado){
-        boolean terminada = false;
-        return tareasRepository.findByCategoriaAndImportanciaAndTerminadaAndEstado(categoria, importancia,terminada, estado);
-    }
 
     @Override
     public List<Tareas> findByUser(User user){
@@ -176,12 +159,36 @@ public class TareasServiceImpl implements TareasService {
 
     //METODOS ESTADISTICAS
     @Override
-    public long contarTareas(){
-        return this.tareasRepository.count();
+    public long contarTareasPorUsuario(User user){
+
+        return this.tareasRepository.countByUser(user);
     }
 
     @Override
-    public long contarTareasPorEstado(Estado estado){
-        return this.tareasRepository.countByEstado(estado);
+    public long contarTareasPorEstadoYUsuario(Estado estado,User user){
+        return this.tareasRepository.countByEstadoAndUser(estado, user);
+    }
+
+
+    // METODOS FILTRADO
+    @Override
+    public List<Tareas> buscarTareasPorUsuario(User user){
+        return this.tareasRepository.findByUser(user);
+    }
+    @Override
+    public List<Tareas> buscarTareasPorUsuarioYCategoria(Categoria categoria,User user){
+        return this.tareasRepository.findByCategoriaAndUser(categoria,user);
+    }
+
+    @Override
+    public List<Tareas> buscarTareasPorUsuarioYImportancia(Importancia importancia,User user){
+        return this.tareasRepository.findByImportanciaAndUser(importancia,user);
+    }
+
+
+
+    @Override
+    public List<Tareas> buscarTareasPorUsuarioImportanciaYCategoria(Importancia importancia, Categoria categoria, User user){
+        return this.tareasRepository.findByImportanciaAndCategoriaAndUser(importancia,categoria,user);
     }
 }

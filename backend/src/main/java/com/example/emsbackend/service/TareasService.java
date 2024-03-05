@@ -16,10 +16,7 @@ public interface TareasService {
 
     /*void deleteEjercicioByRutina(Rutina rutina);*/
 
-    List<Tareas> findByImportancia(Importancia importancia, Estado estado);
-    List<Tareas> findByCategoria(Categoria categoria, Estado estado);
 
-    List<Tareas> findByCategoriaAndImportancia(Categoria categoria,Importancia importancia, Estado estado);
 
     List<Tareas> findByEstado(Estado estado);
 
@@ -31,7 +28,17 @@ public interface TareasService {
 
     //Metodos estadisticas
 
-    long contarTareas();
+    long contarTareasPorUsuario(User user);
 
-    long contarTareasPorEstado(Estado estado);
+    long contarTareasPorEstadoYUsuario(Estado estado, User user);
+
+    //filtrado
+
+    List<Tareas> buscarTareasPorUsuario(User user);
+
+    List<Tareas> buscarTareasPorUsuarioYCategoria(Categoria categoria,User user);
+
+    List<Tareas> buscarTareasPorUsuarioYImportancia(Importancia importancia,User user);
+
+    List<Tareas> buscarTareasPorUsuarioImportanciaYCategoria(Importancia importancia, Categoria categoria, User user);
 }

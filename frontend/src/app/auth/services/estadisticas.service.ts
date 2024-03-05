@@ -11,24 +11,24 @@ export class EstadisticasService {
 
   constructor(private http: HttpClient) { }
 
-  tareasTotales(): Observable<number>{
-    return this.http.get<number>(`${this.apiUrl}/tareasTotales`)
+  tareasTotales(id:Number): Observable<number>{
+    return this.http.get<number>(`${this.apiUrl}/tareasTotales/${id}`)
   }
 
-  tareasTodo(): Observable<number>{
-    return this.http.get<number>(`${this.apiUrl}/tareasToDo`);
+  tareasTodo(id:Number): Observable<number>{
+    return this.http.get<number>(`${this.apiUrl}/tareasToDo/${id}`);
   }
 
-  tareasDoing(): Observable<number>{
-    return this.http.get<number>(`${this.apiUrl}/tareasDoing`);
+  tareasDoing(id:Number): Observable<number>{
+    return this.http.get<number>(`${this.apiUrl}/tareasDoing/${id}`);
   }
 
-  tareasDone(): Observable<number>{
-    return this.http.get<number>(`${this.apiUrl}/tareasDone`);
+  tareasDone(id:Number): Observable<number>{
+    return this.http.get<number>(`${this.apiUrl}/tareasDone/${id}`);
   }
 
-  tareasFinalizadas(): Observable<number>{
-    return this.http.get<number>(`${this.apiUrl}/tareasFinalizadas`);
+  tareasFinalizadas(id:Number): Observable<number>{
+    return this.http.get<number>(`${this.apiUrl}/tareasFinalizadas/${id}`);
   }
     
 }

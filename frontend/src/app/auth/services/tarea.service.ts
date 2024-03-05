@@ -9,9 +9,12 @@ export class TareaService {
     constructor(private http: HttpClient) { }
 
     private apiUrl = "http://localhost:9000/api/tareas";
-    
     buscarTodasTareas(): Observable<Tarea[]> {
         return this.http.get<Tarea[]>(this.apiUrl + "/all");
+    }
+
+    buscarTareasFiltro(id_categoria: Number, id_importancia: Number, id_user: Number): Observable<Tarea[]>{
+        return this.http.get<Tarea[]>(`${this.apiUrl}/filtroTotal?categoria=${id_categoria}&importancia=${id_importancia}&id_user=${id_user}`);
     }
 
     cambiarEstadoTarea(idTarea: Number, idEstado: Number): Observable<Tarea>{

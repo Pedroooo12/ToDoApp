@@ -124,14 +124,38 @@ export class ActualizarTareaComponent implements OnInit{
 
     }
 
-    if(typeof this.miFormulario.get("categoria")!.value == "object"){
+    if(typeof this.miFormulario.get("categoria")!.value == "object" && typeof this.miFormulario.get("importancia")!.value == "object"){
       let importancia = this.miFormulario.get("importancia")!.value;
-      let categoria = this.miFormulario.get("categoria")!.value;
+        let categoria = this.miFormulario.get("categoria")!.value;
+
+        this.miFormulario.patchValue({
+          categoria:  categoria,
+          importancia: importancia
+        });
+    }
+
+    if(typeof this.miFormulario.get("categoria")!.value == "string" && typeof this.miFormulario.get("importancia")!.value == "object"){
+      let importancia = this.miFormulario.get("importancia")!.value;
+      let categoria = Number(this.miFormulario.get("categoria")!.value);
+
       this.miFormulario.patchValue({
-        categoria: categoria,
+        categoria: this.listadoCategorias[categoria],
         importancia: importancia
       });
-    }else{
+    }
+
+    if(typeof this.miFormulario.get("categoria")!.value == "object" && typeof this.miFormulario.get("importancia")!.value == "string"){
+      let importancia = Number(this.miFormulario.get("importancia")!.value);
+      let categoria = this.miFormulario.get("categoria")!.value;
+
+      this.miFormulario.patchValue({
+        categoria: categoria,
+        importancia: this.listadoImportancias[importancia]
+      });
+    }
+
+
+    if(typeof this.miFormulario.get("categoria")!.value == "string" && typeof this.miFormulario.get("importancia")!.value == "string"){
       let importancia = Number(this.miFormulario.get("importancia")!.value);
       let categoria = Number(this.miFormulario.get("categoria")!.value);
       this.miFormulario.patchValue({
@@ -139,6 +163,8 @@ export class ActualizarTareaComponent implements OnInit{
         importancia: this.listadoImportancias[importancia]
       });
     }
+
+    
 
     this._tareaService.actualizarTarea(this.tarea_id,this.miFormulario.value).subscribe(resp => {
       this.route.navigate(["auth/listado-tareas"]);

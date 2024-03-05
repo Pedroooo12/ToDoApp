@@ -1,6 +1,7 @@
-import { Component, ElementRef } from '@angular/core';
-import { ArcElement, Chart } from 'chart.js/auto';
+import { Component } from '@angular/core';
+import { Chart } from 'chart.js/auto';
 import { forkJoin } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { EstadisticasService } from 'src/app/auth/services/estadisticas.service';
 
 @Component({
@@ -9,6 +10,9 @@ import { EstadisticasService } from 'src/app/auth/services/estadisticas.service'
   styleUrls: ['./por-estado.component.css']
 })
 export class PorEstadoComponent {
+
+  private id_user!: Number;
+
   public chart!: Chart<'pie', Number[], string>;
 
   public tareasTotales!: number;
@@ -23,22 +27,23 @@ export class PorEstadoComponent {
       'Todo',
       'Doing',
       'Done',
-      'Finalizadas'
     ],
     datasets: [{
       label: '',
-      data: [0,0,0,0],
+      data: [0,0,0],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
         'rgb(255, 205, 86)',
-        'rgb(79, 205, 86)'
       ],
       hoverOffset: 4
     }]
   };
 
-  constructor(private _estadisticasService: EstadisticasService){
+  constructor(private _estadisticasService: EstadisticasService, private _authService: AuthService){
+    if(this._authService.currentUser){
+      this.id_user = this._authService.currentUser.id!;
+    }
   }
 
   ngOnInit(): void{
@@ -48,18 +53,16 @@ export class PorEstadoComponent {
   cogerValoresTareas() {
     // Realiza todas las solicitudes de manera concurrente utilizando forkJoin
     forkJoin([
-      this._estadisticasService.tareasTotales(),
-      this._estadisticasService.tareasTodo(),
-      this._estadisticasService.tareasDoing(),
-      this._estadisticasService.tareasDone(),
-      this._estadisticasService.tareasFinalizadas()
+      this._estadisticasService.tareasTotales(this.id_user),
+      this._estadisticasService.tareasTodo(this.id_user),
+      this._estadisticasService.tareasDoing(this.id_user),
+      this._estadisticasService.tareasDone(this.id_user),
     ]).subscribe(
-      ([tareasTotales, tareasToDo, tareasDoing, tareasDone, tareasFinalizadas]) => {
+      ([tareasTotales, tareasToDo, tareasDoing, tareasDone]) => {
         this.tareasTotales = tareasTotales;
         this.tareasToDo = tareasToDo;
         this.tareasDoing = tareasDoing;
         this.tareasDone = tareasDone;
-        this.tareasFinalizadas = tareasFinalizadas;
 
         this.inicializarChart();
       },
@@ -84,43 +87,62 @@ export class PorEstadoComponent {
       btn_valores?.classList.add("block");
 
       this.data = {
-        labels: ['Todo', 'Doing', 'Done', 'Finalizadas'],
+        labels: ['Todo', 'Doing', 'Done', ],
         datasets: [{
           label: '',
-          data: [this.convertirAPorcentaje(this.tareasToDo), this.convertirAPorcentaje(this.tareasDoing), this.convertirAPorcentaje(this.tareasDone),this.convertirAPorcentaje(this.tareasFinalizadas)],
+          data: [this.convertirAPorcentaje(this.tareasToDo), this.convertirAPorcentaje(this.tareasDoing), this.convertirAPorcentaje(this.tareasDone)],
           backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
             'rgb(255, 205, 86)',
-            'rgb(79, 205, 86)'
           ],
           hoverOffset: 4
         }]
       };
+
+      this.chart = new Chart("chart", {
+        type: 'pie',
+        data: this.data,
+        options: {
+          plugins: {
+              tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      var label = context.label || '';
+                      var percentage = context.dataset.data[context.dataIndex];
+                      return `${label}: ${percentage}%`;
+                    }
+                  }
+              }
+          },
+          // Otras opciones de configuración del gráfico
+      },
+      });
     }else{
       btn_porcentaje?.classList.remove("hidden");
       btn_valores?.classList.add("hidden");
 
       this.data = {
-        labels: ['Todo', 'Doing', 'Done', 'Finalizadas'],
+        labels: ['Todo', 'Doing', 'Done'],
         datasets: [{
           label: '',
-          data: [this.tareasToDo, this.tareasDoing, this.tareasDone,this.tareasFinalizadas],
+          data: [this.tareasToDo, this.tareasDoing, this.tareasDone],
           backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
             'rgb(255, 205, 86)',
-            'rgb(79, 205, 86)'
           ],
           hoverOffset: 4
         }]
       };
+
+      this.chart = new Chart("chart", {
+        type: 'pie',
+        data: this.data,
+      });
     }
 
-    this.chart = new Chart("chart", {
-      type: 'pie',
-      data: this.data,
-    });
+    
 
     
   }
@@ -130,7 +152,7 @@ export class PorEstadoComponent {
   }
 
   convertirAPorcentaje(numero: number): number {
-    return (this.tareasTotales * numero)  / 100;
+    return Number(((100 * numero)  / this.tareasTotales).toFixed(2));
   }
 
   cambiarEstado(acordeon: HTMLDivElement){

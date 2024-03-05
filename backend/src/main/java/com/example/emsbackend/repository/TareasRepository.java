@@ -9,12 +9,9 @@ import java.util.List;
 
 @Repository
 public interface TareasRepository extends JpaRepository<Tareas, Long>{
-    List<Tareas> findByCategoriaAndTerminadaAndEstado(Categoria categoria, boolean terminada, Estado estado);
-    List<Tareas> findByImportanciaAndTerminadaAndEstado(Importancia importancia, boolean terminada, Estado estado);
 
-    List<Tareas> findByCategoriaAndImportanciaAndTerminadaAndEstado(Categoria categoria,Importancia importancia, boolean terminada, Estado estado);
 
-    List<Tareas> findByUser(User user);
+
 
     long countByCategoria(Categoria categoria);
 
@@ -23,11 +20,21 @@ public interface TareasRepository extends JpaRepository<Tareas, Long>{
     List<Tareas> findByEstado(Estado estado);
 
     //Métodos para las estadisticas
-    long count();
-    long countByEstado(Estado estado);
+    long countByUser(User user);
+    long countByEstadoAndUser(Estado estado,User user);
 
     long countByImportancia(Importancia importancia);
 
     long countByImportanciaAndEstado(Importancia importancia, Estado estado);
+
+    //Filtrado
+
+    List<Tareas> findByUser(User user);
+
+    List<Tareas> findByCategoriaAndUser(Categoria categoria, User user);
+
+    List<Tareas> findByImportanciaAndUser(Importancia importancia, User user);
+
+    List <Tareas> findByImportanciaAndCategoriaAndUser(Importancia importancia, Categoria categoria, User user);
 
 }

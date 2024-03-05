@@ -3,6 +3,7 @@ import { Tarea } from 'src/app/auth/interfaces/tarea';
 import { TareaService } from 'src/app/auth/services/tarea.service';
 import {CdkDragDrop, moveItemInArray, CdkDropList, transferArrayItem} from '@angular/cdk/drag-drop';
 import { FiltradoService } from 'src/app/auth/services/filtrado.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-listado-tarea',
@@ -15,146 +16,53 @@ export class ListadoTareaComponent {
   tareasDoing: Tarea[] = [];
   tareasDone: Tarea[] = [];
 
+  public id_user!:Number;
+
   //acciones
   eliminar = false;
   terminar = false;
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-
-  constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService){
-    this._tareaService.buscarTareasPorEstado({id: 1}).subscribe(resp => {
-      this.tareasToDo = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._tareaService.buscarTareasPorEstado({id: 2}).subscribe(resp => {
-      this.tareasDoing = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._tareaService.buscarTareasPorEstado({id: 3}).subscribe(resp => {
-      this.tareasDone = resp;
-    }, (error) => {
-      console.log(error);
-    });
-    //this.recogerArrays();
-  }
-
-  async recogerArrays(eventData?: { id_categoria: Number, id_importancia: Number }){
-   
-
-
-    //Si no se ha tocado nada
-    if(!eventData || eventData.id_categoria == 0 && eventData.id_importancia == 0){
-  
-      this.recorrerArrayNormal();
-      //si idcategoria existe y no es 0 y importancia es 0
-    }else{
-      console.log(eventData);
-
-      if(eventData && eventData.id_categoria == 1 && eventData.id_importancia == 0){
-        console.log("entra a categoria");
-        this.recorrerArrayPorCategoria(eventData.id_categoria);
-        
-        //filtrar por importancia
-      }else if(eventData && eventData.id_importancia != 0 && eventData.id_categoria == 0){
-        this.recorrerArrayPorImportancia(eventData.id_importancia);
-      }else{
-        this.recorrerArrayPorCategoriaYImportancia(eventData.id_categoria, eventData.id_importancia);
-      }
+  constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService, private _authService: AuthService){
+    if(this._authService.currentUser){
+      this.id_user = this._authService.currentUser.id!;
+      this.recogerArrays({id_categoria: 0, id_importancia: 0});
+      console.log(this.tareasDoing);
     }
+  }
+
+  async recogerArrays(eventData: { id_categoria: Number, id_importancia: Number }){
+    console.log(eventData);
+    this.tareasDoing = [];
+    this.tareasToDo = [];
+    this.tareasDone = [];
+    this._tareaService.buscarTareasFiltro(eventData.id_categoria,eventData.id_importancia, this.id_user).subscribe(resp => {
+      for (let i = 0; i < resp.length; i++) {
+        if(resp[i].estado.estado == "todo"){
+          console.log("entra");
+          this.tareasToDo.push(resp[i]);  
+        }
+        if(resp[i].estado.estado == "doing"){
+          this.tareasDoing.push(resp[i]);
+        }
+        if(resp[i].estado.estado == "done"){
+          this.tareasDone.push(resp[i]);
+        }
+        
+      }
+    },(error) => {
+      console.warn(error);
+    });
+    
 
   }
 
-  recorrerArrayNormal(){
-    this._tareaService.buscarTareasPorEstado({id: 1}).subscribe(resp => {
-      this.tareasToDo = resp;
-    }, (error) => {
-      console.log(error);
-    });
 
-    this._tareaService.buscarTareasPorEstado({id: 2}).subscribe(resp => {
-      this.tareasDoing = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._tareaService.buscarTareasPorEstado({id: 3}).subscribe(resp => {
-      this.tareasDone = resp;
-    }, (error) => {
-      console.log(error);
-    });
-  }
-
-  recorrerArrayPorCategoria(categoriaId: Number){
-    this._filtradoService.filtrarPorCategoria(categoriaId,{id: 1}).subscribe(resp => {
-      this.tareasToDo = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._filtradoService.filtrarPorCategoria(categoriaId,{id: 2}).subscribe(resp => {
-      this.tareasDoing = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._filtradoService.filtrarPorCategoria(categoriaId,{id: 3}).subscribe(resp => {
-      this.tareasDone = resp;
-    }, (error) => {
-      console.log(error);
-    });
-  }
-
-  recorrerArrayPorImportancia(importanciaId: Number){
-    this._filtradoService.filtrarPorImportancia(importanciaId,{id: 1}).subscribe(resp => {
-      this.tareasToDo = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._filtradoService.filtrarPorImportancia(importanciaId,{id: 2}).subscribe(resp => {
-      this.tareasDoing = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._filtradoService.filtrarPorImportancia(importanciaId,{id: 3}).subscribe(resp => {
-      this.tareasDone = resp;
-    }, (error) => {
-      console.log(error);
-    });
-  }
-
-  recorrerArrayPorCategoriaYImportancia(importanciaId: Number, categoriaId: Number){
-    this._filtradoService.filtrarPorImportanciaYCategoria(categoriaId,importanciaId,{id: 1}).subscribe(resp => {
-      this.tareasToDo = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._filtradoService.filtrarPorImportanciaYCategoria(categoriaId,importanciaId,{id: 2}).subscribe(resp => {
-      this.tareasDoing = resp;
-    }, (error) => {
-      console.log(error);
-    });
-
-    this._filtradoService.filtrarPorImportanciaYCategoria(categoriaId,importanciaId,{id: 3}).subscribe(resp => {
-      this.tareasDone = resp;
-    }, (error) => {
-      console.log(error);
-    });
-  }
 
   drop(event: CdkDragDrop<Tarea[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      this.recogerArrays();
+      this.recogerArrays({id_categoria: 0, id_importancia: 0});
       let id_estado;
       if(event.container.element.nativeElement.id == "todo"){
         id_estado = 1;
@@ -191,7 +99,7 @@ export class ListadoTareaComponent {
 
   terminarTodasTareas(){
     this._tareaService.terminarTareas(this.tareasDone).subscribe(resp => {
-      this.recogerArrays();
+      this.recogerArrays({id_categoria: 0, id_importancia: 0});
     }, (error) => { 
       console.log(error);
     });
