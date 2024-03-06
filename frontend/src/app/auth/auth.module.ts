@@ -21,6 +21,7 @@ import { FiltradoTareaComponent } from './page/components/tareas/filtrado-tarea/
 import { ListadoEstadisticasComponent } from './page/components/estadisticas/listado-estadisticas/listado-estadisticas.component';
 import { PorEstadoComponent } from './page/components/estadisticas/por-estado/por-estado.component';
 import { PorFinalizadasComponent } from './page/components/estadisticas/por-finalizadas/por-finalizadas.component';
+import { BuscadorTareaComponent } from './page/components/tareas/buscador-tarea/buscador-tarea.component';
 
 
 
@@ -43,6 +44,7 @@ import { PorFinalizadasComponent } from './page/components/estadisticas/por-fina
     ListadoEstadisticasComponent,
     PorEstadoComponent,
     PorFinalizadasComponent,
+    BuscadorTareaComponent,
   ],
   imports: [
     CommonModule,

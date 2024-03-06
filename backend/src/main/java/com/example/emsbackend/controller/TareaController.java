@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -62,7 +64,10 @@ public class TareaController {
 
 
     @GetMapping("/filtroTotal")
-    public ResponseEntity<List<Tareas>> getTareaByAllFiltros(@RequestParam Long categoria , @RequestParam  Long importancia, @RequestParam  Long id_user) {
+    public ResponseEntity<List<Tareas>> getTareaByAllFiltros(
+            @RequestParam Long categoria,
+            @RequestParam  Long importancia,
+            @RequestParam  Long id_user) {
         User user = userService.findById(id_user);
         List<Tareas> tareas;
         if(categoria == 0 && importancia == 0){
@@ -82,10 +87,24 @@ public class TareaController {
             tareas = tareasService.buscarTareasPorUsuarioImportanciaYCategoria(importanciaObj,categoriaObj,user);
         }
 
-
         return ResponseEntity.ok(tareas);
     }
 
+    @GetMapping("/buscador")
+    public ResponseEntity<List<Tareas>> getTareaByBuscador(
+            @RequestParam(required = false) String terminoBusqueda, @RequestParam  Long id_user) {
+        User user = userService.findById(id_user);
+        List<Tareas> todasTareas = tareasService.buscarTareasPorUsuario(user);
+
+        if (terminoBusqueda != null && !terminoBusqueda.isEmpty()) {
+            // Aplicar la lógica de búsqueda aquí, por ejemplo:
+            List<Tareas> tareasSeleccionadas = todasTareas.stream()
+                    .filter(t -> t.getNombre().contains(terminoBusqueda))
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(tareasSeleccionadas);
+        }
+        return ResponseEntity.ok(Collections.emptyList());
+    }
 
 
     //Leemos la lista de todos los ejercicios

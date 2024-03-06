@@ -16,6 +16,9 @@ export class ListadoTareaComponent {
   tareasDoing: Tarea[] = [];
   tareasDone: Tarea[] = [];
 
+  recogerTarea?: Tarea;
+  hayModal: boolean = false;
+
   public id_user!:Number;
 
   //acciones
@@ -135,5 +138,20 @@ export class ListadoTareaComponent {
         this.eliminar = false;
       }, 2000);
     }
+  }
+
+  ponerModal(id: Number){
+    this.hayModal = true;
+    this._tareaService.obtenerTareaPorID(id).subscribe(resp => {
+      this.recogerTarea = resp;
+    }, (error) => {
+      console.log(error)
+    });
+  }
+
+  cerrarModal(){
+    console.log("salir");
+    const modal = document.querySelector(".modal");
+    modal?.classList.add("hidden");
   }
 }

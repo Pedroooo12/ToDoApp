@@ -1,4 +1,4 @@
-<section class="p-20 h-svh bg-gradient-to-br block from-amarillo via-claro to-azul">
+<section class="p-20 h-svh bg-gray-600 bg-gradient-to-br block from-amarillo via-claro to-azul">
     <div class="mx-auto container">
         <div *ngIf="terminar" class="p-4 mb-4 text-sm w-fit ms-auto text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
             <span class="font-medium">¡Tarea terminada!</span> La tarea ha sido terminada con éxito.
@@ -9,8 +9,11 @@
         </div>
 
         <h1 class="text-center text-3xl font-bold mb-10">Listado tareas</h1>
-        <app-filtrado-tarea (eventoRecargaTareas)="recogerArrays($event)"></app-filtrado-tarea>
-        <div class="flex gap-36 justify-center">
+        <div class="flex justify-between my-10 items-center">
+            <app-buscador-tarea (ponerModal)="ponerModal($event)"></app-buscador-tarea>
+            <app-filtrado-tarea (eventoRecargaTareas)="recogerArrays($event)"></app-filtrado-tarea>
+        </div>
+        <div class="flex gap-36 justify-between">
             <div>
                 <div class="flex justify-center gap-3 mb-5">
                     <h2 class="text-2xl text-center font-semibold  text-azul">To do</h2>
@@ -20,7 +23,7 @@
                           </svg>                                        
                     </a>
                 </div>
-                <div id="todo" class="h-96 w-fit min-w-56 overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
+                <div id="todo" class="h-96 w-fit  min-w-80 overflow-y-auto overflow-x-hidden bg-violeta  rounded bg-opacity-10 px-4 flex flex-col gap-5"
                 cdkDropList
                 #todoList="cdkDropList"
                 [cdkDropListData]="tareasToDo"
@@ -41,7 +44,7 @@
                           </svg>                                        
                     </a>
                 </div>
-                <div id="doing" class="h-96 w-fit min-w-56 altura overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
+                <div id="doing" class="h-96 w-fit  min-w-80 altura overflow-y-auto overflow-x-hidden  bg-violeta  border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
                 cdkDropList
                 #doingList="cdkDropList"
                 [cdkDropListData]="tareasDoing"
@@ -65,7 +68,7 @@
                 <a *ngIf="tareasDone.length > 0" (click)="terminarTodasTareas()" class="p-3 block bg-green-500 my-5 rounded-lg text-white cursor-pointer">Terminar todas las tareas realizadas</a>
                 <div
                   id="done"
-                  class="h-96 altura w-fit min-w-56 overflow-y-auto bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
+                  class="h-96 altura w-fit min-w-80  overflow-y-auto overflow-x-hidden bg-violeta border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
                   cdkDropList
                   #doneList="cdkDropList"
                   [cdkDropListData]="tareasDone"
@@ -79,4 +82,18 @@
         </div>
     </div>
 
+
+    <div *ngIf="hayModal" class="modal">
+        <div class="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-80 z-40" (click)="cerrarModal()"></div>
+        <div id="default-modal" tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="flex justify-center align-middle items-center h-screen">
+                <div class="cardContainer">
+                    <div class="card">
+    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </section>
