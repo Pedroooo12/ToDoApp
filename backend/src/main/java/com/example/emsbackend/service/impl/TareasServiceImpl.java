@@ -58,7 +58,6 @@ public class TareasServiceImpl implements TareasService {
         );
         tarea.setNombre(updatedTarea.getNombre());
         tarea.setDescripcion(updatedTarea.getDescripcion());
-        tarea.setTerminada(updatedTarea.getTerminada());
         tarea.setCategoria(updatedTarea.getCategoria());
         tarea.setImportancia(updatedTarea.getImportancia());
         tarea.setUpdated(new Date());
@@ -120,8 +119,6 @@ public class TareasServiceImpl implements TareasService {
         );
         //cambiamos el estado a finalizado
         tarea.setEstado(estado);
-        //ponemos finalizado en 1
-        tarea.setTerminada(true);
 
         //actualizamos
         Tareas updatedEjercicioObj =  tareasRepository.save(tarea);
@@ -144,9 +141,6 @@ public class TareasServiceImpl implements TareasService {
 
             // Cambiamos el estado a finalizado
             tareaExistente.setEstado(estado);
-
-            // Ponemos terminada en true
-            tareaExistente.setTerminada(true);
 
             // Actualizamos y agregamos a la lista de tareas terminadas
             Tareas updatedTarea = tareasRepository.save(tareaExistente);

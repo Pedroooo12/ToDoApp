@@ -1,23 +1,19 @@
 package com.example.emsbackend.controller;
 
 import com.example.emsbackend.entity.*;
-import com.example.emsbackend.exception.ResourceNotFoundException;
 import com.example.emsbackend.repository.EstadoRepository;
-import com.example.emsbackend.request.FiltradoAllRequest;
-import com.example.emsbackend.request.FiltradoCategoriaRequest;
-import com.example.emsbackend.request.FiltradoImportanciaRequest;
+
 import com.example.emsbackend.service.CategoriaService;
 import com.example.emsbackend.service.ImportanciaService;
 import com.example.emsbackend.service.TareasService;
 import com.example.emsbackend.service.UserService;
-import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+
 import java.util.List;
 
 

@@ -31,6 +31,7 @@ export class ListadoTareaComponent {
   }
 
   async recogerArrays(eventData: { id_categoria: Number, id_importancia: Number }){
+    this._filtradoService.eventDataSetter = eventData;
     console.log(eventData);
     this.tareasDoing = [];
     this.tareasToDo = [];
@@ -38,7 +39,6 @@ export class ListadoTareaComponent {
     this._tareaService.buscarTareasFiltro(eventData.id_categoria,eventData.id_importancia, this.id_user).subscribe(resp => {
       for (let i = 0; i < resp.length; i++) {
         if(resp[i].estado.estado == "todo"){
-          console.log("entra");
           this.tareasToDo.push(resp[i]);  
         }
         if(resp[i].estado.estado == "doing"){
@@ -75,7 +75,6 @@ export class ListadoTareaComponent {
       if(event.container.element.nativeElement.id == "doing"){
         id_estado = 2;
         this._tareaService.cambiarEstadoTarea(event.item.data.id, id_estado).subscribe(resp => {
-          console.log("Hecho");
         }, (error) => {
           console.log(error);
         });
@@ -106,8 +105,6 @@ export class ListadoTareaComponent {
   }
 
   async alertasTareas(accion: String){
-    console.log("hola")
-    console.log(accion);
 
     if (accion == "terminar") {
   
@@ -125,7 +122,6 @@ export class ListadoTareaComponent {
       }, 2000);
     }
     if (accion == "eliminar") {
-      console.log("entra");
       // Supongamos que el evento asíncrono es una promesa
       await new Promise<void>(resolve => {
         // Lógica asíncrona que eventualmente resolverá la promesa

@@ -12,7 +12,14 @@
         <app-filtrado-tarea (eventoRecargaTareas)="recogerArrays($event)"></app-filtrado-tarea>
         <div class="flex gap-36 justify-center">
             <div>
-                <h2 class="text-2xl text-center font-semibold mb-5 text-azul">To do</h2>
+                <div class="flex justify-center gap-3 mb-5">
+                    <h2 class="text-2xl text-center font-semibold  text-azul">To do</h2>
+                    <a routerLink="/auth/crear-tarea/1" class="block my-auto w-6 h-6 bg-azul text-white rounded-xl">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4.2a1 1 0 1 0-2 0V11H7.8a1 1 0 1 0 0 2H11v3.2a1 1 0 1 0 2 0V13h3.2a1 1 0 1 0 0-2H13V7.8Z" clip-rule="evenodd"/>
+                          </svg>                                        
+                    </a>
+                </div>
                 <div id="todo" class="h-96 w-fit min-w-56 overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
                 cdkDropList
                 #todoList="cdkDropList"
@@ -26,7 +33,14 @@
             </div>
 
             <div>
-                <h2 class="text-2xl text-center font-semibold mb-5 text-azul">Doing</h2>
+                <div class="flex justify-center gap-3 mb-5">
+                    <h2 class="text-2xl text-center font-semibold  text-azul">Doing</h2>
+                    <a routerLink="/auth/crear-tarea/2" class="block my-auto w-6 h-6 bg-azul text-white rounded-xl">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4.2a1 1 0 1 0-2 0V11H7.8a1 1 0 1 0 0 2H11v3.2a1 1 0 1 0 2 0V13h3.2a1 1 0 1 0 0-2H13V7.8Z" clip-rule="evenodd"/>
+                          </svg>                                        
+                    </a>
+                </div>
                 <div id="doing" class="h-96 w-fit min-w-56 altura overflow-y-auto  bg-violeta border-2 border-white rounded bg-opacity-10 px-4 flex flex-col gap-5"
                 cdkDropList
                 #doingList="cdkDropList"
@@ -40,7 +54,14 @@
             </div>
 
             <div>
-                <h2 class="text-2xl text-center font-semibold mb-5 text-azul">Done</h2>
+                <div class="flex justify-center gap-3 mb-5">
+                    <h2 class="text-2xl text-center font-semibold  text-azul">Done</h2>
+                    <a routerLink="/auth/crear-tarea/3" class="block my-auto w-6 h-6 bg-azul text-white rounded-xl">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm11-4.2a1 1 0 1 0-2 0V11H7.8a1 1 0 1 0 0 2H11v3.2a1 1 0 1 0 2 0V13h3.2a1 1 0 1 0 0-2H13V7.8Z" clip-rule="evenodd"/>
+                          </svg>                                        
+                    </a>
+                </div>
                 <a *ngIf="tareasDone.length > 0" (click)="terminarTodasTareas()" class="p-3 block bg-green-500 my-5 rounded-lg text-white cursor-pointer">Terminar todas las tareas realizadas</a>
                 <div
                   id="done"

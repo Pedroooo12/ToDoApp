@@ -14,7 +14,6 @@ public interface TareasService {
 
     void deleteTarea(Long tareaId);
 
-    /*void deleteEjercicioByRutina(Rutina rutina);*/
 
 
 

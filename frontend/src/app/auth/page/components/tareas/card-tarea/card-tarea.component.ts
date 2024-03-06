@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
+import { FiltradoService } from 'src/app/auth/services/filtrado.service';
 import { TareaService } from 'src/app/auth/services/tarea.service';
 
 @Component({
@@ -15,13 +16,14 @@ export class CardTareaComponent {
   @Output() alertasTareas = new EventEmitter<any>();
 
 
-  constructor(private _tareaService: TareaService){
+  constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService){
+
   }
 
   eliminarTarea(id: Number){
     this._tareaService.eliminarTarea(id).subscribe(resp => {
       this.alertasTareas.emit("eliminar");
-      this.eventoRecargaTareas.emit();
+      this.eventoRecargaTareas.emit(this._filtradoService.eventDataCurrent);
     }, (error) => {
       console.log(error);
     });
@@ -29,10 +31,10 @@ export class CardTareaComponent {
 
 
   terminarTarea(tarea: Tarea){
-    
     this._tareaService.terminarTarea(tarea).subscribe(resp => {
       this.alertasTareas.emit("terminar");
-      this.eventoRecargaTareas.emit();
+      console.log(this._filtradoService.eventDataCurrent);
+      this.eventoRecargaTareas.emit(this._filtradoService.eventDataCurrent);
     }, (error) => {
       console.log(error);
     });

@@ -19,16 +19,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let categoria of listadoCategorias" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <tr *ngFor="let categoria of listadoCategorias" [style.background]="categoria.color" class="border-b">
+                <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">
                     {{categoria.id}}
                 </th>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-white">
                     {{categoria.categoria}}
                 </td>
                 <td class="px-6 py-4 flex gap-5">
-                    <a [routerLink]="'/auth/actualizar-categoria/' + categoria.id" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a (click)="eliminar(categoria.id!)" class="font-medium cursor-pointer text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                    <a [routerLink]="'/auth/actualizar-categoria/' + categoria.id" class="font-medium cursor-pointer text-blue-600 bg-white py-2 px-3 w-fit rounded-lg dark:text-blue-500 hover:underline">Edit</a>
+                    <a (click)="eliminar(categoria.id!)" class="font-medium cursor-pointer text-red-600 bg-white py-2 px-3 rounded-lg dark:text-red-500 hover:underline">Delete</a>
                 </td>
             </tr>
         </tbody>

@@ -10,7 +10,8 @@ import { ActualizarCategoriaComponent } from './page/components/categoria/actual
 import { CrearTareaComponent } from './page/components/tareas/crear-tarea/crear-tarea.component';
 import { ActualizarTareaComponent } from './page/components/tareas/actualizar-tarea/actualizar-tarea.component';
 import { CrearCategoriaComponent } from './page/components/categoria/crear-categoria/crear-categoria.component';
-import { ListadoEstadisticasComponent } from './page/estadisticas/listado-estadisticas/listado-estadisticas.component';
+import { ListadoEstadisticasComponent } from './page/components/estadisticas/listado-estadisticas/listado-estadisticas.component';
+
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
       },
       {
         path: 'crear-tarea',
+        component: CrearTareaComponent
+      },
+      {
+        path: 'crear-tarea/:id_estado',
         component: CrearTareaComponent
       },
       {

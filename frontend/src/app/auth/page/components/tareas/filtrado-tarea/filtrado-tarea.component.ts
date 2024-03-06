@@ -3,6 +3,7 @@ import { Categoria } from 'src/app/auth/interfaces/categoria';
 import { Importancia } from 'src/app/auth/interfaces/importancia';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
+import { FiltradoService } from 'src/app/auth/services/filtrado.service';
 import { ImportanciaService } from 'src/app/auth/services/importancia.service';
 import { User } from 'src/app/interfaces/user';
 
@@ -18,7 +19,7 @@ export class FiltradoTareaComponent {
 
   @Output() eventoRecargaTareas = new EventEmitter<any>();
   user!: User;
-  constructor(private _categoriaService: CategoriaService, private _importanciaService: ImportanciaService, private _authService: AuthService) {
+  constructor(private _categoriaService: CategoriaService, private _importanciaService: ImportanciaService, private _authService: AuthService, private _filtradoService: FiltradoService) {
     this.user =this._authService.currentUser!;
     this._categoriaService.buscarCategoriasPorUser(this.user.id!).subscribe(resp => {
       this.listadoCategorias = resp;
@@ -35,20 +36,26 @@ export class FiltradoTareaComponent {
 
 
   cambioCategorias(event: any){
-    console.log(event.target.value);
+    //console.log(event.target.value);
 
     //cogemos el valor de la importancia
     const select = document.getElementById("importancias") as HTMLSelectElement;
+    console.log(typeof Number(event.target.value));
 
+    console.log(typeof  select.selectedIndex);
 
-    this.eventoRecargaTareas.emit({id_categoria: Number(event.target.value), id_importancia: Number(select.selectedIndex)});
+    const eventData = {id_categoria: Number(event.target.value), id_importancia: Number(select.selectedIndex)};
+
+    this._filtradoService.eventDataSetter = eventData;
+    this.eventoRecargaTareas.emit(eventData);
   }
 
   cambioImportancias(event: any){
 
     //cogemos el valor de la importancia
     const select = document.getElementById("categorias") as HTMLSelectElement;
-    console.log(select.selectedIndex);
-    this.eventoRecargaTareas.emit({id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)});
+    const eventData = {id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)};
+    this._filtradoService.eventDataSetter = eventData;
+    this.eventoRecargaTareas.emit();
   }
 }

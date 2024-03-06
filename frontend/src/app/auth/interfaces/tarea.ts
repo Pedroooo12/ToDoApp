@@ -7,7 +7,6 @@ export interface Tarea {
     id?: Number,
     nombre: String,
     descripcion: String,
-    terminada: boolean,
     created?: Date,
     updated?: Date,
     categoria: Categoria,

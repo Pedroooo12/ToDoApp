@@ -23,8 +23,6 @@ public class Tareas {
     @Column(name="descripcion", nullable = false)
     private String descripcion;
 
-    @Column(name="terminada", nullable = false)
-    private Boolean terminada;
 
     @ManyToOne
     @JoinColumn(name="importancia_id")

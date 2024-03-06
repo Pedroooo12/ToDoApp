@@ -147,10 +147,6 @@ export class PorEstadoComponent {
     
   }
 
-  cambiarAPorcentaje(){
-
-  }
-
   convertirAPorcentaje(numero: number): number {
     return Number(((100 * numero)  / this.tareasTotales).toFixed(2));
   }

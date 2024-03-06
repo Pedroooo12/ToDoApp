@@ -1,7 +1,7 @@
 import { Estado } from './../../../../interfaces/estado';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/auth/interfaces/categoria';
 import { Importancia } from 'src/app/auth/interfaces/importancia';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
@@ -16,7 +16,7 @@ import { User } from 'src/app/interfaces/user';
   templateUrl: './crear-tarea.component.html',
   styleUrls: ['./crear-tarea.component.css']
 })
-export class CrearTareaComponent {
+export class CrearTareaComponent implements OnInit{
   public listadoImportancias: Importancia[] = [];
 
   public listadoCategorias: Categoria[] = [];
@@ -26,6 +26,8 @@ export class CrearTareaComponent {
   formularioEnviado = false;
 
   private user_id!: number;
+
+  private id_estado?: Number;
 
   private user!: User;
 
@@ -44,7 +46,6 @@ export class CrearTareaComponent {
   private tarea: Tarea = {
     nombre: '',
     descripcion: '',
-    terminada: false,
     categoria: this.categoria,
     importancia: this.importancia,
     estado: {
@@ -54,7 +55,11 @@ export class CrearTareaComponent {
   }
 
   //injectamos en el constructor 
-  constructor(private fb: FormBuilder, private route: Router, private _authService: AuthService, private _importanciaService: ImportanciaService, private _categoriaService: CategoriaService, private _tareaService: TareaService) { 
+  constructor(private fb: FormBuilder, private route: Router, private _authService: AuthService, 
+    private _importanciaService: ImportanciaService, 
+    private _categoriaService: CategoriaService, 
+    private _tareaService: TareaService,
+    private router: ActivatedRoute) { 
 
     if(typeof this._authService.currentUser == "object"){
       this.user = this._authService.currentUser;
@@ -81,12 +86,31 @@ export class CrearTareaComponent {
     this.miFormulario = this.fb.group({
       nombre: [this.tarea.nombre, [Validators.required]],
       descripcion: [this.tarea.descripcion, [Validators.required]],
-      terminada: [this.tarea.terminada],
       importancia: [null, [Validators.required]],
       categoria: [null, [Validators.required]],
       estado: [this.tarea.estado],
       user:[this.importancia.user]
     })
+  }
+
+  ngOnInit(): void {
+
+      // Suscribirse a los cambios en los parámetros de la ruta
+      this.router.paramMap.subscribe(params => {
+        // Obtener el valor del parámetro id_estado
+        this.id_estado = Number(params.get('id_estado'));
+  
+        // Realizar acciones basadas en si el parámetro está presente o no
+        if (this.id_estado) {
+          // El parámetro id_estado está presente
+          this.miFormulario.patchValue({
+            estado: {id: this.id_estado}
+          });
+        } else {
+          // El parámetro id_estado no está presente
+          console.log('No se proporcionó ningún id_estado.');
+        }
+      });
   }
 
 
@@ -115,7 +139,7 @@ export class CrearTareaComponent {
     this._tareaService.crearTarea(this.miFormulario.value).subscribe(resp => {
       this.route.navigate(["auth/listado-tareas"]);
     }, (error) => {
-      console.log(error);
+      console.warn(error);
     });
     
   }

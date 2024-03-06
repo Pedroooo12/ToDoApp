@@ -1,6 +1,11 @@
 <div class="flex gap-10 my-10">
     <div class="w-60">
-        <label for="categorias" class="block text-sm font-medium leading-6 text-gray-900">Filtrar por categoria</label>
+        <div class="flex">
+            <label for="categorias" class="block text-sm font-medium leading-6 text-gray-900">Filtrar por categoria</label>
+            <svg class="w-6 h-6 text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M5 3a2 2 0 0 0-1.5 3.3l5.4 6v5c0 .4.3.9.6 1.1l3.1 2.3c1 .7 2.5 0 2.5-1.2v-7.1l5.4-6C21.6 5 20.7 3 19 3H5Z"/>
+            </svg>
+        </div>
         <select id="categorias" name="categorias" (change)="cambioCategorias($event)" class="bg-transparent mt-2 border border-gray-300 text-violeta text-sm rounded-lg  block w-full p-2.5 ">
             <option selected value="0">Todos</option>
             <option *ngFor="let categoria of listadoCategorias" [value]="categoria.id!">{{categoria.categoria}}</option>
@@ -9,7 +14,12 @@
     
 
     <div class="w-60">
-        <label for="importancias" class="block text-sm font-medium leading-6 text-gray-900">Filtrar por importancia</label>
+        <div class="flex">
+            <label for="importancias" class="block text-sm font-medium leading-6 text-gray-900">Filtrar por importancia</label>
+            <svg class="w-6 h-6 text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M5 3a2 2 0 0 0-1.5 3.3l5.4 6v5c0 .4.3.9.6 1.1l3.1 2.3c1 .7 2.5 0 2.5-1.2v-7.1l5.4-6C21.6 5 20.7 3 19 3H5Z"/>
+            </svg>
+        </div>
         <select id="importancias" name="importancias" (change)="cambioImportancias($event)" class="bg-transparent mt-2 border border-gray-300 text-violeta text-sm rounded-lg  block w-full p-2.5 ">
             <option selected value="0">Todos</option>
             <option *ngFor="let importancia of listadoImportancias" [value]="importancia.id!">{{importancia.importancia}}</option>

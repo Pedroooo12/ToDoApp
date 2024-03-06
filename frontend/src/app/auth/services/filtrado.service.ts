@@ -1,44 +1,22 @@
-import { Estado } from './../interfaces/estado';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Tarea } from '../interfaces/tarea';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FiltradoService {
   private ApiURL = "http://localhost:9000/api/tareas";
+
+  private eventData: Object = {id_categoria: Number, id_importancia: Number};
+
   constructor(private http: HttpClient) { }
 
-  filtrarPorCategoria(id: Number, estado: Estado): Observable<Array<Tarea>>{
-    return this.http.post<Array<Tarea>>(`${this.ApiURL}/categoria/filtrado`,
-      {
-        "categoriaId": id,
-        "estado": estado
-      }
-    );
+  set eventDataSetter(eventData: { id_categoria: Number, id_importancia: Number }){
+    this.eventData = eventData;
   }
 
-  filtrarPorImportancia(id: Number, estado: Estado): Observable<Array<Tarea>>{
-    return this.http.post<Array<Tarea>>(`${this.ApiURL}/importancia/filtrado`,
-      {
-        "importanciaId": id,
-        "estado": estado
-      }
-    );
+  get eventDataCurrent(){
+    return this.eventData;
   }
-
-  filtrarPorImportanciaYCategoria(id_categoria: Number, id_importancia: Number, estado: Estado): Observable<Array<Tarea>>{
-    return this.http.post<Array<Tarea>>(`${this.ApiURL}/filtrado/all`,
-      {
-        "categoriaId": id_categoria,
-        "importanciaId": id_importancia,
-        "estado": estado
-      }
-    );
-  }
-
-
 
 }

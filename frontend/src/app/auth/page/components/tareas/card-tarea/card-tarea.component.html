@@ -5,7 +5,7 @@
     <a href="#">
         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">{{card.nombre}}</h5>
     </a>
-    <p class="{{card.categoria.color}} my-3 px-2  p-1 w-fit font-normal text-white rounded-sm ">Tipo: {{card.categoria.categoria}}</p>
+    <p [style.background]="card.categoria.color" class="my-3 px-2  p-1 w-fit font-normal text-white rounded-sm ">Tipo: {{card.categoria.categoria}}</p>
     <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Importancia: {{card.importancia.importancia}}</p>
     <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">{{card.descripcion}}</p>
 

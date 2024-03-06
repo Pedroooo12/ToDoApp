@@ -45,7 +45,6 @@ export class ActualizarTareaComponent implements OnInit{
   public tarea: Tarea = {
     nombre: '',
     descripcion: '',
-    terminada: false,
     categoria: this.categoria,
     importancia: this.importancia,
     estado: {
@@ -83,7 +82,6 @@ export class ActualizarTareaComponent implements OnInit{
       id: [this.tarea.id],
       nombre: [this.tarea.nombre, [Validators.required]],
       descripcion: [this.tarea.descripcion, [Validators.required]],
-      terminada: [this.tarea.terminada],
       created: [this.tarea.created],
       updated: [this.tarea.updated],
       importancia: [null, [Validators.required]],
