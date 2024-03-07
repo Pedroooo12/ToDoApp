@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Filtrado } from '../interfaces/filtrado';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,11 @@ import { Injectable } from '@angular/core';
 export class FiltradoService {
   private ApiURL = "http://localhost:9000/api/tareas";
 
-  private eventData: Object = {id_categoria: Number, id_importancia: Number};
+  private eventData!: Filtrado;
 
   constructor(private http: HttpClient) { }
 
-  set eventDataSetter(eventData: { id_categoria: Number, id_importancia: Number }){
+  set eventDataSetter(eventData: Filtrado){
     this.eventData = eventData;
   }
 

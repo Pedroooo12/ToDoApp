@@ -11,32 +11,21 @@ import { TareaService } from 'src/app/auth/services/tarea.service';
 export class CardTareaComponent {
   @Input() card!: Tarea;
 
-  @Output() eventoRecargaTareas = new EventEmitter<any>();
 
   @Output() alertasTareas = new EventEmitter<any>();
+
+  @Output() addModal = new EventEmitter<any>();
 
 
   constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService){
 
   }
 
-  eliminarTarea(id: Number){
-    this._tareaService.eliminarTarea(id).subscribe(resp => {
-      this.alertasTareas.emit("eliminar");
-      this.eventoRecargaTareas.emit(this._filtradoService.eventDataCurrent);
-    }, (error) => {
-      console.log(error);
-    });
+  obtenerColorImportancia(importancia: String) {
+    return this._tareaService.obtenerColorImportancia(importancia);
   }
 
-
-  terminarTarea(tarea: Tarea){
-    this._tareaService.terminarTarea(tarea).subscribe(resp => {
-      this.alertasTareas.emit("terminar");
-      console.log(this._filtradoService.eventDataCurrent);
-      this.eventoRecargaTareas.emit(this._filtradoService.eventDataCurrent);
-    }, (error) => {
-      console.log(error);
-    });
+  irModal(id:Number){
+    this.addModal.emit(id);
   }
 }

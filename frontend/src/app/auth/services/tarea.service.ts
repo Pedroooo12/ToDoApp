@@ -8,6 +8,23 @@ import { Observable, take } from 'rxjs';
 export class TareaService {
     constructor(private http: HttpClient) { }
 
+    obtenerColorImportancia(importancia: String) {
+        switch (importancia) {
+          case 'Muy urgente':
+            return 'red';
+          case 'Urgente':
+            return 'orange';
+          case 'Medio':
+            return '#FFD700';
+          case 'Bajo':
+            return 'lightgreen';
+          case 'Muy bajo':
+            return 'lightgrey';
+          default:
+            return 'black';
+        }
+      }
+
     private apiUrl = "http://localhost:9000/api/tareas";
     buscarTodasTareas(): Observable<Tarea[]> {
         return this.http.get<Tarea[]>(this.apiUrl + "/all");

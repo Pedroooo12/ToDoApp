@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Categoria } from 'src/app/auth/interfaces/categoria';
+import { Filtrado } from 'src/app/auth/interfaces/filtrado';
 import { Importancia } from 'src/app/auth/interfaces/importancia';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
@@ -17,6 +18,12 @@ export class FiltradoTareaComponent {
   
   listadoImportancias: Importancia[] = [];
 
+  comprobarFiltradoImportancia: boolean = false;
+
+  comprobarFiltradoCategoria:boolean = false;
+
+  filtrosActuales!: Filtrado;
+
   @Output() eventoRecargaTareas = new EventEmitter<any>();
   user!: User;
   constructor(private _categoriaService: CategoriaService, private _importanciaService: ImportanciaService, private _authService: AuthService, private _filtradoService: FiltradoService) {
@@ -32,10 +39,13 @@ export class FiltradoTareaComponent {
     }, (error) => {
       console.log(error);
     });
+
+    this.filtrosActuales = this._filtradoService.eventDataCurrent;
   }
 
 
   cambioCategorias(event: any){
+
     //console.log(event.target.value);
 
     //cogemos el valor de la importancia
@@ -44,21 +54,25 @@ export class FiltradoTareaComponent {
 
     console.log(typeof  select.selectedIndex);
 
-    const eventData = {id_categoria: Number(event.target.value), id_importancia: Number(select.selectedIndex)};
-
+    const eventData: Filtrado = {id_categoria: Number(event.target.value), id_importancia: Number(select.selectedIndex)};
     this._filtradoService.eventDataSetter = eventData;
     this.eventoRecargaTareas.emit(eventData);
   }
 
   cambioImportancias(event: any){
-   
+    
+    console.log(this.filtrosActuales);
     //cogemos el valor de la importancia
     const select = document.getElementById("categorias") as HTMLSelectElement;
-    console.log(typeof Number(event.target.value));
 
-    console.log(typeof  select.selectedIndex);
-    const eventData = {id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)};
+
+    //const eventData = {id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)};
+    const eventData: Filtrado = {id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)};
+    console.log(eventData);
     this._filtradoService.eventDataSetter = eventData;
     this.eventoRecargaTareas.emit(eventData);
   }
+
+
+
 }

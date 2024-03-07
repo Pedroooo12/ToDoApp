@@ -1,0 +1,58 @@
+.ag-courses-item_link {
+    display: block;
+  
+    overflow: hidden;
+  
+    position: relative;
+}
+
+
+  .ag-courses-item_bg {
+    height: 128px;
+    width: 128px;
+  
+    z-index: 1;
+    position: absolute;
+    top: -85px;
+    right: -85px;
+  
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  } 
+  
+  
+  
+  @media only screen and (max-width: 979px) {
+    .ag-courses_item {
+      -ms-flex-preferred-size: calc(50% - 30px);
+      flex-basis: calc(50% - 30px);
+    }
+    .ag-courses-item_title {
+      font-size: 24px;
+    }
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .ag-format-container {
+      width: 96%;
+    }
+  
+  }
+  @media only screen and (max-width: 639px) {
+    .ag-courses_item {
+      -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+    }
+    .ag-courses-item_title {
+      min-height: 72px;
+      line-height: 1;
+  
+      font-size: 24px;
+    }
+    .ag-courses-item_date-box {
+      font-size: 16px;
+    }
+  }
