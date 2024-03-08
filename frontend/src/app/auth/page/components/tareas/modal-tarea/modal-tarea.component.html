@@ -1,0 +1,57 @@
+<div class="modal"> 
+    <div class="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-90 z-40" ></div>
+    <div id="default-modal" tabindex="-1" aria-hidden="true"   class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="flex justify-center align-middle items-center h-screen"(click)="cerrarModal()">
+            <div class="cardContainer" (click)="detenerPropagacion($event)">
+                <div class="card border-1 p-6 h-fit rounded-xl" [style.border-color]="recogerTarea.categoria.color">
+                    <h3 class="block text-3xl text-left text-white underline-offset-1">{{recogerTarea.nombre}}</h3>
+                    <div class="flex gap-5 align-middle items-center my-5">
+                        <p [style.background]="recogerTarea.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{recogerTarea.categoria.categoria}}</p>
+                        <p [ngStyle]="{'background-color': obtenerColorImportancia(recogerTarea.importancia.importancia)}" class="px-2  p-1 w-fit font-normal text-sm text-white rounded-sm">{{recogerTarea.importancia.importancia}}</p>
+                    </div>
+                    <div class="flex gap-5 my-5">
+                        <p class="inline-flex gap-2 font-semibold bg-gray-800 rounded-sm text-white p-2"> 
+                            <svg class="w-5 h-5 my-auto text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1H5a1 1 0 0 0-1 1v12c0 .6.4 1 1 1Zm3-7h0v0h0v0Zm4 0h0v0h0v0Zm4 0h0v0h0v0Zm-8 4h0v0h0v0Zm4 0h0v0h0v0Zm4 0h0v0h0v0Z"/>
+                              </svg>
+                            {{recogerTarea.created  | date:'dd/MM/yyyy'}}</p>
+                        <p class="inline-flex gap-2 font-semibold bg-gray-800 rounded-sm text-white p-2"> 
+                            <svg class="w-5 h-5 my-auto text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                              </svg>
+                            {{recogerTarea.created  | date:'HH:mm'}}
+                        </p>
+                    </div>
+                    <p class=" my-10 p-4 bg-gray-200 text-violeta font-bold rounded-sm">{{recogerTarea.descripcion}}</p>
+                    <div class="flex gap-5">
+                        <a *ngIf="recogerTarea.estado.estado!.trim() === 'done'" (click)="terminarTarea(recogerTarea)" class="inline-flex cursor-pointer font-medium items-center text-green-600 hover:underline">
+                            Terminar tarea
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                              </svg>          
+                        </a>
+                        
+                        <a [routerLink]="['/auth/actualizar-tarea', recogerTarea.id]" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+                            Modificar tarea
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M8 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H8Zm2 0V2h7a2 2 0 0 1 2 2v.1a5 5 0 0 0-4.7 1.4l-6.7 6.6a3 3 0 0 0-.8 1.6l-.7 3.7a3 3 0 0 0 3.5 3.5l3.7-.7a3 3 0 0 0 1.5-.9l4.2-4.2V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M17.4 8a1 1 0 0 1 1.2.3 1 1 0 0 1 0 1.6l-.3.3-1.6-1.5.4-.4.3-.2Zm-2.1 2.1-4.6 4.7-.4 1.9 1.9-.4 4.6-4.7-1.5-1.5ZM17.9 6a3 3 0 0 0-2.2 1L9 13.5a1 1 0 0 0-.2.5L8 17.8a1 1 0 0 0 1.2 1.1l3.7-.7c.2 0 .4-.1.5-.3l6.6-6.6A3 3 0 0 0 18 6Z" clip-rule="evenodd"/>
+                              </svg>
+                              
+                        </a>
+                    
+                        <a (click)="eliminarTarea(recogerTarea.id!)" class="inline-flex font-medium items-center cursor-pointer text-red-600 hover:underline">
+                            Eliminar tarea
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+        
+       
+</div>

@@ -22,6 +22,7 @@ import { ListadoEstadisticasComponent } from './page/components/estadisticas/lis
 import { PorEstadoComponent } from './page/components/estadisticas/por-estado/por-estado.component';
 import { PorFinalizadasComponent } from './page/components/estadisticas/por-finalizadas/por-finalizadas.component';
 import { BuscadorTareaComponent } from './page/components/tareas/buscador-tarea/buscador-tarea.component';
+import { ModalTareaComponent } from './page/components/tareas/modal-tarea/modal-tarea.component';
 
 
 
@@ -45,6 +46,7 @@ import { BuscadorTareaComponent } from './page/components/tareas/buscador-tarea/
     PorEstadoComponent,
     PorFinalizadasComponent,
     BuscadorTareaComponent,
+    ModalTareaComponent,
   ],
   imports: [
     CommonModule,

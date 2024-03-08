@@ -29,6 +29,8 @@ export class ListadoTareaComponent {
 
   confirmarTareaRealizada: boolean = false;
 
+  confirmarAlertaTareas: boolean = false;
+
   public id_user!:Number;
 
   //acciones
@@ -52,7 +54,8 @@ export class ListadoTareaComponent {
     this.tareasToDo = [];
     this.tareasDone = [];
     this._tareaService.buscarTareasFiltro(eventData.id_categoria,eventData.id_importancia, this.id_user).subscribe(resp => {
-      if(!this.tareasLlenas){
+      this.confirmarAlertaTareas = !this.confirmarAlertaTareas;
+      if(!this.tareasLlenas || this.confirmarAlertaTareas){
         for (let i = 0; i < resp.length; i++) {
           if(resp[i].estado.estado == "todo"){
             this.tareasToDo.push(resp[i]);  
@@ -84,9 +87,6 @@ export class ListadoTareaComponent {
           
         }
       }
-      
-
-      
     },(error) => {
       console.warn(error);
     });
@@ -140,7 +140,7 @@ export class ListadoTareaComponent {
   /* ALERTAS PARA LOS EVENTOS DE LAS CARDS */
 
   async alertasTareas(accion: String){
-
+    this.confirmarTareaRealizada = !this.confirmarAlertaTareas;
     if (accion == "terminar") {
   
       // Supongamos que el evento asíncrono es una promesa
@@ -173,26 +173,7 @@ export class ListadoTareaComponent {
   }
 
   /* EVENTOS PROPIOS DE LAS CARDS */
-  eliminarTarea(id: Number){
-    this._tareaService.eliminarTarea(id).subscribe(resp => {
-      let eventData: any =this._filtradoService.eventDataCurrent;
-      this.recogerArrays(eventData);
-    }, (error) => {
-      console.log(error);
-    });
-  }
-
-
-  terminarTarea(tarea: Tarea){
-    this._tareaService.terminarTarea(tarea).subscribe(resp => {
-      let eventData: any =this._filtradoService.eventDataCurrent;
-      this.alertasTareas("terminar");
-      this.recogerArrays(eventData);
-      this.hayModal = false;
-    }, (error) => {
-      console.log(error);
-    });
-  }
+  
 
   terminarTodasTareas(){
     this._tareaService.terminarTareas(this.tareasDone).subscribe(resp => {
@@ -217,10 +198,9 @@ export class ListadoTareaComponent {
     });
   }
 
-  cerrarModal(){
-    this.hayModal = false;
+  cerrarModal(event: any){
     this.confirmarTareaRealizada = false;
-    console.log("salir");
+    this.hayModal = event.value;
   }
 
   obtenerColorImportancia(importancia: String) {
@@ -238,8 +218,8 @@ export class ListadoTareaComponent {
     } else if (texto === 'menor' && id === 1) {
       this.aplicarOrdenATareas(this.tareasToDo, texto, id);
     } else {
+      this.tareasToDo = [];
       this.tareasToDo = [...this.tareasToDoDuplicado];
-      // Resto de la lógica...
     }
 
     
@@ -251,19 +231,20 @@ export class ListadoTareaComponent {
     } else if (texto === 'menor' && id === 2) {
       this.aplicarOrdenATareas(this.tareasDoing, texto, id);
     } else {
+      this.tareasDoing = [];
       this.tareasDoing = [...this.tareasDoingDuplicado];
-      // Resto de la lógica...
+
     }
   }
 
   cambiarOrdenDone(texto:string, id?:number){
     if (texto === 'mayor' && id === 3) {
-      this.aplicarOrdenATareas(this.tareasDoing, texto, id);
+      this.aplicarOrdenATareas(this.tareasDone, texto, id);
     } else if (texto === 'menor' && id === 3) {
-      this.aplicarOrdenATareas(this.tareasDoing, texto, id);
+      this.aplicarOrdenATareas(this.tareasDone, texto, id);
     } else {
-      this.tareasDoing = [...this.tareasDoingDuplicado];
-      // Resto de la lógica...
+      this.tareasDone = [];
+      this.tareasDone = [...this.tareasDoneDuplicado];
     }
   }
 
