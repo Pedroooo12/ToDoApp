@@ -24,6 +24,7 @@ import { PorFinalizadasComponent } from './page/components/estadisticas/por-fina
 import { BuscadorTareaComponent } from './page/components/tareas/buscador-tarea/buscador-tarea.component';
 import { ModalTareaComponent } from './page/components/tareas/modal-tarea/modal-tarea.component';
 import { PorFechaComponent } from './page/components/estadisticas/por-fecha/por-fecha.component';
+import { ModalConfirmacionComponent } from './page/components/tareas/modal-confirmacion/modal-confirmacion.component';
 
 
 
@@ -49,6 +50,7 @@ import { PorFechaComponent } from './page/components/estadisticas/por-fecha/por-
     BuscadorTareaComponent,
     ModalTareaComponent,
     PorFechaComponent,
+    ModalConfirmacionComponent,
   ],
   imports: [
     CommonModule,
