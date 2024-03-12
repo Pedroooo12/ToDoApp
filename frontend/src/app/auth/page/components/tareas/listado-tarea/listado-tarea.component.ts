@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
 import { TareaService } from 'src/app/auth/services/tarea.service';
 import {CdkDragDrop, moveItemInArray, CdkDropList, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -40,6 +40,8 @@ export class ListadoTareaComponent {
   eliminar = false;
   terminar = false;
   terminarTodas = false;
+
+  @Output() emitirAlertar  = new EventEmitter<boolean>();
 
   constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService, private _authService: AuthService){
     if(this._authService.currentUser){
@@ -156,56 +158,7 @@ export class ListadoTareaComponent {
   }
 
   
-  /* ALERTAS PARA LOS EVENTOS DE LAS CARDS */
-
-  async alertasTareas(accion: String){
-    this.confirmarTareaRealizada = !this.confirmarAlertaTareas;
-    if (accion == "terminar") {
   
-      // Supongamos que el evento asíncrono es una promesa
-      await new Promise<void>(resolve => {
-        // Lógica asíncrona que eventualmente resolverá la promesa
-        // Esto podría ser un evento, una solicitud HTTP, etc.
-        resolve();
-      });
-  
-      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
-      this.terminar = true;
-      setTimeout(() => {
-        this.terminar = false;
-      }, 2000);
-    }
-    if (accion == "eliminar") {
-      // Supongamos que el evento asíncrono es una promesa
-      await new Promise<void>(resolve => {
-        // Lógica asíncrona que eventualmente resolverá la promesa
-        // Esto podría ser un evento, una solicitud HTTP, etc.
-        resolve();
-      });
-  
-      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
-      this.eliminar = true;
-      setTimeout(() => {
-        this.eliminar = false;
-      }, 2000);
-    }
-
-    if (accion == "terminarTodas") {
-      console.log("entra a terminarTodas");
-      // Supongamos que el evento asíncrono es una promesa
-      await new Promise<void>(resolve => {
-        // Lógica asíncrona que eventualmente resolverá la promesa
-        // Esto podría ser un evento, una solicitud HTTP, etc.
-        resolve();
-      });
-  
-      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
-      this.terminarTodas = true;
-      setTimeout(() => {
-        this.terminarTodas = false;
-      }, 2000);
-    }
-  }
 
   /* EVENTOS PROPIOS DE LAS CARDS */
 

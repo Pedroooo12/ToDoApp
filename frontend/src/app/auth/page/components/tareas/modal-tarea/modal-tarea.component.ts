@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Filtrado } from 'src/app/auth/interfaces/filtrado';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
+import { AlertaTareasService } from 'src/app/auth/services/alertaTareas.service';
 import { FiltradoService } from 'src/app/auth/services/filtrado.service';
 import { TareaService } from 'src/app/auth/services/tarea.service';
 
@@ -14,16 +15,20 @@ export class ModalTareaComponent {
   @Output() hayModal = new EventEmitter<any>();
   @Output() recorrerArrays = new EventEmitter<any>();
 
-  @Output() alertasTareas = new EventEmitter<any>();
-  constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService){
+  //@Output() alertasTareas = new EventEmitter<any>();
+  constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService, private _alertaTareas: AlertaTareasService){
 
   }
+  
   eliminarTarea(id: Number){
+
+
     this._tareaService.eliminarTarea(id).subscribe(resp => {
       let eventData: Filtrado =this._filtradoService.eventDataCurrent;
       this.hayModal.emit("false");
       this.recorrerArrays.emit(eventData);
-      this.alertasTareas.emit("eliminar");
+      this._alertaTareas.setAlertasData("eliminar");
+      //this.alertasTareas.emit("eliminar");
       
     }, (error) => {
       console.log(error);
@@ -41,7 +46,7 @@ export class ModalTareaComponent {
       let eventData: Filtrado =this._filtradoService.eventDataCurrent;
       this.hayModal.emit("false");
       this.recorrerArrays.emit(eventData);
-      this.alertasTareas.emit("terminar");
+      this._alertaTareas.setAlertasData("terminar");
       
     }, (error) => {
       console.log(error);

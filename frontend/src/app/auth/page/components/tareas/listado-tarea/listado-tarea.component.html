@@ -1,16 +1,9 @@
 <section class="p-20 h-svh bg-gray-600 bg-gradient-to-br block from-amarillo via-claro to-azul">
     <div class="mx-auto container">
-        <div *ngIf="terminar" class="absolute right-44 p-4 mb-4 text-sm w-fit ms-auto text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <span class="font-medium">¡Tarea terminada!</span> La tarea ha sido terminada con éxito.
-        </div>
-
-        <div *ngIf="terminarTodas" class="absolute right-44 p-4 mb-4 text-sm w-fit ms-auto text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <span class="font-medium">¡Tareas terminadas!</span> La tareas ha sido terminadas con éxito.
-        </div>
-
-        <div *ngIf="eliminar" class="absolute p-4 mb-4 w-fit ms-auto right-44 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-            <span class="font-medium">¡Tarea eliminada!</span> La tarea ha sido eliminada con éxito.
-        </div>
+        <app-alertas-tareas 
+                [confirmarAlertaTareas]="confirmarAlertaTareas" 
+                [confirmarTareaRealizada]="confirmarTareaRealizada"
+                ></app-alertas-tareas>
 
         <h1 class="text-center w-fit mx-auto text-3xl font-bold mb-10">Listado tareas</h1>
         <div class="flex justify-between my-20 items-center">
@@ -93,7 +86,7 @@
     
                 <div>
                     <div class="flex justify-between items-center gap-3 mb-5">
-                        <h2 class="text-2xl font-semibold  text-azul">To do</h2>
+                        <h2 class="text-2xl font-semibold  text-azul">Done</h2>
     
                         <app-cambiar-orden [id]="3" [arrayTareas]="tareasDone"></app-cambiar-orden>
                     </div>
@@ -131,7 +124,7 @@
         <app-modal-tarea    *ngIf="recogerTarea && hayModal" 
                             (hayModal)="cerrarModal($event)" 
                             (recorrerArrays)="recogerArrays($event)"
-                            (alertasTareas)="alertasTareas($event)" 
+                             
                             [recogerTarea]="recogerTarea"></app-modal-tarea>
         </ng-container>
         </ng-container>
@@ -141,7 +134,6 @@
     <app-modal-confirmacion *ngIf="confirmarTareaRealizada" 
         (hayModal)="cerrarModal($event)" 
         [tareas]="tareasDone"
-        (alertasTareas)="alertasTareas($event)"
         (recorrerArrays)="recogerArrays($event)"></app-modal-confirmacion>
         
 </section>
