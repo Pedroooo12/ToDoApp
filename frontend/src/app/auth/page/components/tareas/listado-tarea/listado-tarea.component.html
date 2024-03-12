@@ -4,6 +4,10 @@
             <span class="font-medium">¡Tarea terminada!</span> La tarea ha sido terminada con éxito.
         </div>
 
+        <div *ngIf="terminarTodas" class="absolute right-44 p-4 mb-4 text-sm w-fit ms-auto text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">¡Tareas terminadas!</span> La tareas ha sido terminadas con éxito.
+        </div>
+
         <div *ngIf="eliminar" class="absolute p-4 mb-4 w-fit ms-auto right-44 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
             <span class="font-medium">¡Tarea eliminada!</span> La tarea ha sido eliminada con éxito.
         </div>
@@ -13,163 +17,182 @@
             <app-buscador-tarea (ponerModal)="ponerModal($event)"></app-buscador-tarea>
             <app-filtrado-tarea (eventoRecargaTareas)="recogerArrays($event)"></app-filtrado-tarea>
         </div>
-        <div class="flex gap-36 justify-between">
-            <div>
-                <div class="flex justify-between items-center gap-3 mb-5">
-                    <h2 class="text-2xl font-semibold  text-azul">To do</h2>
 
-                    <div class="flex gap-2 p-2 bg-azul rounded-sm">
-                        <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenToDo('mayor',1)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
-                            </svg>
-                        </button>
-
-                        <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenToDo('refrescar',1)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
-                              </svg>
-                        </button>
-
-                        <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenToDo('menor',1)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
-                              </svg>
-                        </button>
-                        
-                    </div>
-                </div>
-                <div id="todo" class="h-96 w-fit  min-w-80 overflow-y-auto overflow-x-hidden bg-violeta  rounded bg-opacity-10 px-4 flex flex-col gap-5 pt-5 relative"
-                cdkDropList
-                #todoList="cdkDropList"
-                [cdkDropListData]="tareasToDo"
-                [cdkDropListConnectedTo]="[doneList, doingList]"
-                (cdkDropListDropped)="drop($event)">
-                    <div class="" *ngFor="let tarea of tareasToDo" cdkDrag [cdkDragData]="tarea">
-                        <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
-                        
-                    </div>
-                    <div class="absolute bottom-3 left-3">
-                        <a routerLink="/auth/crear-tarea/1" class="flex gap-2 py-2 px-4 my-auto bg-violeta text-white rounded-xl">
-                            Añadir tarea  
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M8 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H8Zm2 0V2h7a2 2 0 0 1 2 2v.1a5 5 0 0 0-4.7 1.4l-6.7 6.6a3 3 0 0 0-.8 1.6l-.7 3.7a3 3 0 0 0 3.5 3.5l3.7-.7a3 3 0 0 0 1.5-.9l4.2-4.2V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
-                                <path fill-rule="evenodd" d="M17.4 8a1 1 0 0 1 1.2.3 1 1 0 0 1 0 1.6l-.3.3-1.6-1.5.4-.4.3-.2Zm-2.1 2.1-4.6 4.7-.4 1.9 1.9-.4 4.6-4.7-1.5-1.5ZM17.9 6a3 3 0 0 0-2.2 1L9 13.5a1 1 0 0 0-.2.5L8 17.8a1 1 0 0 0 1.2 1.1l3.7-.7c.2 0 .4-.1.5-.3l6.6-6.6A3 3 0 0 0 18 6Z" clip-rule="evenodd"/>
-                              </svg>
-                                                                 
-                        </a>
-                    </div>
-                </div>
+        <ng-template #sinTareas>
+            <div class="p-4 mb-4 text-sm text-white w-fit mx-auto rounded-lg  bg-amarillo" role="alert">             
+                <span class="font-medium">¡Alerta no tienes ninguna tarea creada!</span> 
             </div>
+        </ng-template>
 
-            <div>
-                <div class="flex justify-between items-center gap-3 mb-5">
-                    <h2 class="text-2xl font-semibold  text-azul">Doing</h2>
-
-                    <div class="flex gap-2 p-2 bg-azul rounded-sm">
-                        <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenDoing('mayor',2)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
-                            </svg>
-                        </button>
-
-                        <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDoing('refrescar',2)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
-                              </svg>
-                        </button>
-
-                        <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDoing('menor',2)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
-                              </svg>
-                        </button>
-                        
-                    </div>
-                </div>
-                <div id="doing" class="h-96 w-fit  min-w-80 altura overflow-y-auto overflow-x-hidden  bg-violeta  border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
-                cdkDropList
-                #doingList="cdkDropList"
-                [cdkDropListData]="tareasDoing"
-                [cdkDropListConnectedTo]="[todoList, doneList]"
-                (cdkDropListDropped)="drop($event)">
-                    <div class="" *ngFor="let tarea of tareasDoing" cdkDrag [cdkDragData]="tarea">
-                        <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
-                    </div>
-                    <div class="absolute bottom-3 left-3">
-                        <a routerLink="/auth/crear-tarea/2" class="flex gap-2 py-2 px-4 my-auto bg-violeta text-white rounded-xl">
-                            Añadir tarea  
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M8 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H8Zm2 0V2h7a2 2 0 0 1 2 2v.1a5 5 0 0 0-4.7 1.4l-6.7 6.6a3 3 0 0 0-.8 1.6l-.7 3.7a3 3 0 0 0 3.5 3.5l3.7-.7a3 3 0 0 0 1.5-.9l4.2-4.2V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
-                                <path fill-rule="evenodd" d="M17.4 8a1 1 0 0 1 1.2.3 1 1 0 0 1 0 1.6l-.3.3-1.6-1.5.4-.4.3-.2Zm-2.1 2.1-4.6 4.7-.4 1.9 1.9-.4 4.6-4.7-1.5-1.5ZM17.9 6a3 3 0 0 0-2.2 1L9 13.5a1 1 0 0 0-.2.5L8 17.8a1 1 0 0 0 1.2 1.1l3.7-.7c.2 0 .4-.1.5-.3l6.6-6.6A3 3 0 0 0 18 6Z" clip-rule="evenodd"/>
-                              </svg>
-                                                                 
-                        </a>
-                    </div>
-                </div>
+        <ng-template #sinTareasPorFiltro>
+            <div class="p-4 mb-4 text-sm text-white w-fit mx-auto rounded-lg  bg-amarillo" role="alert">             
+                <span class="font-medium">¡Alerta no hay ninguna tareas con estos filtros!</span> 
             </div>
+        </ng-template>
 
-            <div>
-                <div class="flex justify-between items-center gap-3 mb-5">
-                    <h2 class="text-2xl font-semibold  text-azul">To do</h2>
-
-                    <div class="flex gap-2 p-2 bg-azul rounded-sm">
-                        <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenDone('mayor',3)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
-                            </svg>
-                        </button>
-
-                        <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDone('refrescar',3)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
-                              </svg>
-                        </button>
-
-                        <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDone('menor',3)">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
-                              </svg>
-                        </button>
-                        
+        <ng-container *ngIf="!noHayTareas;else sinTareas" >
+        <ng-container *ngIf="!noHayTareasPorFiltro;else sinTareasPorFiltro">
+            <div class="flex gap-36 justify-between" >
+                <div>
+                    <div class="flex justify-between items-center gap-3 mb-5">
+                        <h2 class="text-2xl font-semibold  text-azul">To do</h2>
+    
+                        <div class="flex gap-2 p-2 bg-azul rounded-sm">
+                            <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenToDo('mayor',1)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
+                                </svg>
+                            </button>
+    
+                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenToDo('refrescar',1)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
+                                  </svg>
+                            </button>
+    
+                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenToDo('menor',1)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
+                                  </svg>
+                            </button>
+                            
+                        </div>
                     </div>
-                </div>
-                <div
-                  id="done"
-                  class="h-96 altura w-fit min-w-80  overflow-y-auto overflow-x-hidden bg-violeta border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
-                  cdkDropList
-                  #doneList="cdkDropList"
-                  [cdkDropListData]="tareasDone"
-                  [cdkDropListConnectedTo]="[todoList, doingList]"
-                  (cdkDropListDropped)="drop($event)">
-                  <div class="" *ngFor="let tarea of tareasDone" cdkDrag [cdkDragData]="tarea">
-                    <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
-                  </div>
-                  <div class="absolute bottom-3 left-3">
-                        <div class="flex gap-3">
-                            <a routerLink="/auth/crear-tarea/2" class="flex w-fit gap-2 py-2 px-4 my-auto bg-violeta text-white rounded-xl">
+                    <div id="todo" class="h-96 w-fit  min-w-80 overflow-y-auto overflow-x-hidden bg-violeta  rounded bg-opacity-10 px-4 flex flex-col gap-5 pt-5 relative"
+                    cdkDropList
+                    #todoList="cdkDropList"
+                    [cdkDropListData]="tareasToDo"
+                    [cdkDropListConnectedTo]="[doneList, doingList]"
+                    (cdkDropListDropped)="drop($event)">
+                        <div class="" *ngFor="let tarea of tareasToDo" cdkDrag [cdkDragData]="tarea">
+                            <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
+                            
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <a routerLink="/auth/crear-tarea/1" class="flex gap-2 py-2 px-4 my-auto bg-violeta text-white rounded-xl">
                                 Añadir tarea  
                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M8 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H8Zm2 0V2h7a2 2 0 0 1 2 2v.1a5 5 0 0 0-4.7 1.4l-6.7 6.6a3 3 0 0 0-.8 1.6l-.7 3.7a3 3 0 0 0 3.5 3.5l3.7-.7a3 3 0 0 0 1.5-.9l4.2-4.2V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
                                     <path fill-rule="evenodd" d="M17.4 8a1 1 0 0 1 1.2.3 1 1 0 0 1 0 1.6l-.3.3-1.6-1.5.4-.4.3-.2Zm-2.1 2.1-4.6 4.7-.4 1.9 1.9-.4 4.6-4.7-1.5-1.5ZM17.9 6a3 3 0 0 0-2.2 1L9 13.5a1 1 0 0 0-.2.5L8 17.8a1 1 0 0 0 1.2 1.1l3.7-.7c.2 0 .4-.1.5-.3l6.6-6.6A3 3 0 0 0 18 6Z" clip-rule="evenodd"/>
-                                </svg>                                  
-                            </a>
-                            <a *ngIf="tareasDone.length > 0" (click)="abrirModalTerminadas()" class=" w-fit gap-2 p-2 my-auto  rounded-full text-white bg-green-500 cursor-pointer">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd" d="M5 4a2 2 0 0 0-2 2v1h11l-2-2.3a2 2 0 0 0-1.5-.7H5ZM3 19V9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm11.7-7.7a1 1 0 0 0-1.4 1.4l.3.3H8a1 1 0 1 0 0 2h5.6l-.3.3a1 1 0 0 0 1.4 1.4l2-2c.4-.4.4-1 0-1.4l-2-2Z" clip-rule="evenodd"/>
-                                  </svg>    
+                                  </svg>
+                                                                     
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
+    
+                <div>
+                    <div class="flex justify-between items-center gap-3 mb-5">
+                        <h2 class="text-2xl font-semibold  text-azul">Doing</h2>
+    
+                        <div class="flex gap-2 p-2 bg-azul rounded-sm">
+                            <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenDoing('mayor',2)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
+                                </svg>
+                            </button>
+    
+                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDoing('refrescar',2)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
+                                  </svg>
+                            </button>
+    
+                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDoing('menor',2)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
+                                  </svg>
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div id="doing" class="h-96 w-fit  min-w-80 altura overflow-y-auto overflow-x-hidden  bg-violeta  border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
+                    cdkDropList
+                    #doingList="cdkDropList"
+                    [cdkDropListData]="tareasDoing"
+                    [cdkDropListConnectedTo]="[todoList, doneList]"
+                    (cdkDropListDropped)="drop($event)">
+                        <div class="" *ngFor="let tarea of tareasDoing" cdkDrag [cdkDragData]="tarea">
+                            <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
+                        </div>
+                        <div class="absolute bottom-3 left-3">
+                            <a routerLink="/auth/crear-tarea/2" class="flex gap-2 py-2 px-4 my-auto bg-violeta text-white rounded-xl">
+                                Añadir tarea  
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M8 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H8Zm2 0V2h7a2 2 0 0 1 2 2v.1a5 5 0 0 0-4.7 1.4l-6.7 6.6a3 3 0 0 0-.8 1.6l-.7 3.7a3 3 0 0 0 3.5 3.5l3.7-.7a3 3 0 0 0 1.5-.9l4.2-4.2V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd" d="M17.4 8a1 1 0 0 1 1.2.3 1 1 0 0 1 0 1.6l-.3.3-1.6-1.5.4-.4.3-.2Zm-2.1 2.1-4.6 4.7-.4 1.9 1.9-.4 4.6-4.7-1.5-1.5ZM17.9 6a3 3 0 0 0-2.2 1L9 13.5a1 1 0 0 0-.2.5L8 17.8a1 1 0 0 0 1.2 1.1l3.7-.7c.2 0 .4-.1.5-.3l6.6-6.6A3 3 0 0 0 18 6Z" clip-rule="evenodd"/>
+                                  </svg>
+                                                                     
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div>
+                    <div class="flex justify-between items-center gap-3 mb-5">
+                        <h2 class="text-2xl font-semibold  text-azul">To do</h2>
+    
+                        <div class="flex gap-2 p-2 bg-azul rounded-sm">
+                            <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenDone('mayor',3)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
+                                </svg>
+                            </button>
+    
+                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDone('refrescar',3)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
+                                  </svg>
+                            </button>
+    
+                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDone('menor',3)">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
+                                  </svg>
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div
+                      id="done"
+                      class="h-96 altura w-fit min-w-80  overflow-y-auto overflow-x-hidden bg-violeta border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
+                      cdkDropList
+                      #doneList="cdkDropList"
+                      [cdkDropListData]="tareasDone"
+                      [cdkDropListConnectedTo]="[todoList, doingList]"
+                      (cdkDropListDropped)="drop($event)">
+                      <div class="" *ngFor="let tarea of tareasDone" cdkDrag [cdkDragData]="tarea">
+                        <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
+                      </div>
+                      <div class="absolute bottom-3 left-3">
+                            <div class="flex gap-3">
+                                <a routerLink="/auth/crear-tarea/3" class="flex w-fit gap-2 py-2 px-4 my-auto bg-violeta text-white rounded-xl">
+                                    Añadir tarea  
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M8 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H8Zm2 0V2h7a2 2 0 0 1 2 2v.1a5 5 0 0 0-4.7 1.4l-6.7 6.6a3 3 0 0 0-.8 1.6l-.7 3.7a3 3 0 0 0 3.5 3.5l3.7-.7a3 3 0 0 0 1.5-.9l4.2-4.2V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M17.4 8a1 1 0 0 1 1.2.3 1 1 0 0 1 0 1.6l-.3.3-1.6-1.5.4-.4.3-.2Zm-2.1 2.1-4.6 4.7-.4 1.9 1.9-.4 4.6-4.7-1.5-1.5ZM17.9 6a3 3 0 0 0-2.2 1L9 13.5a1 1 0 0 0-.2.5L8 17.8a1 1 0 0 0 1.2 1.1l3.7-.7c.2 0 .4-.1.5-.3l6.6-6.6A3 3 0 0 0 18 6Z" clip-rule="evenodd"/>
+                                    </svg>                                  
+                                </a>
+                                <a *ngIf="tareasDone.length > 0" (click)="abrirModalTerminadas()" class=" w-fit gap-2 p-2 my-auto  rounded-full text-white bg-green-500 cursor-pointer">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M5 4a2 2 0 0 0-2 2v1h11l-2-2.3a2 2 0 0 0-1.5-.7H5ZM3 19V9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm11.7-7.7a1 1 0 0 0-1.4 1.4l.3.3H8a1 1 0 1 0 0 2h5.6l-.3.3a1 1 0 0 0 1.4 1.4l2-2c.4-.4.4-1 0-1.4l-2-2Z" clip-rule="evenodd"/>
+                                      </svg>    
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
+
+        <app-modal-tarea    *ngIf="recogerTarea && hayModal" 
+                            (hayModal)="cerrarModal($event)" 
+                            (recorrerArrays)="recogerArrays($event)"
+                            (alertasTareas)="alertasTareas($event)" 
+                            [recogerTarea]="recogerTarea"></app-modal-tarea>
+        </ng-container>
+        </ng-container>
     </div>
-    <app-modal-tarea    *ngIf="recogerTarea && hayModal" 
-                        (hayModal)="cerrarModal($event)" 
-                        (recorrerArrays)="recogerArrays($event)"
-                        (alertasTareas)="alertasTareas($event)" 
-                        [recogerTarea]="recogerTarea"></app-modal-tarea>
+        
 </section>
 
 <!-- MODAL CONFIRMACION TAREAS TERMINADAS -->
@@ -202,64 +225,6 @@
     </div>
 </div>
 
-<!-- MODAL DE TAREAS -->
-<!-- <div *ngIf="hayModal && recogerTarea" class="modal"> 
-    <div class="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-90 z-40" ></div>
-    <div id="default-modal" tabindex="-1" aria-hidden="true"   class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="flex justify-center align-middle items-center h-screen"(click)="cerrarModal()">
-            <div class="cardContainer" (click)="detenerPropagacion($event)">
-                <div class="card border-1 p-6 h-fit rounded-xl" [style.border-color]="recogerTarea.categoria.color">
-                    <h3 class="block text-3xl text-left text-white underline-offset-1">{{recogerTarea.nombre}}</h3>
-                    <div class="flex gap-5 align-middle items-center my-5">
-                        <p [style.background]="recogerTarea.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{recogerTarea.categoria.categoria}}</p>
-                        <p [ngStyle]="{'background-color': obtenerColorImportancia(recogerTarea.importancia.importancia)}" class="px-2  p-1 w-fit font-normal text-sm text-white rounded-sm">{{recogerTarea.importancia.importancia}}</p>
-                    </div>
-                    <div class="flex gap-5 my-5">
-                        <p class="inline-flex gap-2 font-semibold bg-gray-800 rounded-sm text-white p-2"> 
-                            <svg class="w-5 h-5 my-auto text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1H5a1 1 0 0 0-1 1v12c0 .6.4 1 1 1Zm3-7h0v0h0v0Zm4 0h0v0h0v0Zm4 0h0v0h0v0Zm-8 4h0v0h0v0Zm4 0h0v0h0v0Zm4 0h0v0h0v0Z"/>
-                              </svg>
-                            {{recogerTarea.created  | date:'dd/MM/yyyy'}}</p>
-                        <p class="inline-flex gap-2 font-semibold bg-gray-800 rounded-sm text-white p-2"> 
-                            <svg class="w-5 h-5 my-auto text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                              </svg>
-                            {{recogerTarea.created  | date:'HH:mm'}}
-                        </p>
-                    </div>
-                    <p class=" my-10 p-4 bg-gray-200 text-violeta font-bold rounded-sm">{{recogerTarea.descripcion}}</p>
-                    <div class="flex gap-5">
-                        <a *ngIf="recogerTarea.estado.estado!.trim() === 'done'" (click)="terminarTarea(recogerTarea)" class="inline-flex cursor-pointer font-medium items-center text-green-600 hover:underline">
-                            Terminar tarea
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                              </svg>          
-                        </a>
-                        
-                        <a [routerLink]="['/auth/actualizar-tarea', recogerTarea.id]" class="inline-flex font-medium items-center text-blue-600 hover:underline">
-                            Modificar tarea
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M8 7V2.2a2 2 0 0 0-.5.4l-4 3.9a2 2 0 0 0-.3.5H8Zm2 0V2h7a2 2 0 0 1 2 2v.1a5 5 0 0 0-4.7 1.4l-6.7 6.6a3 3 0 0 0-.8 1.6l-.7 3.7a3 3 0 0 0 3.5 3.5l3.7-.7a3 3 0 0 0 1.5-.9l4.2-4.2V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
-                                <path fill-rule="evenodd" d="M17.4 8a1 1 0 0 1 1.2.3 1 1 0 0 1 0 1.6l-.3.3-1.6-1.5.4-.4.3-.2Zm-2.1 2.1-4.6 4.7-.4 1.9 1.9-.4 4.6-4.7-1.5-1.5ZM17.9 6a3 3 0 0 0-2.2 1L9 13.5a1 1 0 0 0-.2.5L8 17.8a1 1 0 0 0 1.2 1.1l3.7-.7c.2 0 .4-.1.5-.3l6.6-6.6A3 3 0 0 0 18 6Z" clip-rule="evenodd"/>
-                              </svg>
-                              
-                        </a>
-                    
-                        <a (click)="eliminarTarea(recogerTarea.id!)" class="inline-flex font-medium items-center cursor-pointer text-red-600 hover:underline">
-                            Eliminar tarea
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-        
-       
-</div> -->
 
 
 

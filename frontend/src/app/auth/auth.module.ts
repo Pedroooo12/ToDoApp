@@ -23,6 +23,7 @@ import { PorEstadoComponent } from './page/components/estadisticas/por-estado/po
 import { PorFinalizadasComponent } from './page/components/estadisticas/por-finalizadas/por-finalizadas.component';
 import { BuscadorTareaComponent } from './page/components/tareas/buscador-tarea/buscador-tarea.component';
 import { ModalTareaComponent } from './page/components/tareas/modal-tarea/modal-tarea.component';
+import { PorFechaComponent } from './page/components/estadisticas/por-fecha/por-fecha.component';
 
 
 
@@ -47,6 +48,7 @@ import { ModalTareaComponent } from './page/components/tareas/modal-tarea/modal-
     PorFinalizadasComponent,
     BuscadorTareaComponent,
     ModalTareaComponent,
+    PorFechaComponent,
   ],
   imports: [
     CommonModule,

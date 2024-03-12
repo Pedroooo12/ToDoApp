@@ -2,6 +2,7 @@ package com.example.emsbackend.controller;
 
 import com.example.emsbackend.entity.Categoria;
 import com.example.emsbackend.entity.Estado;
+import com.example.emsbackend.entity.Tareas;
 import com.example.emsbackend.entity.User;
 import com.example.emsbackend.repository.EstadoRepository;
 import com.example.emsbackend.service.CategoriaService;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/estadisticas")
@@ -76,8 +78,5 @@ public class EstadisticaController {
 
         return ResponseEntity.ok(tareasFinalizadas);
     }
-
-
-
 
 }

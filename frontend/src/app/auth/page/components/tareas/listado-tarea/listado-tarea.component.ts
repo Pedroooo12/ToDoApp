@@ -21,6 +21,9 @@ export class ListadoTareaComponent {
   tareasDoingDuplicado: Tarea[] = [];
   tareasDoneDuplicado: Tarea[] = [];
 
+  noHayTareas: boolean = false;
+  noHayTareasPorFiltro: boolean = false;
+
   tareasLlenas: boolean = false;
 
   recogerTarea?: Tarea;
@@ -36,12 +39,12 @@ export class ListadoTareaComponent {
   //acciones
   eliminar = false;
   terminar = false;
+  terminarTodas = false;
 
   constructor(private _tareaService: TareaService, private _filtradoService: FiltradoService, private _authService: AuthService){
     if(this._authService.currentUser){
       this.id_user = this._authService.currentUser.id!;
       this.recogerArrays({id_categoria: 0, id_importancia: 0});
-      console.log(this.tareasDoing);
     }
   }
 
@@ -49,44 +52,60 @@ export class ListadoTareaComponent {
 
   async recogerArrays(eventData: Filtrado){
     this._filtradoService.eventDataSetter = eventData;
-    console.log(eventData);
+
     this.tareasDoing = [];
     this.tareasToDo = [];
     this.tareasDone = [];
     this._tareaService.buscarTareasFiltro(eventData.id_categoria,eventData.id_importancia, this.id_user).subscribe(resp => {
       this.confirmarAlertaTareas = !this.confirmarAlertaTareas;
-      if(!this.tareasLlenas || this.confirmarAlertaTareas){
-        for (let i = 0; i < resp.length; i++) {
-          if(resp[i].estado.estado == "todo"){
-            this.tareasToDo.push(resp[i]);  
-            this.tareasToDoDuplicado.push(resp[i]);
-          }
-          if(resp[i].estado.estado == "doing"){
-            this.tareasDoing.push(resp[i]);
-            this.tareasDoingDuplicado.push(resp[i]);
-          }
-          if(resp[i].estado.estado == "done"){
-            this.tareasDone.push(resp[i]);
-            this.tareasDoneDuplicado.push(resp[i]);
-          }
-          
+      console.log(resp);
+      if(resp.length == 0 ){
+        if(eventData.id_categoria != 0 || eventData.id_importancia != 0 || (eventData.id_categoria == 0 && eventData.id_importancia != 0) || (eventData.id_categoria != 0 && eventData.id_importancia == 0)){
+          this.noHayTareasPorFiltro = true;
+        }else{
+          this.noHayTareas = true;
         }
+        
       }else{
-        for (let i = 0; i < resp.length; i++) {
-          if(resp[i].estado.estado == "todo"){
-            this.tareasToDo.push(resp[i]);  
-
+        this.noHayTareas = false;
+        this.noHayTareasPorFiltro = false;
+        if(!this.tareasLlenas || this.confirmarAlertaTareas){
+          for (let i = 0; i < resp.length; i++) {
+            if(resp[i].estado.estado == "todo"){
+              this.tareasToDo.push(resp[i]);  
+              this.tareasToDoDuplicado.push(resp[i]);
+            }
+            if(resp[i].estado.estado == "doing"){
+              this.tareasDoing.push(resp[i]);
+              this.tareasDoingDuplicado.push(resp[i]);
+            }
+            if(resp[i].estado.estado == "done"){
+              this.tareasDone.push(resp[i]);
+              this.tareasDoneDuplicado.push(resp[i]);
+            }
+            
           }
-          if(resp[i].estado.estado == "doing"){
-            this.tareasDoing.push(resp[i]);
-
+        }else{
+          for (let i = 0; i < resp.length; i++) {
+            if(resp[i].estado.estado == "todo"){
+              this.tareasToDo.push(resp[i]);  
+  
+            }
+            if(resp[i].estado.estado == "doing"){
+              this.tareasDoing.push(resp[i]);
+  
+            }
+            if(resp[i].estado.estado == "done"){
+              this.tareasDone.push(resp[i]);
+            }
+            
           }
-          if(resp[i].estado.estado == "done"){
-            this.tareasDone.push(resp[i]);
-          }
-          
+  
+        
         }
       }
+
+     
     },(error) => {
       console.warn(error);
     });
@@ -170,6 +189,22 @@ export class ListadoTareaComponent {
         this.eliminar = false;
       }, 2000);
     }
+
+    if (accion == "terminarTodas") {
+      console.log("entra a terminarTodas");
+      // Supongamos que el evento asíncrono es una promesa
+      await new Promise<void>(resolve => {
+        // Lógica asíncrona que eventualmente resolverá la promesa
+        // Esto podría ser un evento, una solicitud HTTP, etc.
+        resolve();
+      });
+  
+      // Después de que se resuelva la promesa (2 segundos), se cambiará a true y luego a false
+      this.terminarTodas = true;
+      setTimeout(() => {
+        this.terminarTodas = false;
+      }, 2000);
+    }
   }
 
   /* EVENTOS PROPIOS DE LAS CARDS */
@@ -178,6 +213,8 @@ export class ListadoTareaComponent {
   terminarTodasTareas(){
     this._tareaService.terminarTareas(this.tareasDone).subscribe(resp => {
       this.recogerArrays({id_categoria: 0, id_importancia: 0});
+      this.alertasTareas("terminarTodas");
+      this.cerrarModal(event);
     }, (error) => { 
       console.log(error);
     });

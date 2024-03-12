@@ -1,51 +1,61 @@
 <section class="flex min-h-full h-screen bg-oscuro flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-br from-azul via-claro to-amarillo">
-    <div class="h-auto w-1/2 mx-auto bg-claro bg-opacity-10 shadow-2xl rounded-md">  
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-violeta animate-fade-down animate-once animate-duration-[1000ms]">Actualizar tarea</h2>
-        </div>
-        <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm animate-fade-down animate-once animate-duration-[1000ms] animate-delay-1000">
-            <form class="space-y-6" [formGroup]="miFormulario" (ngSubmit)="enviar()" action="#" method="POST">
-            <div>
-                <label for="nombre" class="block text-sm font-medium leading-6 text-violeta">Nombre</label>
-                <div class="mt-2">
-                    <input type="text" formControlName="nombre" name="nombre" id="nombre" autocomplete="off" class="block w-full bg-transparent rounded-md border-2 border-transparent px-3.5 py-2 text-violeta shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:text-violeta focus:bg-transparent  sm:text-sm sm:leading-6">
-                    <div *ngIf="formularioEnviado && validacion('nombre')" class="bg-red-500 my-4 border w-fit rounded text-white p-2">
-                        Es necesario introducir un nombre
-                    </div>
+
+    <div class="modal"> 
+        <div class="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-40 z-40" ></div>
+        <div id="default-modal" tabindex="-1" aria-hidden="true"   class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="flex justify-center align-middle items-center h-screen">
+                <div class="cardContainer">
+                    <form action="" [formGroup]="miFormulario" (ngSubmit)="enviar()">
+                        <div class="card border-1 p-6 h-fit rounded-xl">
+                            <input type="text" class="block w-full border-b-2 border-gray-400  text-3xl text-left text-white bg-transparent " formControlName="nombre">
+                            <div *ngIf="formularioEnviado && validacion('nombre')" class="bg-red-500 my-4 border w-fit rounded text-white p-2">
+                                Es necesario introducir un nombre
+                            </div>
+                            <div class="flex gap-5 align-middle items-center my-5">
+                                <label for="categoria" [style.background]="tarea.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{tarea.categoria.categoria}}</label>
+                               <div>
+                                    <select id="categoria" formControlName="categoria" class="bg-transparent w-fit  border border-gray-300 text-violeta text-sm rounded-lg  block  px-2  p-1 ">
+                                            <option *ngFor="let categoria of listadoCategorias; let i = index" value="{{i}}" [attr.selected]="categoria.id == tarea.categoria.id ? true : null">{{categoria.categoria}}</option>
+                                    </select>
+                               </div>
+                            </div>
+                
+                            <div class="flex gap-5 align-middle items-center my-5">
+                                <label for="importancia" [ngStyle]="{'background-color': obtenerColorImportancia(tarea.importancia.importancia)}" class="px-2  p-1 w-fit font-normal text-sm text-white rounded-sm">{{tarea.importancia.importancia}}</label>
+                                <select id="importancia" formControlName="importancia" class="bg-transparent w-fit border border-gray-300 text-violeta text-sm rounded-lg  block  px-2  p-1 ">
+                                        <option *ngFor="let importancia of listadoImportancias; let i = index" value="{{i}}" [attr.selected]="importancia.id == tarea.importancia.id ? true : null">{{importancia.importancia}}</option>
+                                </select>
+                            </div>
+    
+                                
+                            <div class="flex gap-5 my-5">
+                                <p class="inline-flex gap-2 font-semibold bg-gray-800 rounded-sm text-white p-2"> 
+                                    <svg class="w-5 h-5 my-auto text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14c.6 0 1-.4 1-1V7c0-.6-.4-1-1-1H5a1 1 0 0 0-1 1v12c0 .6.4 1 1 1Zm3-7h0v0h0v0Zm4 0h0v0h0v0Zm4 0h0v0h0v0Zm-8 4h0v0h0v0Zm4 0h0v0h0v0Zm4 0h0v0h0v0Z"/>
+                                      </svg>
+                                    {{tarea.created  | date:'dd/MM/yyyy'}}</p>
+                                <p class="inline-flex gap-2 font-semibold bg-gray-800 rounded-sm text-white p-2"> 
+                                    <svg class="w-5 h-5 my-auto text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                      </svg>
+                                    {{tarea.created  | date:'HH:mm'}}
+                                </p>
+                            </div>
+                            <textarea formControlName="descripcion" class="my-10 w-full p-4 bg-gray-200 text-violeta font-bold rounded-sm">{{tarea.descripcion}}</textarea>
+                            <div *ngIf="formularioEnviado && validacion('descripcion')" class="bg-red-500 my-4 border w-fit rounded text-white p-2">
+                                Es necesario introducir una descripcion
+                            </div>
+                            <div class="flex gap-5">
+                                <button type="submit" class="flex w-fit justify-center rounded-md bg-violeta px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Actualizar tarea</button>
+                                <a routerLink="/auth/listado-tareas" class="flex w-fit justify-center rounded-md bg-amarillo px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Volver al listado</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <div>
-                <label for="descripcion" class="block text-sm font-medium leading-6 text-violeta">Descripción</label>
-                <div class="mt-2">
-                    <textarea id="descripcion" formControlName="descripcion" name="descripcion" rows="4" class="block p-2.5 w-full text-sm text-violeta bg-transparent  rounded-lg border border-gray-300 placeholder:text-violeta_claro" placeholder="Una breve descripción de la tarea..."></textarea>
-                    <div *ngIf="formularioEnviado && validacion('descripcion')" class="bg-red-500 my-4 border w-fit rounded text-white p-2">
-                        Es necesario introducir una descripcion
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <label for="categoria" class="block text-sm font-medium leading-6 text-violeta">Categoría</label>
-                <select id="categoria" formControlName="categoria" class="bg-transparent mt-2 border border-gray-300 text-violeta text-sm rounded-lg  block w-full p-2.5 ">
-                        <option *ngFor="let categoria of listadoCategorias; let i = index" value="{{i}}" [attr.selected]="categoria.id == tarea.categoria.id ? true : null">{{categoria.categoria}}</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="importancia" class="block text-sm font-medium leading-6 text-violeta">Importancia</label>
-                <select id="importancia" formControlName="importancia" class="bg-transparent mt-2 border border-gray-300 text-violeta text-sm rounded-lg  block w-full p-2.5 ">
-                        <option *ngFor="let importancia of listadoImportancias; let i = index" value="{{i}}" [attr.selected]="importancia.id == tarea.importancia.id ? true : null">{{importancia.importancia}}</option>
-                </select>
-            </div>
-        
-        
-            <div>
-                <button type="submit" class="flex w-full justify-center rounded-md bg-violeta px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Actualizar tarea</button>
-            </div>
-            </form>
-        </div>
+            
+        </div> 
     </div>
 </section>
 
-{{this.miFormulario.value | json}}
+

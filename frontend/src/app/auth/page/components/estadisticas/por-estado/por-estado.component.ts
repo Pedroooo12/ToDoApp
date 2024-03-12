@@ -11,6 +11,14 @@ import { EstadisticasService } from 'src/app/auth/services/estadisticas.service'
 })
 export class PorEstadoComponent {
 
+  TareasMapa = {
+    '=0': 'no tienes ninguna tarea.',
+    '=1': 'tienes una tarea.',
+    '=2': 'tienes dos tareas.',
+    //cualquier otro valor
+    'other': 'tienes # tareas.'
+  }
+
   private id_user!: Number;
 
   public chart!: Chart<'pie', Number[], string>;

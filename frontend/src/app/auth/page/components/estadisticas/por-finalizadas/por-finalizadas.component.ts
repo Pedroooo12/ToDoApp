@@ -10,6 +10,15 @@ import { EstadisticasService } from 'src/app/auth/services/estadisticas.service'
   styleUrls: ['./por-finalizadas.component.css']
 })
 export class PorFinalizadasComponent {
+
+  TareasMapa = {
+    '=0': 'no tienes ninguna tarea',
+    '=1': 'tienes una tarea',
+    '=2': 'tienes dos tareas',
+    //cualquier otro valor
+    'other': 'tienes # tareas'
+  }
+
   private id_user!: Number;
 
   public chart!: Chart<'polarArea', Number[], string>;

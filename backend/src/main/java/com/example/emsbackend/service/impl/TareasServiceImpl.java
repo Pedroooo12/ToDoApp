@@ -185,4 +185,5 @@ public class TareasServiceImpl implements TareasService {
     public List<Tareas> buscarTareasPorUsuarioImportanciaYCategoria(Importancia importancia, Categoria categoria, User user){
         return this.tareasRepository.findByImportanciaAndCategoriaAndUser(importancia,categoria,user);
     }
+
 }

@@ -3,6 +3,7 @@ package com.example.emsbackend.repository;
 import com.example.emsbackend.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,13 +11,7 @@ import java.util.List;
 @Repository
 public interface TareasRepository extends JpaRepository<Tareas, Long>{
 
-
-
-
     long countByCategoria(Categoria categoria);
-
-
-
     List<Tareas> findByEstado(Estado estado);
 
     //Métodos para las estadisticas
@@ -36,5 +31,5 @@ public interface TareasRepository extends JpaRepository<Tareas, Long>{
     List<Tareas> findByImportanciaAndUser(Importancia importancia, User user);
 
     List <Tareas> findByImportanciaAndCategoriaAndUser(Importancia importancia, Categoria categoria, User user);
-
+    
 }

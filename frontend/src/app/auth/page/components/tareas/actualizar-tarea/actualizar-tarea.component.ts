@@ -171,4 +171,8 @@ export class ActualizarTareaComponent implements OnInit{
     });
     
   }
+
+  obtenerColorImportancia(importancia: String) {
+    return this._tareaService.obtenerColorImportancia(importancia);
+  }
 }

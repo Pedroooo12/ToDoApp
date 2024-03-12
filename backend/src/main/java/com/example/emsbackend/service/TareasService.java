@@ -40,4 +40,5 @@ public interface TareasService {
     List<Tareas> buscarTareasPorUsuarioYImportancia(Importancia importancia,User user);
 
     List<Tareas> buscarTareasPorUsuarioImportanciaYCategoria(Importancia importancia, Categoria categoria, User user);
+
 }

@@ -46,13 +46,11 @@ export class FiltradoTareaComponent {
 
   cambioCategorias(event: any){
 
-    //console.log(event.target.value);
+
 
     //cogemos el valor de la importancia
     const select = document.getElementById("importancias") as HTMLSelectElement;
-    console.log(typeof Number(event.target.value));
 
-    console.log(typeof  select.selectedIndex);
 
     const eventData: Filtrado = {id_categoria: Number(event.target.value), id_importancia: Number(select.selectedIndex)};
     this._filtradoService.eventDataSetter = eventData;
@@ -61,14 +59,13 @@ export class FiltradoTareaComponent {
 
   cambioImportancias(event: any){
     
-    console.log(this.filtrosActuales);
+
     //cogemos el valor de la importancia
     const select = document.getElementById("categorias") as HTMLSelectElement;
 
 
     //const eventData = {id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)};
     const eventData: Filtrado = {id_categoria: Number(select.selectedIndex), id_importancia: Number(event.target.value)};
-    console.log(eventData);
     this._filtradoService.eventDataSetter = eventData;
     this.eventoRecargaTareas.emit(eventData);
   }
