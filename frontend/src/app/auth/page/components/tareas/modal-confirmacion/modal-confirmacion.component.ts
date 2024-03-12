@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Tarea } from 'src/app/auth/interfaces/tarea';
+import { TareaService } from 'src/app/auth/services/tarea.service';
 
 @Component({
   selector: 'app-modal-confirmacion',
@@ -9,6 +11,17 @@ export class ModalConfirmacionComponent {
   @Output() hayModal = new EventEmitter<any>();
 
   @Output() terminarTareas =  new EventEmitter<any>();
+
+  @Output() alertasTareas = new EventEmitter<any>();
+
+  @Output() recorrerArrays = new EventEmitter<any>();
+
+  @Input() tareas!: Tarea[];
+
+  constructor(private _tareaService: TareaService){
+
+  }
+
   detenerPropagacion(event: Event) {
     // Detiene la propagación del evento para evitar que llegue al fondo oscuro
     event.stopPropagation();
@@ -20,6 +33,12 @@ export class ModalConfirmacionComponent {
   }
 
   terminarTodasTareas(){
-    this.terminarTareas.emit();
+
+    this._tareaService.terminarTareas(this.tareas).subscribe(resp => {
+      this.recorrerArrays.emit({id_categoria: 0, id_importancia: 0});
+      this.alertasTareas.emit("terminarTodas");
+    }, (error) => { 
+      console.log(error);
+    });
   }
 }

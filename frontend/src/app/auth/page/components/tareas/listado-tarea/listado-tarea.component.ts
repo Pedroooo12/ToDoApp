@@ -208,17 +208,6 @@ export class ListadoTareaComponent {
   }
 
   /* EVENTOS PROPIOS DE LAS CARDS */
-  
-
-  terminarTodasTareas(){
-    this._tareaService.terminarTareas(this.tareasDone).subscribe(resp => {
-      this.recogerArrays({id_categoria: 0, id_importancia: 0});
-      this.alertasTareas("terminarTodas");
-      this.cerrarModal(event);
-    }, (error) => { 
-      console.log(error);
-    });
-  }
 
 
   /*MODALES */
@@ -244,57 +233,4 @@ export class ListadoTareaComponent {
     return this._tareaService.obtenerColorImportancia(importancia);
   }
 
-  detenerPropagacion(event: Event) {
-    // Detiene la propagación del evento para evitar que llegue al fondo oscuro
-    event.stopPropagation();
-  }
-
-  cambiarOrdenToDo(texto:string, id?:number){
-    if (texto === 'mayor' && id === 1) {
-      this.aplicarOrdenATareas(this.tareasToDo, texto, id);
-    } else if (texto === 'menor' && id === 1) {
-      this.aplicarOrdenATareas(this.tareasToDo, texto, id);
-    } else {
-      this.tareasToDo = [];
-      this.tareasToDo = [...this.tareasToDoDuplicado];
-    }
-
-    
-  }
-
-  cambiarOrdenDoing(texto:string, id?:number){
-    if (texto === 'mayor' && id === 2) {
-      this.aplicarOrdenATareas(this.tareasDoing, texto, id);
-    } else if (texto === 'menor' && id === 2) {
-      this.aplicarOrdenATareas(this.tareasDoing, texto, id);
-    } else {
-      this.tareasDoing = [];
-      this.tareasDoing = [...this.tareasDoingDuplicado];
-
-    }
-  }
-
-  cambiarOrdenDone(texto:string, id?:number){
-    if (texto === 'mayor' && id === 3) {
-      this.aplicarOrdenATareas(this.tareasDone, texto, id);
-    } else if (texto === 'menor' && id === 3) {
-      this.aplicarOrdenATareas(this.tareasDone, texto, id);
-    } else {
-      this.tareasDone = [];
-      this.tareasDone = [...this.tareasDoneDuplicado];
-    }
-  }
-
-  aplicarOrdenATareas(tareas: Tarea[], texto: string, id: number): void {
-    tareas.sort((a, b) => {
-      const idA = a.importancia?.id?.valueOf() ?? 0;
-      const idB = b.importancia?.id?.valueOf() ?? 0;
-  
-      return texto === 'mayor' ? this.compararNumeros(idB, idA) : this.compararNumeros(idA, idB);
-    });
-  }
-
-  compararNumeros(a: number, b: number): number {
-    return a - b;
-  }
 }

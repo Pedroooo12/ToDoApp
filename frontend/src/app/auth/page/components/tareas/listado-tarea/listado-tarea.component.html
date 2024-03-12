@@ -37,7 +37,7 @@
                     <div class="flex justify-between items-center gap-3 mb-5">
                         <h2 class="text-2xl font-semibold  text-azul">To do</h2>
                         <!-- COMPONENTE CAMBIAR ORDEN DE LA URGENCIA -->
-                       <app-cambiar-orden (ordenar)="cambiarOrdenToDo($event, 1)"></app-cambiar-orden>
+                       <app-cambiar-orden [id]="1" [arrayTareas]="tareasToDo" ></app-cambiar-orden>
                     </div>
                     <div id="todo" class="h-96 w-fit  min-w-80 overflow-y-auto overflow-x-hidden bg-violeta  rounded bg-opacity-10 px-4 flex flex-col gap-5 pt-5 relative"
                     cdkDropList
@@ -46,7 +46,7 @@
                     [cdkDropListConnectedTo]="[doneList, doingList]"
                     (cdkDropListDropped)="drop($event)">
                         <div class="" *ngFor="let tarea of tareasToDo" cdkDrag [cdkDragData]="tarea">
-                            <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
+                            <app-card-tarea (addModal)="ponerModal($event)" [card]="tarea"></app-card-tarea>
                             
                         </div>
                         <div class="absolute bottom-3 left-3">
@@ -67,7 +67,7 @@
                         <h2 class="text-2xl font-semibold  text-azul">Doing</h2>
     
                         <!-- COMPONENTE CAMBIAR ORDEN DE LA URGENCIA -->
-                       <app-cambiar-orden (ordenar)="cambiarOrdenDoing($event, 2)"></app-cambiar-orden>
+                       <app-cambiar-orden [id]="2" [arrayTareas]="tareasDoing"></app-cambiar-orden>
                     </div>
                     <div id="doing" class="h-96 w-fit  min-w-80 altura overflow-y-auto overflow-x-hidden  bg-violeta  border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
                     cdkDropList
@@ -76,7 +76,7 @@
                     [cdkDropListConnectedTo]="[todoList, doneList]"
                     (cdkDropListDropped)="drop($event)">
                         <div class="" *ngFor="let tarea of tareasDoing" cdkDrag [cdkDragData]="tarea">
-                            <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
+                            <app-card-tarea (addModal)="ponerModal($event)" [card]="tarea"></app-card-tarea>
                         </div>
                         <div class="absolute bottom-3 left-3">
                             <a routerLink="/auth/crear-tarea/2" class="flex gap-2 py-2 px-4 my-auto bg-violeta text-white rounded-xl">
@@ -95,7 +95,7 @@
                     <div class="flex justify-between items-center gap-3 mb-5">
                         <h2 class="text-2xl font-semibold  text-azul">To do</h2>
     
-                        <app-cambiar-orden (ordenar)="cambiarOrdenDone($event, 3)"></app-cambiar-orden>
+                        <app-cambiar-orden [id]="3" [arrayTareas]="tareasDone"></app-cambiar-orden>
                     </div>
                     <div
                       id="done"
@@ -106,7 +106,7 @@
                       [cdkDropListConnectedTo]="[todoList, doingList]"
                       (cdkDropListDropped)="drop($event)">
                       <div class="" *ngFor="let tarea of tareasDone" cdkDrag [cdkDragData]="tarea">
-                        <app-card-tarea (addModal)="ponerModal($event)" (alertasTareas)="alertasTareas($event)" [card]="tarea"></app-card-tarea>
+                        <app-card-tarea (addModal)="ponerModal($event)" [card]="tarea"></app-card-tarea>
                       </div>
                       <div class="absolute bottom-3 left-3">
                             <div class="flex gap-3">
@@ -138,7 +138,11 @@
     </div>
 
     <!-- MODAL CONFIRMACION TAREAS TERMINADAS -->
-    <app-modal-confirmacion *ngIf="confirmarTareaRealizada" (hayModal)="cerrarModal($event)" (terminarTareas)="terminarTodasTareas()"></app-modal-confirmacion>
+    <app-modal-confirmacion *ngIf="confirmarTareaRealizada" 
+        (hayModal)="cerrarModal($event)" 
+        [tareas]="tareasDone"
+        (alertasTareas)="alertasTareas($event)"
+        (recorrerArrays)="recogerArrays($event)"></app-modal-confirmacion>
         
 </section>
 

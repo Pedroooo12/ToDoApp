@@ -12,8 +12,6 @@ export class CardTareaComponent {
   @Input() card!: Tarea;
 
 
-  @Output() alertasTareas = new EventEmitter<any>();
-
   @Output() addModal = new EventEmitter<any>();
 
 
