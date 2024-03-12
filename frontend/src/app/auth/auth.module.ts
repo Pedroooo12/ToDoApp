@@ -25,6 +25,7 @@ import { BuscadorTareaComponent } from './page/components/tareas/buscador-tarea/
 import { ModalTareaComponent } from './page/components/tareas/modal-tarea/modal-tarea.component';
 import { PorFechaComponent } from './page/components/estadisticas/por-fecha/por-fecha.component';
 import { ModalConfirmacionComponent } from './page/components/tareas/modal-confirmacion/modal-confirmacion.component';
+import { CambiarOrdenComponent } from './page/components/tareas/cambiar-orden/cambiar-orden.component';
 
 
 
@@ -51,6 +52,7 @@ import { ModalConfirmacionComponent } from './page/components/tareas/modal-confi
     ModalTareaComponent,
     PorFechaComponent,
     ModalConfirmacionComponent,
+    CambiarOrdenComponent,
   ],
   imports: [
     CommonModule,

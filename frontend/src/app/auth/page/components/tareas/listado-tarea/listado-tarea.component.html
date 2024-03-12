@@ -36,27 +36,8 @@
                 <div>
                     <div class="flex justify-between items-center gap-3 mb-5">
                         <h2 class="text-2xl font-semibold  text-azul">To do</h2>
-    
-                        <div class="flex gap-2 p-2 bg-azul rounded-sm">
-                            <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenToDo('mayor',1)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
-                                </svg>
-                            </button>
-    
-                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenToDo('refrescar',1)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
-                                  </svg>
-                            </button>
-    
-                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenToDo('menor',1)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
-                                  </svg>
-                            </button>
-                            
-                        </div>
+                        <!-- COMPONENTE CAMBIAR ORDEN DE LA URGENCIA -->
+                       <app-cambiar-orden (ordenar)="cambiarOrdenToDo($event, 1)"></app-cambiar-orden>
                     </div>
                     <div id="todo" class="h-96 w-fit  min-w-80 overflow-y-auto overflow-x-hidden bg-violeta  rounded bg-opacity-10 px-4 flex flex-col gap-5 pt-5 relative"
                     cdkDropList
@@ -85,26 +66,8 @@
                     <div class="flex justify-between items-center gap-3 mb-5">
                         <h2 class="text-2xl font-semibold  text-azul">Doing</h2>
     
-                        <div class="flex gap-2 p-2 bg-azul rounded-sm">
-                            <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenDoing('mayor',2)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
-                                </svg>
-                            </button>
-    
-                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDoing('refrescar',2)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
-                                  </svg>
-                            </button>
-    
-                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDoing('menor',2)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
-                                  </svg>
-                            </button>
-                            
-                        </div>
+                        <!-- COMPONENTE CAMBIAR ORDEN DE LA URGENCIA -->
+                       <app-cambiar-orden (ordenar)="cambiarOrdenDoing($event, 2)"></app-cambiar-orden>
                     </div>
                     <div id="doing" class="h-96 w-fit  min-w-80 altura overflow-y-auto overflow-x-hidden  bg-violeta  border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
                     cdkDropList
@@ -132,26 +95,7 @@
                     <div class="flex justify-between items-center gap-3 mb-5">
                         <h2 class="text-2xl font-semibold  text-azul">To do</h2>
     
-                        <div class="flex gap-2 p-2 bg-azul rounded-sm">
-                            <button class=" bg-white text-violeta rounded-full p-1"  (click)="cambiarOrdenDone('mayor',3)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v13m0-13 4 4m-4-4-4 4"/>
-                                </svg>
-                            </button>
-    
-                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDone('refrescar',3)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
-                                  </svg>
-                            </button>
-    
-                            <button class=" bg-white text-violeta rounded-full p-1" (click)="cambiarOrdenDone('menor',3)">
-                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19V5m0 14-4-4m4 4 4-4"/>
-                                  </svg>
-                            </button>
-                            
-                        </div>
+                        <app-cambiar-orden (ordenar)="cambiarOrdenDone($event, 3)"></app-cambiar-orden>
                     </div>
                     <div
                       id="done"
