@@ -39,8 +39,8 @@ export class TareaService {
         return this.http.put<Tarea>(`${this.apiUrl}/cambiarEstado/${idTarea}`, idEstado);
     }
 
-    buscarTareasPorEstado(user: User,estado: Estado): Observable<Tarea[]>{
-        return this.http.post<Tarea[]>(`${this.apiUrl}/estado/`, {user,estado});
+    buscarTareasPorEstado(id_user: Number,id_estado: Number): Observable<Tarea[]>{
+        return this.http.get<Tarea[]>(`${this.apiUrl}/estado/${id_estado}/${id_user}`);
     }
     
     

@@ -140,8 +140,10 @@ public class TareaController {
         return ResponseEntity.ok(tareas);
     }
 
-    @PostMapping("/estado/")
-    public ResponseEntity<List<Tareas>> getAllCategoriesByEstado(@RequestBody() Estado estado, @RequestBody() User user) {
+    @GetMapping("/estado/{idEstado}/{idUser}")
+    public ResponseEntity<List<Tareas>> getAllCategoriesByEstado(@PathVariable("idEstado") Long estadoId, @PathVariable("idUser") Long userId) {
+        Estado estado = estadoRepository.findById(estadoId).orElseThrow();
+        User user = userService.findById(userId);
         List<Tareas> tareas = tareasService.findByEstadoAndUser(estado,user);
         return ResponseEntity.ok(tareas);
     }

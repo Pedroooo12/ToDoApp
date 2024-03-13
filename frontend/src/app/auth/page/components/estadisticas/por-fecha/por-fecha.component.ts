@@ -57,7 +57,7 @@ id_user!: Number;
   }
 
   inicializarChart() {
-    this._tareaService.buscarTareasPorEstado(this._authService.currentUser!,{id: 4}).subscribe(fechasResp => {
+    this._tareaService.buscarTareasPorEstado(this.id_user,4).subscribe(fechasResp => {
       console.log(fechasResp);
       for (let index = 0; index < fechasResp.length; index++) {
         let fecha = new Date (fechasResp[index].created!); 
