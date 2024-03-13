@@ -60,9 +60,10 @@ export class ListadoTareaComponent {
     this.tareasDone = [];
     this._tareaService.buscarTareasFiltro(eventData.id_categoria,eventData.id_importancia, this.id_user).subscribe(resp => {
       this.confirmarAlertaTareas = !this.confirmarAlertaTareas;
-      console.log(resp);
-      if(resp.length == 0 ){
-        if(eventData.id_categoria != 0 || eventData.id_importancia != 0 || (eventData.id_categoria == 0 && eventData.id_importancia != 0) || (eventData.id_categoria != 0 && eventData.id_importancia == 0)){
+      console.log(resp.filter(respuesta => !respuesta.estado.estado!.includes('finalizada')));
+      if( resp.filter(respuesta => !respuesta.estado.estado!.includes('finalizada')).length === 0){
+        console.log("entra");
+        if(eventData.id_categoria != 0 || eventData.id_importancia != 0){
           this.noHayTareasPorFiltro = true;
         }else{
           this.noHayTareas = true;

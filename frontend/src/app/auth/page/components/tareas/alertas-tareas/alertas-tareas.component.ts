@@ -10,6 +10,8 @@ import { AlertaTareasService } from 'src/app/auth/services/alertaTareas.service'
 export class AlertasTareasComponent implements OnInit, OnDestroy{
   @Input() confirmarTareaRealizada!: boolean;
   @Input() confirmarAlertaTareas!: boolean;
+  @Input() noHayTareas!:boolean;
+  @Input() NoHayTareasSinFiltro!: boolean;
 
   private alertasSubscription!: Subscription;
 

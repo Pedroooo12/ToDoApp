@@ -11,6 +11,7 @@ import { CrearTareaComponent } from './page/components/tareas/crear-tarea/crear-
 import { ActualizarTareaComponent } from './page/components/tareas/actualizar-tarea/actualizar-tarea.component';
 import { CrearCategoriaComponent } from './page/components/categoria/crear-categoria/crear-categoria.component';
 import { ListadoEstadisticasComponent } from './page/components/estadisticas/listado-estadisticas/listado-estadisticas.component';
+import { CalendarioComponent } from './page/components/calendario/calendario/calendario.component';
 
 
 
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'crear-tarea',
         component: CrearTareaComponent
+      },
+      {
+        path: 'calendario',
+        component: CalendarioComponent
       },
       {
         path: 'crear-tarea/:id_estado',

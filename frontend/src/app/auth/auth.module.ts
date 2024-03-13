@@ -27,6 +27,8 @@ import { PorFechaComponent } from './page/components/estadisticas/por-fecha/por-
 import { ModalConfirmacionComponent } from './page/components/tareas/modal-confirmacion/modal-confirmacion.component';
 import { CambiarOrdenComponent } from './page/components/tareas/cambiar-orden/cambiar-orden.component';
 import { AlertasTareasComponent } from './page/components/tareas/alertas-tareas/alertas-tareas.component';
+import { CalendarioComponent } from './page/components/calendario/calendario/calendario.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -55,6 +57,7 @@ import { AlertasTareasComponent } from './page/components/tareas/alertas-tareas/
     ModalConfirmacionComponent,
     CambiarOrdenComponent,
     AlertasTareasComponent,
+    CalendarioComponent,
   ],
   imports: [
     CommonModule,
@@ -63,7 +66,8 @@ import { AlertasTareasComponent } from './page/components/tareas/alertas-tareas/
     ReactiveFormsModule,
     DragDropModule,
     CdkDropList,
-    CdkDrag
+    CdkDrag,
+    FullCalendarModule
   ],
   exports: [
     HeaderComponent,

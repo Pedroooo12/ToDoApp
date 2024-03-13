@@ -3,6 +3,8 @@
         <app-alertas-tareas 
                 [confirmarAlertaTareas]="confirmarAlertaTareas" 
                 [confirmarTareaRealizada]="confirmarTareaRealizada"
+                [noHayTareas]="noHayTareas"
+                [NoHayTareasSinFiltro]="noHayTareasPorFiltro"
                 ></app-alertas-tareas>
 
         <h1 class="text-center w-fit mx-auto text-3xl font-bold mb-10">Listado tareas</h1>
@@ -11,20 +13,9 @@
             <app-filtrado-tarea (eventoRecargaTareas)="recogerArrays($event)"></app-filtrado-tarea>
         </div>
 
-        <ng-template #sinTareas>
-            <div class="p-4 mb-4 text-sm text-white w-fit mx-auto rounded-lg  bg-amarillo" role="alert">             
-                <span class="font-medium">¡Alerta no tienes ninguna tarea creada!</span> 
-            </div>
-        </ng-template>
 
-        <ng-template #sinTareasPorFiltro>
-            <div class="p-4 mb-4 text-sm text-white w-fit mx-auto rounded-lg  bg-amarillo" role="alert">             
-                <span class="font-medium">¡Alerta no hay ninguna tareas con estos filtros!</span> 
-            </div>
-        </ng-template>
-
-        <ng-container *ngIf="!noHayTareas;else sinTareas" >
-        <ng-container *ngIf="!noHayTareasPorFiltro;else sinTareasPorFiltro">
+        <ng-container *ngIf="!noHayTareas" >
+        <ng-container *ngIf="!noHayTareasPorFiltro">
             <div class="flex gap-36 justify-between" >
                 <div>
                     <div class="flex justify-between items-center gap-3 mb-5">
