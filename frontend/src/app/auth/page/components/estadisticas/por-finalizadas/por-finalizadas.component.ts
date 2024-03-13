@@ -13,10 +13,10 @@ export class PorFinalizadasComponent {
 
   TareasMapa = {
     '=0': 'no tienes ninguna tarea',
-    '=1': 'tienes una tarea',
-    '=2': 'tienes dos tareas',
+    '=1': 'tienes una tarea no terminada.',
+    '=2': 'tienes dos tareas no terminadas.',
     //cualquier otro valor
-    'other': 'tienes # tareas'
+    'other': 'tienes # tareas no terminadas.'
   }
 
   private id_user!: Number;

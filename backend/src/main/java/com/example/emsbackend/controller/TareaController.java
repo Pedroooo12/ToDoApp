@@ -134,19 +134,19 @@ public class TareaController {
         return ResponseEntity.ok(tarea);
     }
 
-    @PutMapping("/terminarTareas/")
-    public ResponseEntity<List<Tareas>> updateTarea( @RequestBody List<Tareas> tareasRecibida){
-        List<Tareas> tareas = tareasService.terminarTareas(tareasRecibida);
+    @PutMapping("/terminarTareas/{id}")
+    public ResponseEntity<List<Tareas>> updateTarea(@PathVariable("id") Long userId, @RequestBody List<Tareas> tareasRecibida){
+        List<Tareas> tareas = tareasService.terminarTareas(userId,tareasRecibida);
         return ResponseEntity.ok(tareas);
     }
 
     @PostMapping("/estado/")
-    public ResponseEntity<List<Tareas>> getAllCategoriesByEstado(@RequestBody() Estado estado) {
-        List<Tareas> tareas = tareasService.findByEstado(estado);
+    public ResponseEntity<List<Tareas>> getAllCategoriesByEstado(@RequestBody() Estado estado, @RequestBody() User user) {
+        List<Tareas> tareas = tareasService.findByEstadoAndUser(estado,user);
         return ResponseEntity.ok(tareas);
     }
 
-    //Para eliminar un empleado
+    //Para una tarea
     @DeleteMapping("{id}")
     public void  deleteEjercicio(@PathVariable("id") Long tareaId){
         tareasService.deleteTarea(tareaId);

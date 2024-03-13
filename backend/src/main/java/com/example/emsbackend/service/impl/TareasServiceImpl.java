@@ -3,10 +3,7 @@ package com.example.emsbackend.service.impl;
 
 import com.example.emsbackend.entity.*;
 import com.example.emsbackend.exception.ResourceNotFoundException;
-import com.example.emsbackend.repository.CategoriaRepository;
-import com.example.emsbackend.repository.EstadoRepository;
-import com.example.emsbackend.repository.ImportanciaRepository;
-import com.example.emsbackend.repository.TareasRepository;
+import com.example.emsbackend.repository.*;
 import com.example.emsbackend.service.TareasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +25,9 @@ public class TareasServiceImpl implements TareasService {
 
     @Autowired
     ImportanciaRepository importanciaRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public Tareas createTarea(Tareas tarea){
@@ -86,8 +86,8 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public List<Tareas> findByEstado(Estado estado) {
-        List<Tareas> tareas = tareasRepository.findByEstado(estado);
+    public List<Tareas> findByEstadoAndUser(Estado estado, User user) {
+        List<Tareas> tareas = tareasRepository.findByEstadoAndUser(estado, user);
         return tareas;
     }
 
@@ -126,13 +126,16 @@ public class TareasServiceImpl implements TareasService {
     }
 
     @Override
-    public List<Tareas> terminarTareas(List<Tareas> tareas){
+    public List<Tareas> terminarTareas(Long userId,List<Tareas> tareas){
+
+        User user = userRepository.findById(userId).orElseThrow();
         long id_estado = 4;
         Estado estado = estadoRepository.findById(id_estado).orElseThrow(
                 () -> new ResourceNotFoundException("No hay un estado con el id: " + id_estado)
         );
 
-        List<Tareas> tareasTerminadas = new ArrayList<>();
+        //List<Tareas> tareasTerminadas = new ArrayList<>();
+        List<Tareas> tareasTerminadas = tareasRepository.findByUser(user);
 
         for (Tareas tarea : tareas) {
             Tareas tareaExistente = tareasRepository.findById(tarea.getId()).orElseThrow(

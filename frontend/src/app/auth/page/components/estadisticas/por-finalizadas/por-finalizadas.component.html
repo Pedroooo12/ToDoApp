@@ -16,12 +16,14 @@
     
       
     <canvas id="chartFinalizadas" class="h-80 max-h-80">{{chart}}</canvas>
-
-    <h3 class="text-center text-xl font-semibold my-5">Recomendaciones: </h3>
     <div *ngIf="this.tareasTotales > this.tareasFinalizadas">
+        <h3 class="text-center text-xl font-semibold my-5">Recomendaciones: </h3>
+    <div>
         <p class="text-black font-bold text-lg mb-4 w-fit">1. Todavía te faltan tareas por terminar.</p>
-        <p class="mb-2 ms-5 p-3 bg-amarillo text-white rounded-lg w-fit">Tienes {{this.tareasTotales - this.tareasFinalizadas |i18nPlural:TareasMapa}} no terminada.</p>
-      </div>
+        <p class="mb-2 ms-5 p-3 bg-amarillo text-white rounded-lg w-fit">Tienes {{this.tareasTotales - this.tareasFinalizadas |i18nPlural:TareasMapa}}</p>
+    </div>
+    </div>
+    
 
     
 </div>

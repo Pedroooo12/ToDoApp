@@ -8,6 +8,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
 import { TareaService } from 'src/app/auth/services/tarea.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 
 @Component({
@@ -21,9 +22,50 @@ export class CalendarioComponent {
 
   private id_user!: Number;
 
-  @ViewChild(CalendarioComponent) calendar! : CalendarioComponent;
+  @ViewChild(FullCalendarComponent) fullCalendar!: FullCalendarComponent;
 
-  options: any = {};
+  options = {
+    plugins: [dayGridPlugin, interactionPlugin, multiMonthPlugin, listPlugin, timeGridPlugin],
+    //initialView: 'multiMonthYear',
+    initialView: 'multiMonthYear',
+    //defaultDate: this.obtenerFechaMasAntigua(this.events),
+    locale: esLocale,
+    buttonText: {
+      today: 'Hoy',
+      list: 'Diario',
+      listWeek: 'Semana Lista',
+      listMonth: 'Mes Lista',
+    },
+    headerToolbar: {
+      start: 'title', // will normally be on the left. if RTL, will be on the right
+      center: '',
+      end: 'today listAño listMonth listWeek listDay prev,next' // will normally be on the right. if RTL, will be on the left
+    },
+    customButtons: {
+      listAño: {
+        text: 'Anual',
+        click: () => {
+          this.fullCalendar.getApi().changeView('multiMonthYear');
+        }
+      },
+      listMonth: {
+        text: 'Mensual',
+        click: () => {
+          this.fullCalendar.getApi().changeView('listMonth');
+        }
+      },
+      listWeek: {
+        text: 'Semanal',
+        click: () => {
+          this.fullCalendar.getApi().changeView('listWeek');
+        }
+      }
+    },
+    
+    weekends: true,
+    editable: false
+  };
+
   constructor(private _tareaService:TareaService, private _authService: AuthService){
     if(this._authService.currentUser){
       this.id_user = this._authService.currentUser.id!;
@@ -36,52 +78,24 @@ export class CalendarioComponent {
 
 
   iniciarCalendario(){
-    this._tareaService.buscarTareasFiltro(0,0,this.id_user).subscribe(resp => {
-      console.log(resp);
+      this._tareaService.buscarTareasFiltro(0,0,this.id_user).subscribe(resp => {
+  
+        for (let index = 0; index < resp.length; index++) {
+          let event =  {
+            title: resp[index].nombre,
+            date: new Date(resp[index].created!),
+            description: "Descripcion",
+            color: resp[index].categoria.color,
+            
+          };
+          this.events.push(event);
+        }  
+        
+      });
 
-      for (let index = 0; index < resp.length; index++) {
-        let event =  {
-          title: resp[index].nombre,
-          date: new Date(resp[index].created!),
-          description: "Descripcion",
-          color: resp[index].categoria.color,
-        };
-        this.events.push(event);
-      }
-
-      console.log(this.events);
-      
-      
-      
-      
-    });
-
-    this.options = {
-      plugins: [dayGridPlugin, interactionPlugin, multiMonthPlugin, listPlugin, timeGridPlugin],
-      //initialView: 'multiMonthYear',
-      initialView: 'listWeek',
-      defaultDate: this.obtenerFechaMasAntigua(this.events),
-      locale: esLocale,
-      headerToolbar: {
-        start: 'title', // will normally be on the left. if RTL, will be on the right
-        center: '',
-        end: 'today list month year  prev,next' // will normally be on the right. if RTL, will be on the left
-      },
-      viewHint: function(buttonText: any, buttonName: any) {
-        switch(true) {
-          case buttonName.match(/^list/):
-            return buttonText + " list view";
-          case buttonName.match(/^Ano/):
-            return buttonText + " multiMonthYear";
-          default:
-            return buttonText + " view";
-        }
-      },
-      weekends: true,
-      backgroundColor: 'white',
-      editable: false
-    };
   }
+
+
   obtenerFechaMasAntigua(fechas: Date[]): Date | null {
       if (fechas.length === 0) {
           return null;

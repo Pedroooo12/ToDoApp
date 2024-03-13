@@ -12,7 +12,7 @@ import java.util.List;
 public interface TareasRepository extends JpaRepository<Tareas, Long>{
 
     long countByCategoria(Categoria categoria);
-    List<Tareas> findByEstado(Estado estado);
+    List<Tareas> findByEstadoAndUser(Estado estado, User user);
 
     //Métodos para las estadisticas
     long countByUser(User user);

@@ -1,3 +1,4 @@
+import { User } from './../../interfaces/user';
 import { Tarea } from './../interfaces/tarea';
 import { Estado } from './../interfaces/estado';
 import { Injectable } from '@angular/core';
@@ -38,8 +39,8 @@ export class TareaService {
         return this.http.put<Tarea>(`${this.apiUrl}/cambiarEstado/${idTarea}`, idEstado);
     }
 
-    buscarTareasPorEstado(Estado: Estado): Observable<Tarea[]>{
-        return this.http.post<Tarea[]>(`${this.apiUrl}/estado/`, Estado);
+    buscarTareasPorEstado(user: User,estado: Estado): Observable<Tarea[]>{
+        return this.http.post<Tarea[]>(`${this.apiUrl}/estado/`, {user,estado});
     }
     
     
@@ -59,8 +60,8 @@ export class TareaService {
         return this.http.put<Tarea>(`${this.apiUrl}/terminarTarea/`, tarea);
     }
 
-    terminarTareas(tareas: Array<Tarea>): Observable<Array<Tarea>>{
-        return this.http.put<Array<Tarea>>(`${this.apiUrl}/terminarTareas/`, tareas);
+    terminarTareas(id: Number,tareas: Array<Tarea>): Observable<Array<Tarea>>{
+        return this.http.put<Array<Tarea>>(`${this.apiUrl}/terminarTareas/${id}`, tareas);
     }
     
     eliminarTarea(id:Number): Observable<void>{

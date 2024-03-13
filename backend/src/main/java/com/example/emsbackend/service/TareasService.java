@@ -17,13 +17,13 @@ public interface TareasService {
 
 
 
-    List<Tareas> findByEstado(Estado estado);
+    List<Tareas> findByEstadoAndUser(Estado estado,User user);
 
     List<Tareas> findByUser(User user);
 
     Tareas terminarTarea(Tareas tarea);
 
-    List<Tareas> terminarTareas(List<Tareas> tareas);
+    List<Tareas> terminarTareas(Long userId,List<Tareas> tareas);
 
     //Metodos estadisticas
 

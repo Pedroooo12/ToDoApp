@@ -11,12 +11,20 @@ import { EstadisticasService } from 'src/app/auth/services/estadisticas.service'
 })
 export class PorEstadoComponent {
 
-  TareasMapa = {
-    '=0': 'no tienes ninguna tarea.',
-    '=1': 'tienes una tarea.',
-    '=2': 'tienes dos tareas.',
+  TareasMapaDone = {
+    '=0': 'no tienes ninguna tarea hecha.',
+    '=1': 'tienes una tarea hecha pero no finalizada.',
+    '=2': 'tienes dos tareas hechas pero no finalizadas.',
     //cualquier otro valor
-    'other': 'tienes # tareas.'
+    'other': 'tienes # tareas hechas pero no finalizadas.'
+  }
+
+  TareasMapaDoing = {
+    '=0': 'no tienes ninguna tarea hecha.',
+    '=1': 'una tarea.',
+    '=2': 'dos tareas.',
+    //cualquier otro valor
+    'other': '# tareas.'
   }
 
   private id_user!: Number;
