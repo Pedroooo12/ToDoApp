@@ -3,7 +3,17 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-violeta animate-fade-down animate-once animate-duration-[1000ms]">Iniciar Sesión</h2>
     </div>
-  
+
+    <div *ngIf="this.usuarioNoExiste" class="absolute right-20 top-10 p-4 mb-4 text-sm w-72 ms-auto mx-auto mt-10 bg-red-100 border-l-4 border-red-500 text-red-700" role="alert">
+      <p class="font-bold">Operación no realizada con éxito.</p>
+      <p>El usuario no existe.</p>
+    </div>
+
+    <div *ngIf="this.usuarioErroneo" class="absolute right-20 top-10 p-4 mb-4 text-sm w-72 ms-auto mx-auto mt-10 bg-red-100 border-l-4 border-red-500 text-red-700" role="alert">
+      <p class="font-bold">Operación no realizada con éxito.</p>
+      <p>La contraseña es incorrecta.</p>
+    </div>
+
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm animate-fade-down animate-once animate-duration-[1000ms] animate-delay-1000">
       <form class="space-y-6" [formGroup]="miFormulario" (ngSubmit)="enviar()" action="#" method="POST">
         <div>

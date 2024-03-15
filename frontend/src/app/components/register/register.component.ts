@@ -12,7 +12,9 @@ import { UserRegister } from 'src/app/interfaces/userRegister';
 export class RegisterComponent {
   public miFormulario: FormGroup;
 
-  public userRegistrado = false;
+  public userRegistrado: boolean = false;
+
+  public correoUsado: boolean = false;
 
   formularioEnviado = false;
 
@@ -53,8 +55,22 @@ export class RegisterComponent {
     this.service.registrarse(this.miFormulario.value).subscribe(resp => {
       console.log(resp);
       this.userRegistrado = true;
+        setTimeout(() => {
+          this.userRegistrado = false;
+        }, 2000);
+        this.miFormulario.reset();
     }, (error) => {
       console.log(error);
+
+      if(error.status == 409){
+        this.correoUsado = true;
+        setTimeout(() => {
+          this.correoUsado = false;
+        }, 2000);
+        this.miFormulario.patchValue({
+          email: ""
+        });
+      }
     })
 
     console.log(this.miFormulario.value);

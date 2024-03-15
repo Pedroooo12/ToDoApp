@@ -14,6 +14,10 @@ export class LoginComponent {
 
   formularioEnviado = false;
 
+  public usuarioNoExiste: boolean = false;
+
+  public usuarioErroneo: boolean = false;
+
   private user: User = {
     name: '',
     email: '',
@@ -50,7 +54,29 @@ export class LoginComponent {
       this.route.navigate(['auth/inicio']);
       //redirigir al inicio
     }, (error) => {
-      console.log(error);
+
+      if(error.status == 404){
+        this.usuarioNoExiste = true;
+        setTimeout(() => {
+          this.usuarioNoExiste = false;
+        }, 2000);
+        this.miFormulario.reset();
+      }
+
+      if(error.status == 409){
+        this.usuarioErroneo = true;
+        setTimeout(() => {
+          this.usuarioErroneo = false;
+        }, 2000);
+        this.miFormulario.patchValue({
+          password: ""
+        });
+      }
+
+      if(error.status != 409){
+        console.log(error);
+      }
+      
     })
   }
 }

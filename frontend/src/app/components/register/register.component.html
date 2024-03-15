@@ -1,12 +1,17 @@
-<div class="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-br from-amarillo via-claro to-azul">
+<section class="flex min-h-full h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-br from-amarillo via-claro to-azul">
     <div class="h-auto w-1/2 mx-auto bg-claro bg-opacity-10 shadow-2xl rounded-md">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-violeta animate-fade-down animate-once animate-duration-[1000ms]">Crear una cuenta</h2>
     </div>
 
-    <div *ngIf="this.userRegistrado"  class="w-1/2 mx-auto mt-10 bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+    <div *ngIf="this.userRegistrado"  class="absolute right-20 top-10 mt-10 bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
       <p class="font-bold">Operación realizada con éxito.</p>
       <p>El usuario ha sido registrado correctamente.</p>
+    </div>
+
+    <div *ngIf="this.correoUsado"  class="absolute right-20 top-10 mt-10 bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+      <p class="font-bold">Operación no realizada con éxito.</p>
+      <p>Ese correo ya está usado.</p>
     </div>
   
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm animate-fade-down animate-once animate-duration-[1000ms] animate-delay-1000">
@@ -62,4 +67,4 @@
       </p>
     </div>
     </div>
-</div>
+</section>

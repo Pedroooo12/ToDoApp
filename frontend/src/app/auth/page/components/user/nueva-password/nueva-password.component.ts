@@ -44,13 +44,17 @@ export class NuevaPasswordComponent {
     const password1 = this.miFormulario.controls['password1']!.value;
     const password2 = control.value;
   
-    if (password1 !== password2) {
+    if (password1 !== password2 && password1.length > 0) {
       return { 'passwordMismatch': true };
     }
+
   
     return null;
   }
 
+  longitudPassword1(): number {
+    return this.miFormulario.get('password1')!.value.length;
+  }
 
   validacion(arg:string){
     return this.miFormulario.controls[`${arg}`].hasError('required') && this.miFormulario.controls[`${arg}`].touched;

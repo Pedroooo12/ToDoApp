@@ -34,8 +34,14 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@Valid @RequestBody UserDto user,
                                            BindingResult result){
+        User existing = userService.findByEmail(user.getEmail());
+
         if (result.hasErrors()) {
             return ResponseEntity.notFound().build();
+        }
+
+        if(existing != null){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(user);
         }
 
         userService.saveUser(user);
@@ -57,8 +63,11 @@ public class AuthController {
         boolean comprobar = userService.validarPassword(user.getEmail(), user.getPassword());
 
         if (!comprobar) {
-            // Usuario no encontrado
-            return ResponseEntity.notFound().build();
+            // Usuario no encaja con la contraseña
+            //return ResponseEntity.notFound().build();
+            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(existing);
+
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(existing);
         }
 
         return ResponseEntity.ok(existing);
@@ -87,16 +96,7 @@ public class AuthController {
         return ResponseEntity.ok(existing);
     }
 
-   /* @GetMapping("/logout")
-    public ResponseEntity<Object> logout() {
-        // invalidar la sesión o el token de autenticación si se está utilizando
-        SecurityContextHolder.clearContext();
-        Map<String, String> responseMap = new HashMap<>();
-        responseMap.put("message", "Sesión cerrada exitosamente");
 
-        // Devolver ResponseEntity con el Map y el código 200 (OK)
-        return ResponseEntity.ok(responseMap);
-    }*/
    @PostMapping("/logout")
    public ResponseEntity<Object> logout() {
 
