@@ -14,6 +14,8 @@ public interface TareasRepository extends JpaRepository<Tareas, Long>{
     long countByCategoria(Categoria categoria);
     List<Tareas> findByEstadoAndUser(Estado estado, User user);
 
+    List<Tareas> findByCategoria(Categoria categoria);
+
     //Métodos para las estadisticas
     long countByUser(User user);
     long countByEstadoAndUser(Estado estado,User user);

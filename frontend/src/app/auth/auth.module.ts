@@ -29,6 +29,7 @@ import { CambiarOrdenComponent } from './page/components/tareas/cambiar-orden/ca
 import { AlertasTareasComponent } from './page/components/tareas/alertas-tareas/alertas-tareas.component';
 import { CalendarioComponent } from './page/components/calendario/calendario/calendario.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { AlertaCategoriaComponent } from './page/components/categoria/alerta-categoria/alerta-categoria.component';
 
 
 
@@ -58,6 +59,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CambiarOrdenComponent,
     AlertasTareasComponent,
     CalendarioComponent,
+    AlertaCategoriaComponent,
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ import { Categoria } from 'src/app/auth/interfaces/categoria';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import { User } from 'src/app/interfaces/user';
+import { AlertaCategoriasService } from 'src/app/auth/services/alertaCategorias.service';
 
 @Component({
   selector: 'app-crear-categoria',
@@ -29,7 +30,11 @@ export class CrearCategoriaComponent {
   }
 
   //injectamos en el constructor 
-  constructor(private fb: FormBuilder, private route: Router, private _authService: AuthService, private _categoriaService: CategoriaService) { 
+  constructor(private fb: FormBuilder, 
+      private route: Router, 
+      private _authService: AuthService, 
+      private _categoriaService: CategoriaService,
+      private _alertaCategorias: AlertaCategoriasService) { 
 
     if(typeof this._authService.currentUser == "object"){
       this.user = this._authService.currentUser;
@@ -67,6 +72,7 @@ export class CrearCategoriaComponent {
         this.listadoCategorias= resp;
         this.miFormulario.get('categoria')!.setValue(null);
         this.miFormulario.get('color')!.setValue(null);
+        this._alertaCategorias.setAlertasData("crear");
       }, (error) => {
         console.log(error);
       });

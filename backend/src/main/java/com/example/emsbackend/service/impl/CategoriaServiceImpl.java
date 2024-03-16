@@ -2,8 +2,10 @@ package com.example.emsbackend.service.impl;
 
 
 import com.example.emsbackend.entity.Categoria;
+import com.example.emsbackend.entity.Tareas;
 import com.example.emsbackend.exception.ResourceNotFoundException;
 import com.example.emsbackend.repository.CategoriaRepository;
+import com.example.emsbackend.repository.TareasRepository;
 import com.example.emsbackend.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ import java.util.List;
 public class CategoriaServiceImpl implements CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private TareasRepository tareasRepository;
     @Override
     public Categoria createCategoria(Categoria categoria) {
         Categoria categoriaSaved = categoriaRepository.save(categoria);
@@ -51,10 +56,10 @@ public class CategoriaServiceImpl implements CategoriaService {
                 () -> new ResourceNotFoundException("No existe una rutina con el id: " + categoriaId)
         );
 
-        /*// Obtener ejercicios asociados a la rutina
-        List<Ejercicios> ejerciciosAsociados = ejerciciosRepository.findByRutina(rutina);
+        // Obtener ejercicios asociados a la rutina
+        List<Tareas> tareasAsociadas = tareasRepository.findByCategoria(categoria);
             // Eliminar cada ejercicio asociado
-        ejerciciosAsociados.forEach(ejercicio -> ejerciciosRepository.delete(ejercicio));*/
+        tareasAsociadas.forEach(tarea -> tarea.setCategoria(null));
 
         // Eliminar la rutina
         categoriaRepository.deleteById(categoriaId);

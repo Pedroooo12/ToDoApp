@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Categoria } from 'src/app/auth/interfaces/categoria';
+import { AlertaCategoriasService } from 'src/app/auth/services/alertaCategorias.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import { User } from 'src/app/interfaces/user';
@@ -30,7 +31,11 @@ export class ActualizarCategoriaComponent implements OnInit {
   }
 
   //injectamos en el constructor 
-  constructor(private fb: FormBuilder,private route: ActivatedRoute, private router: Router, private _authService: AuthService, private _categoriaService: CategoriaService) { 
+  constructor(private fb: FormBuilder,private route: ActivatedRoute, 
+    private router: Router, 
+    private _authService: AuthService, 
+    private _categoriaService: CategoriaService,
+    private _alertaCategorias: AlertaCategoriasService) { 
 
     this.miFormulario = this.fb.group({
       categoria: [this.categoria.categoria, [Validators.required]],
@@ -74,6 +79,7 @@ export class ActualizarCategoriaComponent implements OnInit {
     console.log(this.miFormulario.value);
     //Si es correcto el formulario
     this._categoriaService.actualizarCategoria(this.categoria_id,this.miFormulario.value).subscribe(resp => {
+      this._alertaCategorias.setAlertasData("modificar");
       this.router.navigate(["/auth/crear-categoria"]);
     }, (error) => {
       console.log(error);

@@ -3,10 +3,16 @@
     <div id="default-modal" tabindex="-1" aria-hidden="true"   class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="flex justify-center align-middle items-center h-screen"(click)="cerrarModal()">
             <div class="cardContainer" (click)="detenerPropagacion($event)">
-                <div class="card border-1 p-6 h-fit rounded-xl" [style.border-color]="recogerTarea.categoria.color">
+                <div class="card border-1 p-6 h-fit rounded-xl" [style.background]="recogerTarea.categoria ? recogerTarea.categoria.color : null">
                     <h3 class="block text-3xl text-left text-white underline-offset-1">{{recogerTarea.nombre}}</h3>
                     <div class="flex gap-5 align-middle items-center my-5">
-                        <p [style.background]="recogerTarea.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{recogerTarea.categoria.categoria}}</p>
+                        <div *ngIf="recogerTarea.categoria;else noHayCategoria">
+                            <p [style.background]="recogerTarea.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{recogerTarea.categoria.categoria}}</p>
+                        </div>
+                        <ng-template #noHayCategoria>
+                            <p class=" px-2 bg-red-600  p-1 w-fit font-normal text-sm text-white rounded-sm ">No hay categoria</p>
+                        </ng-template>
+                        
                         <p [ngStyle]="{'background-color': obtenerColorImportancia(recogerTarea.importancia.importancia)}" class="px-2  p-1 w-fit font-normal text-sm text-white rounded-sm">{{recogerTarea.importancia.importancia}}</p>
                     </div>
                     <div class="flex gap-5">

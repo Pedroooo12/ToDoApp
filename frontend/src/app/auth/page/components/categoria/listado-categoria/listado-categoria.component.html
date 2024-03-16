@@ -3,13 +3,12 @@
 </div>
 
 <ng-template #HayCategorias>
+<app-alerta-categoria></app-alerta-categoria>
 <div class="relative w-1/2 mx-auto overflow-x-auto shadow-md sm:rounded-lg my-10">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    Id
-                </th>
+
                 <th scope="col" class="px-6 py-3">
                     Nombre Categoria
                 </th>
@@ -20,9 +19,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let categoria of listadoCategorias" [style.background]="categoria.color" class="border-b">
-                <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">
-                    {{categoria.id}}
-                </th>
+
                 <td class="px-6 py-4 text-white">
                     {{categoria.categoria}}
                 </td>

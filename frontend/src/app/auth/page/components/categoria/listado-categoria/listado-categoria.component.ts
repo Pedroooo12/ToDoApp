@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Categoria } from 'src/app/auth/interfaces/categoria';
+import { AlertaCategoriasService } from 'src/app/auth/services/alertaCategorias.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 
@@ -15,7 +16,10 @@ export class ListadoCategoriaComponent {
 
   user_id!: Number;
 
-  constructor(private _categoriaService: CategoriaService, private _authService: AuthService, private cdRef: ChangeDetectorRef){
+  constructor(private _categoriaService: CategoriaService, 
+    private _authService: AuthService, 
+    private cdRef: ChangeDetectorRef,
+    private _alertaCategorias: AlertaCategoriasService){
     if(typeof this._authService.currentUser!.id == "number"){
       this.user_id = this._authService.currentUser!.id;
     }
@@ -34,6 +38,7 @@ export class ListadoCategoriaComponent {
   eliminar(id:Number){
     this._categoriaService.eliminarCategoria(id).subscribe(resp => {
       this.buscarCategorias();
+      this._alertaCategorias.setAlertasData("eliminar");
     }, (error) =>{
 
     });

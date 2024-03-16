@@ -1,6 +1,6 @@
 <div class="card ag-courses-item_link max-w-sm p-5 w-72 h-fit bg-white border-0  border-gray-200 rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700 transform transition-transform hover:scale-105 hover:rotate-3">
 
-    <div class="ag-courses-item_bg" [style.background]="card.categoria.color"></div>
+    <div class="ag-courses-item_bg" [style.background]="card.categoria ? card.categoria.color : null"></div>
     <div class="flex items-center justify-between">
         <h5 class="mb-2 text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{{card.nombre}}</h5>
         <svg (click)="irModal(card.id!)" class="w-6 h-6 text-gray-800  z-10 cursor-pointer dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -8,7 +8,12 @@
         </svg>
     </div>
     <div class="flex gap-5 align-middle items-center">
-        <p [style.background]="card.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{card.categoria.categoria}}</p>
+        <div *ngIf="card.categoria;else noHayCategoria">
+            <p [style.background]="card.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{card.categoria.categoria}}</p>
+        </div>
+        <ng-template #noHayCategoria>
+            <p class=" px-2 bg-red-600  p-1 w-fit font-normal text-sm text-white rounded-sm ">No hay categoria</p>
+        </ng-template>
         <p [ngStyle]="{'background-color': obtenerColorImportancia(card.importancia.importancia)}" class="px-2  p-1 w-fit font-normal text-sm text-white rounded-sm">{{card.importancia.importancia}}</p>
     </div>
 </div>
