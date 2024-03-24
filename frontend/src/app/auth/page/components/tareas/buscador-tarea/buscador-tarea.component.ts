@@ -37,11 +37,10 @@ export class BuscadorTareaComponent implements OnInit, OnDestroy{
         this.texto = value;
         if(resp.length == 0){
           this.listadoTareas = [];
-          
           this.noExisteTarea=true;
-          console.log("entra");
         }else{
           this.listadoTareas = resp.filter(tarea => tarea.estado.estado !== "finalizada");
+          this.noExisteTarea=false;
         }
 
         

@@ -23,7 +23,7 @@
                         <!-- COMPONENTE CAMBIAR ORDEN DE LA URGENCIA -->
                        <app-cambiar-orden [id]="1" [arrayTareas]="tareasToDo" ></app-cambiar-orden>
                     </div>
-                    <div id="todo" class=" h-96 w-fit min-w-80 overflow-y-auto overflow-x-hidden bg-violeta  rounded bg-opacity-10 px-4 flex flex-col gap-5 pt-5 relative"
+                    <div id="todo" class="h-96 altura overflow-y-auto overflow-x-hidden bg-violeta  rounded bg-opacity-10 px-4 flex flex-col gap-5 pt-5 relative"
                     cdkDropList
                     #todoList="cdkDropList"
                     [cdkDropListData]="tareasToDo"
@@ -53,7 +53,7 @@
                         <!-- COMPONENTE CAMBIAR ORDEN DE LA URGENCIA -->
                        <app-cambiar-orden [id]="2" [arrayTareas]="tareasDoing"></app-cambiar-orden>
                     </div>
-                    <div id="doing" class="h-96 w-fit  min-w-80 altura overflow-y-auto overflow-x-hidden  bg-violeta  border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
+                    <div id="doing" class="h-96 altura overflow-y-auto overflow-x-hidden  bg-violeta  border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
                     cdkDropList
                     #doingList="cdkDropList"
                     [cdkDropListData]="tareasDoing"
@@ -83,7 +83,7 @@
                     </div>
                     <div
                       id="done"
-                      class="h-96 altura w-fit min-w-80  overflow-y-auto overflow-x-hidden bg-violeta border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
+                      class="h-96 altura overflow-y-auto overflow-x-hidden bg-violeta border-white rounded bg-opacity-10 px-4 flex flex-col gap-5 relative pt-5"
                       cdkDropList
                       #doneList="cdkDropList"
                       [cdkDropListData]="tareasDone"

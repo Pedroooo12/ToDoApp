@@ -60,7 +60,9 @@ public class TareasServiceImpl implements TareasService {
         tarea.setDescripcion(updatedTarea.getDescripcion());
         tarea.setCategoria(updatedTarea.getCategoria());
         tarea.setImportancia(updatedTarea.getImportancia());
+        tarea.setCreated(updatedTarea.getCreated());
         tarea.setUpdated(new Date());
+        tarea.setUser(updatedTarea.getUser());
 
         Tareas updatedEjercicioObj =  tareasRepository.save(tarea);
 

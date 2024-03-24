@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/auth/interfaces/categoria';
 import { Importancia } from 'src/app/auth/interfaces/importancia';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
+import { AlertaTareasService } from 'src/app/auth/services/alertaTareas.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import { ImportanciaService } from 'src/app/auth/services/importancia.service';
@@ -54,7 +55,15 @@ export class ActualizarTareaComponent implements OnInit{
   }
 
   //injectamos en el constructor 
-  constructor(private fb: FormBuilder, private route: Router, private router: ActivatedRoute, private _authService: AuthService, private _importanciaService: ImportanciaService, private _categoriaService: CategoriaService, private _tareaService: TareaService) { 
+  constructor(
+      private fb: FormBuilder, 
+      private route: Router, 
+      private router: ActivatedRoute, 
+      private _authService: AuthService, 
+      private _importanciaService: ImportanciaService, 
+      private _categoriaService: CategoriaService, 
+      private _tareaService: TareaService,
+      private _alertaTareas: AlertaTareasService) { 
 
     if(typeof this._authService.currentUser == "object"){
       this.user = this._authService.currentUser;
@@ -80,15 +89,16 @@ export class ActualizarTareaComponent implements OnInit{
 
     this.miFormulario = this.fb.group({
       id: [this.tarea.id],
-      nombre: [this.tarea.nombre, [Validators.required]],
-      descripcion: [this.tarea.descripcion, [Validators.required]],
-      created: [this.tarea.created],
-      updated: [this.tarea.updated],
-      importancia: [null, [Validators.required]],
-      categoria: [null, [Validators.required]],
-      estado: [this.tarea.estado],
-      user:[this.importancia.user]
-    })
+          nombre: [this.tarea.nombre, [Validators.required]],
+          descripcion: [this.tarea.descripcion, [Validators.required]],
+          created: [this.tarea.created],
+          updated: [this.tarea.updated],
+          importancia: [null, [Validators.required]],
+          categoria: [null, [Validators.required]],
+          estado: [this.tarea.estado],
+          user:[this.importancia.user]
+
+    });
   }
 
   ngOnInit() {
@@ -98,8 +108,10 @@ export class ActualizarTareaComponent implements OnInit{
 
       this._tareaService.obtenerTareaPorID(this.tarea_id).subscribe(resp => {
         this.tarea = resp;
-        console.log(this.tarea);
+        console.log("Categoria id:" +this.tarea.categoria.categoria);
+        console.log("Categoriaa fronted: " + this.categoria.categoria);
         this.miFormulario.setValue(this.tarea);
+        console.log(this.miFormulario);
       }, (error) => {
         console.log(error);
       });
@@ -166,6 +178,7 @@ export class ActualizarTareaComponent implements OnInit{
 
     this._tareaService.actualizarTarea(this.tarea_id,this.miFormulario.value).subscribe(resp => {
       this.route.navigate(["auth/listado-tareas"]);
+      this._alertaTareas.setAlertasData("modificar");
     }, (error) => {
       console.log(error);
     });

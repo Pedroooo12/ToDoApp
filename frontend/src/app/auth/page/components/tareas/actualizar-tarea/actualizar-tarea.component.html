@@ -14,15 +14,15 @@
                             <div class="flex gap-5 align-middle items-center my-5">
                                 <label for="categoria" [style.background]="tarea.categoria.color" class=" px-2  p-1 w-fit font-normal text-sm text-white rounded-sm ">Tipo: {{tarea.categoria.categoria}}</label>
                                <div>
-                                    <select id="categoria" formControlName="categoria" class="bg-transparent w-fit  border border-gray-300 text-violeta text-sm rounded-lg  block  px-2  p-1 ">
-                                            <option *ngFor="let categoria of listadoCategorias; let i = index" value="{{i}}" [attr.selected]="categoria.id == tarea.categoria.id ? true : null">{{categoria.categoria}}</option>
+                                    <select id="categoria" formControlName="categoria" class="bg-white w-fit  border border-gray-300 text-violeta text-sm rounded-sm  block  px-2  p-1 ">
+                                            <option *ngFor="let categoria of listadoCategorias; let i = index" value="{{i}}" [attr.selected]="categoria.categoria == tarea.categoria.categoria ? true : null">{{categoria.categoria}}</option>
                                     </select>
                                </div>
                             </div>
                 
                             <div class="flex gap-5 align-middle items-center my-5">
                                 <label for="importancia" [ngStyle]="{'background-color': obtenerColorImportancia(tarea.importancia.importancia)}" class="px-2  p-1 w-fit font-normal text-sm text-white rounded-sm">{{tarea.importancia.importancia}}</label>
-                                <select id="importancia" formControlName="importancia" class="bg-transparent w-fit border border-gray-300 text-violeta text-sm rounded-lg  block  px-2  p-1 ">
+                                <select id="importancia" formControlName="importancia" class="bg-white w-fit border border-gray-300 text-violeta text-sm rounded-sm  block  px-2  p-1 ">
                                         <option *ngFor="let importancia of listadoImportancias; let i = index" value="{{i}}" [attr.selected]="importancia.id == tarea.importancia.id ? true : null">{{importancia.importancia}}</option>
                                 </select>
                             </div>

@@ -20,25 +20,26 @@ export class AlertaCategoriaComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.alertasSubscription = this._alertaCategorias.alertasData$.subscribe(data => {
+      console.log(data);
       if(data == "eliminar"){
         this.eliminar = true;
         setTimeout(() => {
           this.eliminar = false;
-        }, 2000);
+        }, 2500);
       }
 
       if(data == "modificar"){
         this.modificar = true;
         setTimeout(() => {
           this.modificar = false;
-        }, 2000);
+        }, 2500);
       }
 
       if(data == "crear"){
         this.crear = true;
         setTimeout(() => {
           this.crear = false;
-        }, 2000);
+        }, 2500);
       }
     });
   }
@@ -47,6 +48,7 @@ export class AlertaCategoriaComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     // Desuscribirse para evitar fugas de memoria
     if (this.alertasSubscription) {
+      console.log("desuscribirse");
       this.alertasSubscription.unsubscribe();
     }
   }

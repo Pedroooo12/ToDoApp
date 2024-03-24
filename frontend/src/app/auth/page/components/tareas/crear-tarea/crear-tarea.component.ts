@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/auth/interfaces/categoria';
 import { Importancia } from 'src/app/auth/interfaces/importancia';
 import { Tarea } from 'src/app/auth/interfaces/tarea';
+import { AlertaTareasService } from 'src/app/auth/services/alertaTareas.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import { ImportanciaService } from 'src/app/auth/services/importancia.service';
@@ -59,7 +60,8 @@ export class CrearTareaComponent implements OnInit{
     private _importanciaService: ImportanciaService, 
     private _categoriaService: CategoriaService, 
     private _tareaService: TareaService,
-    private router: ActivatedRoute) { 
+    private router: ActivatedRoute,
+    private _alertaTareas: AlertaTareasService) { 
 
     if(typeof this._authService.currentUser == "object"){
       this.user = this._authService.currentUser;
@@ -138,6 +140,7 @@ export class CrearTareaComponent implements OnInit{
     });
     this._tareaService.crearTarea(this.miFormulario.value).subscribe(resp => {
       this.route.navigate(["auth/listado-tareas"]);
+      this._alertaTareas.setAlertasData("crear");
     }, (error) => {
       console.warn(error);
     });

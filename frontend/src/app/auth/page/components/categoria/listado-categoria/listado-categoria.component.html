@@ -1,27 +1,35 @@
-<div *ngIf="listadoCategorias.length == 0;else HayCategorias">
-    <h2 class="text-center my-10">No tienes todavía categorias</h2>
+<div *ngIf="listadoCategorias.length == 0;else HayCategorias" class="mx-auto mt-20 p-4 mb-4 text-sm w-fit ms-auto  rounded-lg bg-yellow-500  text-white" role="alert">
+    <span class="font-medium">No tienes todavía categorias aún.</span>
 </div>
 
 <ng-template #HayCategorias>
 <app-alerta-categoria></app-alerta-categoria>
-<div class="relative w-1/2 mx-auto overflow-x-auto shadow-md sm:rounded-lg my-10">
+<div class="relative w-1/2 mx-auto overflow-x-auto shadow-lg sm:rounded-lg my-10">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-md font-semibold bg-white bg-opacity-30 text-violeta ">
             <tr>
 
                 <th scope="col" class="px-6 py-3">
-                    Nombre Categoria
+                    Nombre categoria
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+                    Color
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Acciones
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let categoria of listadoCategorias" [style.background]="categoria.color" class="border-b">
+            <tr *ngFor="let categoria of listadoCategorias" class="border-b bg-violeta_claro">
 
                 <td class="px-6 py-4 text-white">
                     {{categoria.categoria}}
+                </td>
+                <td class="px-6 py-4 text-white">
+                    <div class="h-6 w-6" [style.background]="categoria.color">
+
+                    </div>
                 </td>
                 <td class="px-6 py-4 flex gap-5">
                     <a [routerLink]="'/auth/actualizar-categoria/' + categoria.id" class="font-medium cursor-pointer text-blue-600 bg-white py-2 px-3 w-fit rounded-lg dark:text-blue-500 hover:underline">Edit</a>

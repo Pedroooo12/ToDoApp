@@ -20,7 +20,7 @@ export class TareaService {
           case 'Bajo':
             return 'lightgreen';
           case 'Muy bajo':
-            return 'lightgrey';
+            return '#99ccff';
           default:
             return 'black';
         }

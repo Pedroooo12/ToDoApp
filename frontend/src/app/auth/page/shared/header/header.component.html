@@ -46,11 +46,11 @@
 
       
 
-      <div id="ul_crear" class="absolute invisible bottom-20 right-44 flex gap-2 flex-col rounded-md shadow-sm" role="group">
-        <a routerLink="/auth/crear-tarea" class="block text-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+      <div id="ul_crear" class="absolute invisible bottom-20 right-48 flex gap-2 flex-col rounded-md shadow-sm" role="group">
+        <a routerLink="/auth/crear-tarea" (click)="clickCrear()" class="block text-center items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
           Crear Tarea
         </a>
-        <a routerLink="/auth/crear-categoria" class="block items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+        <a routerLink="/auth/crear-categoria" (click)="clickCrear()" class="block items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
           Crear Categoría
         </a>
       </div>

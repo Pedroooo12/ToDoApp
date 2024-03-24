@@ -33,23 +33,21 @@ export class HeaderComponent {
   }
 
   logOut(){
-    console.log("logout")
     localStorage.clear();
     this.route.navigate(['/register']);
    
   }
 
-  clickhaz(){
-    console.log("click");
+  clickCrear(){
+    const ul = document.getElementById("ul_crear");
+    ul?.classList.toggle("invisible");
   }
-
   devolverUsuario(){
     this.user = this.service.currentUser;
   }
   
   mostrar(){
     const ul = document.getElementById("ul_crear");
-    console.log("hola");
     ul?.classList.toggle("invisible");
   }
 

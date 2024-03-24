@@ -81,13 +81,21 @@ export class CalendarioComponent {
       this._tareaService.buscarTareasFiltro(0,0,this.id_user).subscribe(resp => {
   
         for (let index = 0; index < resp.length; index++) {
-          let event =  {
+          console.log("entra");
+          var event =  {
             title: resp[index].nombre,
             date: new Date(resp[index].created!),
             description: "Descripcion",
             color: resp[index].categoria.color,
-            
-          };
+            classNames: ["hola"]  // Inicializa como un array vacío
+        };
+    
+        // Agrega la clase 'event_finalizado' si el estado es 'finalizado'
+        if(resp[index].estado.estado === "finalizada") {
+          console.log("entra");
+          event.classNames.push("event_finalizado");
+        }
+    
           this.events.push(event);
         }  
         

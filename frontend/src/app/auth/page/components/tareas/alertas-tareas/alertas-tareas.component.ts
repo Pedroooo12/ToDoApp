@@ -16,6 +16,8 @@ export class AlertasTareasComponent implements OnInit, OnDestroy{
   private alertasSubscription!: Subscription;
 
   //acciones
+  crear = false;
+  modificar = false;
   eliminar = false;
   terminar = false;
   terminarTodas = false;
@@ -26,6 +28,20 @@ export class AlertasTareasComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.alertasSubscription = this._alertaTareas.alertasData$.subscribe(data => {
+      if(data == "crear"){
+        this.crear = true;
+        setTimeout(() => {
+          this.crear = false;
+        }, 2000);
+      }
+
+      if(data == "modificar"){
+        this.modificar = true;
+        setTimeout(() => {
+          this.modificar = false;
+        }, 2000);
+      }
+
       if(data == "eliminar"){
         this.eliminar = true;
         setTimeout(() => {

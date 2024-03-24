@@ -39,6 +39,7 @@ export class ListadoCategoriaComponent {
     this._categoriaService.eliminarCategoria(id).subscribe(resp => {
       this.buscarCategorias();
       this._alertaCategorias.setAlertasData("eliminar");
+      
     }, (error) =>{
 
     });

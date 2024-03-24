@@ -1,5 +1,6 @@
 .altura{
     max-height: 500px;
+    width: 360px !important;
 }
 
 ::-webkit-scrollbar{

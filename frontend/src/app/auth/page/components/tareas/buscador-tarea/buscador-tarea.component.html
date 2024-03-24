@@ -18,7 +18,7 @@
         </div>
     </form>
 
-    <ul *ngIf="this.listadoTareas.length > 0 || noExisteTarea && texto != '';" class="max-w-md h-16 max-h-28 overflow-y-auto overflow-x-hidden space-y-1 p-3 mt-2  bg-white bg-opacity-45 rounded-lg absolute w-96 list-inside">
+    <ul *ngIf="texto != '';" class="max-w-md h-16 max-h-28 overflow-y-auto overflow-x-hidden space-y-1 p-3 mt-2  bg-white bg-opacity-45 rounded-lg absolute w-96 list-inside">
 
             <li   [style.background]="tarea.categoria.color" (click)="obtenerId(tarea.id!)" class="w-full flex items-center justify-between text-white font-semibold cursor-pointer py-2 px-3 rounded-lg mb-3" *ngFor="let tarea of listadoTareas">
                 {{tarea.nombre}}
